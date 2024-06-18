@@ -1,32 +1,51 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WEB.Entities;
 using WEB.Models;
 
 namespace WEB.Controllers
 {
-    public class HomeController : Controller
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public class HomeController(IUsuarioModel iUsuarioModel) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Login(Usuario ent)
+        {
+            var resp = iUsuarioModel.IniciarSesion(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("Login", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Signup()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Signup(Usuario ent)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var resp = iUsuarioModel.IniciarSesion(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("Signup", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
         }
+
     }
 }
+

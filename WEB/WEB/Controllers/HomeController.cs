@@ -46,6 +46,30 @@ namespace WEB.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult Principal()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Principal(Usuario ent)
+        {
+            var resp = iUsuarioModel.IniciarSesion(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("Principal", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
     }
 }
 

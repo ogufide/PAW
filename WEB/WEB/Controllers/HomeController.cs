@@ -14,6 +14,24 @@ namespace WEB.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Class()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Services()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Login(Usuario ent)
         {

@@ -320,7 +320,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[rol](
-	[Id_rol] [int] IDENTITY(1,1) NOT NULL,
+	[Id_rol] [tinyint] IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](50) NOT NULL,
 	[estado] [bit] NOT NULL,
 
@@ -367,23 +367,31 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[usuarios](
-	[Id_usuario] [int] IDENTITY(1,1) NOT NULL,
-	[nombre] [varchar](50) NOT NULL,
-	[correo] [varchar](50) NOT NULL,
+
+CREATE TABLE [dbo].[usuario](
+	[consecutivo] [int] IDENTITY(1,1) NOT NULL,
+	[identificacion] [varchar](50) NOT NULL,
+	[nombre] [varchar](100) NOT NULL,
+	[correo] [varchar](100) NOT NULL,
 	[contrasenna] [varchar](100) NOT NULL,
+	[Id_rol] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
-	[Id_rol] [int] NOT NULL,
- CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_tUsuario] PRIMARY KEY CLUSTERED 
 (
-	[Id_usuario] ASC
+	[Consecutivo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UK_Cedula] UNIQUE NONCLUSTERED 
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UK_Correo] UNIQUE NONCLUSTERED 
+(
+	[Correo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
+
 CREATE TABLE [dbo].[ventas](
 	[Id_venta] [int] IDENTITY(1,1) NOT NULL,
 	[Id_cliente] [int] NULL,
@@ -467,10 +475,10 @@ GO
 ALTER TABLE [dbo].[rutinasEntrenamiento]  WITH CHECK ADD FOREIGN KEY([Id_plan])
 REFERENCES [dbo].[planesEntrenamiento] ([Id_plan])
 GO
-ALTER TABLE [dbo].[usuarios]  WITH CHECK ADD  CONSTRAINT [FK_usuarios_rol] FOREIGN KEY([Id_rol])
+ALTER TABLE [dbo].[usuario]  WITH CHECK ADD  CONSTRAINT [FK_usuario_rol] FOREIGN KEY([Id_rol])
 REFERENCES [dbo].[rol] ([Id_rol])
 GO
-ALTER TABLE [dbo].[usuarios] CHECK CONSTRAINT [FK_usuarios_rol]
+ALTER TABLE [dbo].[usuario] CHECK CONSTRAINT [FK_usuario_rol]
 GO
 ALTER TABLE [dbo].[ventas]  WITH CHECK ADD FOREIGN KEY([Id_cliente])
 REFERENCES [dbo].[clientes] ([Id_cliente])
@@ -492,6 +500,22 @@ GO
 
 --******************************* CREACIÓN DE SP *******************************
 USE [Proyecto]
+GO
+
+CREATE PROCEDURE [dbo].[IniciarSesion]
+	@Correo			varchar(100),
+	@Contrasenna	varchar(100)
+AS
+BEGIN
+
+	SELECT	consecutivo,identificacion,nombre,correo,U.Id_rol,estado,R.descripcion
+	FROM	dbo.usuarios U
+	INNER JOIN dbo.rol  R ON U.IdRol = R.Id_rol
+	WHERE	Correo = @Correo
+		AND Contrasenna = @Contrasenna
+		AND estado = 1
+
+END
 GO
 -- Crear usuario
 CREATE PROCEDURE CreateUsuario

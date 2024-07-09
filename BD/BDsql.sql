@@ -1,20 +1,8 @@
+--********************* CREACIÓN DE BD *************************
+
 USE [master]
 GO
-/****** Object:  Database [Proyecto]    Script Date: 5/7/2024 19:59:59 ******/
 CREATE DATABASE [Proyecto]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'Proyecto', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Proyecto.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'Proyecto_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Proyecto_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
-GO
-ALTER DATABASE [Proyecto] SET COMPATIBILITY_LEVEL = 160
-GO
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [Proyecto].[dbo].[sp_fulltext_database] @action = 'enable'
-end
 GO
 ALTER DATABASE [Proyecto] SET ANSI_NULL_DEFAULT OFF 
 GO
@@ -84,11 +72,13 @@ ALTER DATABASE [Proyecto] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_
 GO
 USE [Proyecto]
 GO
-/****** Object:  Table [dbo].[asignacionPlanes]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+--********************* CREACIÓN DE TABLAS *************************
+
 CREATE TABLE [dbo].[asignacionPlanes](
 	[Id_asignacion] [int] IDENTITY(1,1) NOT NULL,
 	[Id_cliente] [int] NULL,
@@ -101,7 +91,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[clases]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +109,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[clientes]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -141,7 +129,6 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ejercicios]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -158,7 +145,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[empleados]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +171,6 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[gimnasios]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,7 +187,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[inscripcionesClases]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +202,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[inventario]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -229,13 +212,13 @@ CREATE TABLE [dbo].[inventario](
 	[Descripcion] [varchar](200) NOT NULL,
 	[CantidadStock] [int] NOT NULL,
 	[Precio] [decimal](10, 2) NOT NULL,
+	[estado] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id_producto] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[membresias]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +236,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[pagos]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,7 +252,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[planes]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -287,7 +268,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[planesEntrenamiento]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,7 +284,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[promociones]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -323,7 +302,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[provincias]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -337,7 +315,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rol]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,13 +322,14 @@ GO
 CREATE TABLE [dbo].[rol](
 	[Id_rol] [int] IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](50) NOT NULL,
+	[estado] [bit] NOT NULL,
+
  CONSTRAINT [PK_rol] PRIMARY KEY CLUSTERED 
 (
 	[Id_rol] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rutinasEjercicios]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -369,7 +347,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rutinasEntrenamiento]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -386,7 +363,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuarios]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -404,7 +380,6 @@ CREATE TABLE [dbo].[usuarios](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ventas]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -421,7 +396,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ventasProductos]    Script Date: 5/7/2024 19:59:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -430,6 +404,7 @@ CREATE TABLE [dbo].[ventasProductos](
 	[Id_venta] [int] NOT NULL,
 	[Id_producto] [int] NOT NULL,
 	[Cantidad] [int] NOT NULL,
+	[estado] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id_venta] ASC,
@@ -512,4 +487,233 @@ GO
 USE [master]
 GO
 ALTER DATABASE [Proyecto] SET  READ_WRITE 
+GO
+
+
+--******************************* CREACIÓN DE SP *******************************
+USE [Proyecto]
+GO
+-- Crear usuario
+CREATE PROCEDURE CreateUsuario
+    @nombre VARCHAR(50),
+    @correo VARCHAR(50),
+    @contrasenna VARCHAR(100),
+    @estado BIT,
+    @Id_rol INT
+AS
+BEGIN
+    INSERT INTO usuarios (nombre, correo, contrasenna, estado, Id_rol)
+    VALUES (@nombre, @correo, @contrasenna, @estado, @Id_rol)
+END
+GO
+
+-- Leer todos los usuarios
+CREATE PROCEDURE ReadUsuarios
+AS
+BEGIN
+    SELECT * FROM usuarios WHERE estado = 1
+END
+GO
+
+-- Leer un usuario por ID
+CREATE PROCEDURE GetUsuarioById
+    @Id_usuario INT
+AS
+BEGIN
+    SELECT * FROM usuarios WHERE Id_usuario = @Id_usuario AND estado = 1
+END
+GO
+
+-- Actualizar usuario
+CREATE PROCEDURE UpdateUsuario
+    @Id_usuario INT,
+    @nombre VARCHAR(50),
+    @correo VARCHAR(50),
+    @contrasenna VARCHAR(100),
+    @estado BIT,
+    @Id_rol INT
+AS
+BEGIN
+    UPDATE usuarios
+    SET nombre = @nombre,
+        correo = @correo,
+        contrasenna = @contrasenna,
+        estado = @estado,
+        Id_rol = @Id_rol
+    WHERE Id_usuario = @Id_usuario
+END
+GO
+
+-- Eliminar usuario
+CREATE PROCEDURE DeleteUsuario
+    @Id_usuario INT
+AS
+BEGIN
+    UPDATE usuarios
+    SET estado = 0
+    WHERE Id_usuario = @Id_usuario
+END
+GO
+
+-- Crear rol
+CREATE PROCEDURE CreateRol
+    @descripcion VARCHAR(50)
+AS
+BEGIN
+    INSERT INTO rol (descripcion)
+    VALUES (@descripcion)
+END
+GO
+
+-- Leer todos los roles
+CREATE PROCEDURE ReadRoles
+AS
+BEGIN
+    SELECT * FROM rol WHERE estado = 1
+END
+GO
+
+-- Leer un rol por ID
+CREATE PROCEDURE GetRolById
+    @Id_rol INT
+AS
+BEGIN
+    SELECT * FROM rol WHERE Id_rol = @Id_rol AND estado = 1
+END
+GO
+
+-- Actualizar rol
+CREATE PROCEDURE UpdateRol
+    @Id_rol INT,
+    @descripcion VARCHAR(50)
+AS
+BEGIN
+    UPDATE rol
+    SET descripcion = @descripcion
+    WHERE Id_rol = @Id_rol
+END
+GO
+
+-- Eliminar rol
+CREATE PROCEDURE DeleteRol
+    @Id_rol INT
+AS
+BEGIN
+    UPDATE rol
+    SET estado = 0
+    WHERE Id_rol = @Id_rol
+END
+GO
+
+-- Crear producto en inventario
+CREATE PROCEDURE CreateProducto
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(200),
+    @CantidadStock INT,
+    @Precio DECIMAL(10, 2)
+AS
+BEGIN
+    INSERT INTO inventario (Nombre, Descripcion, CantidadStock, Precio)
+    VALUES (@Nombre, @Descripcion, @CantidadStock, @Precio)
+END
+GO
+
+-- Leer todos los productos del inventario
+CREATE PROCEDURE ReadProductos
+AS
+BEGIN
+    SELECT * FROM inventario WHERE estado = 1
+END
+GO
+
+-- Leer un producto del inventario por ID
+CREATE PROCEDURE GetProductoById
+    @Id_producto INT
+AS
+BEGIN
+    SELECT * FROM inventario WHERE Id_producto = @Id_producto AND estado = 1
+END
+GO
+
+-- Actualizar producto en inventario
+CREATE PROCEDURE UpdateProducto
+    @Id_producto INT,
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(200),
+    @CantidadStock INT,
+    @Precio DECIMAL(10, 2)
+AS
+BEGIN
+    UPDATE inventario
+    SET Nombre = @Nombre,
+        Descripcion = @Descripcion,
+        CantidadStock = @CantidadStock,
+        Precio = @Precio
+    WHERE Id_producto = @Id_producto
+END
+GO
+
+-- Eliminar producto del inventario
+CREATE PROCEDURE DeleteProducto
+    @Id_producto INT
+AS
+BEGIN
+    UPDATE inventario
+    SET estado = 0
+    WHERE Id_producto = @Id_producto
+END
+GO
+-- Crear ventasProductos
+CREATE PROCEDURE CreateVentasProducto
+    @Id_venta INT,
+    @Id_producto INT,
+    @Cantidad INT
+AS
+BEGIN
+    INSERT INTO ventasProductos (Id_venta, Id_producto, Cantidad)
+    VALUES (@Id_venta, @Id_producto, @Cantidad)
+END
+GO
+
+-- Leer todos los registros de ventasProductos
+CREATE PROCEDURE ReadVentasProductos
+AS
+BEGIN
+    SELECT * FROM ventasProductos WHERE estado = 1
+END
+GO
+
+-- Leer un registro de ventasProductos por ID de venta y producto
+CREATE PROCEDURE GetVentasProductoById
+    @Id_venta INT,
+    @Id_producto INT
+AS
+BEGIN
+    SELECT * FROM ventasProductos WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto AND estado = 1
+END
+GO
+
+-- Actualizar ventasProductos
+CREATE PROCEDURE UpdateVentasProducto
+    @Id_venta INT,
+    @Id_producto INT,
+    @Cantidad INT
+AS
+BEGIN
+    UPDATE ventasProductos
+    SET Cantidad = @Cantidad
+    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
+END
+GO
+
+-- Eliminar ventasProductos
+CREATE PROCEDURE DeleteVentasProducto
+    @Id_venta INT,
+    @Id_producto INT
+AS
+BEGIN
+    UPDATE ventasProductos
+    SET estado = 0
+    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
+END
 GO

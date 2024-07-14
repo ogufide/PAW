@@ -72,17 +72,21 @@
                         <div class="card-body">
                             @using (Html.BeginForm("Login", "Home"))
                             {
-                                <label>Nombre Completo</label>
+                                <label>Identificación</label>
                                 <div class="mb-3">
-                                    @Html.TextBoxFor(m => m.Nombre, new { @type = "nombre", @class = "form-control", @placeholder = "Nombre Completo" })
+                                    @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control form-control-user", @placeholder = "Identificación", @onkeyup = "ConsultarNombre()", @required = "true" })
+                                </div>
+                                <label>Nombre</label>
+                                <div class="mb-3">
+                                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control form-control-user", @placeholder = "Nombre", @readonly = "true", @required = "true" })
                                 </div>
                                 <label>Correo electrónico</label>
                                 <div class="mb-3">
-                                    @Html.TextBoxFor(m => m.Correo, new { @type = "email", @class = "form-control", @placeholder = "Correo electrónico" })
+                                    @Html.TextBoxFor(m => m.Correo, new { @type = "email", @class = "form-control", @placeholder = "Correo electrónico", @required = "true" })
                                 </div>
                                 <label>Contraseña</label>
                                 <div class="mb-3">
-                                    @Html.TextBoxFor(m => m.Contrasenna, new { @type = "password", @class = "form-control", @placeholder = "Contraseña" })
+                                    @Html.TextBoxFor(m => m.Contrasenna, new { @type = "password", @class = "form-control", @placeholder = "Contraseña", @required = "true" })
                                 </div>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
@@ -92,19 +96,22 @@
                                     <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Ingresar</button>
                                 </div>
                             }
-                                <div class="form-check form-check-info text-left">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Estoy de acuerdo con los <a href="javascript:;" class="text-dark font-weight-bolder">Términos y Condiciones</a>
-                                    </label>
-                                </div>
-                                <div class="text-center">
-                                    <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
-                                </div>
-                                <p class="text-sm mt-3 mb-0">¿Ya tiene una cuenta? <a href="javascript:;" class="text-dark font-weight-bolder">Ingrese aquí</a></p>
+                            <div class="form-check form-check-info text-left">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Estoy de acuerdo con los <a href="javascript:;" class="text-dark font-weight-bolder">Términos y Condiciones</a>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                            </div>
+                            <p class="text-sm mt-3 mb-0">¿Ya tiene una cuenta? <a href="javascript:;" class="text-dark font-weight-bolder">Ingrese aquí</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script src="~/plantilla/js/RegistroUsuarios.js"></script>
+

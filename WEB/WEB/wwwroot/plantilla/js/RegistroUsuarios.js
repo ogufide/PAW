@@ -1,13 +1,11 @@
-﻿<script>
-    function ConsultarNombre() {
-        let identificacion = $("#Identificacion").val();
-    $.ajax({
+﻿function ConsultarNombre() {
+    let identificacion = jQuery("#Identificacion").val();
+    jQuery.ajax({
         url: "https://apis.gometa.org/cedulas/" + identificacion,
-    method: "GET",
-    datatype: "json",
-    success: function (response) {
-        $("#Nombre").val(response.nombre);
-            }
-        });
-    }
-</script>
+        method: "GET",
+        datatype: "json",
+        success: function (response) {
+            jQuery("#Nombre").val(response.nombre);
+        }
+    });
+}

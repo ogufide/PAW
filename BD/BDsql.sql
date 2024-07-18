@@ -1,4 +1,4 @@
---********************* CREACIÓN DE BD *************************
+--********************* CREACIï¿½N DE BD *************************
 
 USE [master]
 GO
@@ -77,7 +77,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
---********************* CREACIÓN DE TABLAS *************************
+--********************* CREACIï¿½N DE TABLAS *************************
 
 CREATE TABLE [dbo].[asignacionPlanes](
 	[Id_asignacion] [int] IDENTITY(1,1) NOT NULL,
@@ -369,7 +369,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[usuario](
-	[consecutivo] [int] IDENTITY(1,1) NOT NULL,
 	[identificacion] [varchar](50) NOT NULL,
 	[nombre] [varchar](100) NOT NULL,
 	[correo] [varchar](100) NOT NULL,
@@ -377,10 +376,6 @@ CREATE TABLE [dbo].[usuario](
 	[Id_rol] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
  CONSTRAINT [PK_tUsuario] PRIMARY KEY CLUSTERED 
-(
-	[Consecutivo] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [UK_Cedula] UNIQUE NONCLUSTERED 
 (
 	[Identificacion] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
@@ -498,7 +493,7 @@ ALTER DATABASE [Proyecto] SET  READ_WRITE
 GO
 
 
---******************************* CREACIÓN DE SP *******************************
+--******************************* CREACIï¿½N DE SP *******************************
 USE [Proyecto]
 GO
 
@@ -508,7 +503,7 @@ CREATE PROCEDURE [dbo].[IniciarSesion]
 AS
 BEGIN
 
-	SELECT	consecutivo,identificacion,nombre,correo,U.Id_rol,estado,R.descripcion
+	SELECT	identificacion,nombre,correo,U.Id_rol,estado,R.descripcion
 	FROM	dbo.usuarios U
 	INNER JOIN dbo.rol  R ON U.IdRol = R.Id_rol
 	WHERE	Correo = @Correo
@@ -519,15 +514,16 @@ END
 GO
 -- Crear usuario
 CREATE PROCEDURE CreateUsuario
-    @nombre VARCHAR(50),
-    @correo VARCHAR(50),
+    @identificacion VARCHAR(50),
+    @nombre VARCHAR(100),
+    @correo VARCHAR(100),
     @contrasenna VARCHAR(100),
     @estado BIT,
-    @Id_rol INT
+    @Id_rol TINYINT
 AS
 BEGIN
-    INSERT INTO usuarios (nombre, correo, contrasenna, estado, Id_rol)
-    VALUES (@nombre, @correo, @contrasenna, @estado, @Id_rol)
+    INSERT INTO [dbo].[usuario] (identificacion, nombre, correo, contrasenna, estado, Id_rol)
+    VALUES (@identificacion, @nombre, @correo, @contrasenna, @estado, @Id_rol)
 END
 GO
 

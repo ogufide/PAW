@@ -4,8 +4,9 @@ namespace WEB.Models
 {
     public interface IUsuarioModel
     {
-        Respuesta RegistrarUsuario(Usuario ent);
+        Respuesta CreateUsuario(Usuario ent);
 
         Respuesta IniciarSesion(Usuario ent);
+        Respuesta ReadUsuarios();
     }
 }

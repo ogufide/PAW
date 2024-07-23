@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
@@ -9,23 +10,7 @@ namespace WEB.Controllers
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class HomeController(IUsuarioModel iUsuarioModel, IComunModel iComunModel) : Controller
     {
-        [HttpGet]
-        public IActionResult Principal()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Principal(Usuario ent)
-        {
-            var resp = iUsuarioModel.IniciarSesion(ent);
-
-            if (resp.Codigo == 1)
-                return RedirectToAction("Principal", "Home");
-
-            ViewBag.msj = resp.Mensaje;
-            return View();
-        }
+        
         
         [HttpGet]
         public IActionResult Login()
@@ -42,8 +27,10 @@ namespace WEB.Controllers
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<Usuario>((JsonElement)resp.Contenido!);
-                HttpContext.Session.SetString("TOKEN", datos!.Token!);
+               // HttpContext.Session.SetString("TOKEN", datos!.Token!);
                 HttpContext.Session.SetString("NOMBRE", datos!.Nombre!);
+                // HttpContext.Session.SetString("ROL", datos!.Id_rol!);
+                HttpContext.Session.SetString("IDENTIFICACION", datos!.Identificacion!);
                 return RedirectToAction("Principal", "Home");
             }
 
@@ -78,6 +65,12 @@ namespace WEB.Controllers
 
         [HttpGet]
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Principal()
         {
             return View();
         }

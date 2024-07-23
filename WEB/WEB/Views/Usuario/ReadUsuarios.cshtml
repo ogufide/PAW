@@ -11,6 +11,11 @@
             <th>Identificación</th>
             <th>Nombre</th>
             <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+
+
         </tr>
     </thead>
     <tbody>
@@ -20,10 +25,12 @@
                 <td>@item.Identificacion</td>
                 <td>@item.Nombre</td>
                 <td>@item.Correo</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Estado</td>
             </tr>
         }
     </tbody>
 </table>
 
-<script src="~/page/jquery/jquery.min.js"></script>
-<script src="~/js/ConsultaUsuarios.js"></script>
+<script src="~/plantilla/js/ConsultaUsuarios.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

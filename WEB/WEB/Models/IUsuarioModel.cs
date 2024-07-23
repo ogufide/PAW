@@ -8,5 +8,6 @@ namespace WEB.Models
 
         Respuesta IniciarSesion(Usuario ent);
         Respuesta ReadUsuarios();
+        Respuesta GetUsuarioById(int Identificacion);
     }
 }

@@ -2,12 +2,13 @@
 using WEB.Entities;
 using WEB.Models;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace WEB.Controllers
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class UsuarioController(IUsuarioModel iUsuarioModel, IComunModel iComunModel) : Controller
+    public class UsuarioController(IUsuarioModel iUsuarioModel, IComunModel iComunModel, IRolModel iRolModel) : Controller
     {
 
         [HttpGet]
@@ -37,10 +38,27 @@ namespace WEB.Controllers
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<List<Usuario>>((JsonElement)resp.Contenido!);
-                return View(datos);
+                return View(datos!.Where(x => x.Identificacion != HttpContext.Session.GetString("IDENTIFICACION")).ToList());
             }
 
             return View(new List<Usuario>());
+        }
+
+        [HttpGet]
+        public IActionResult ActualizarUsuario(int q)
+        {
+            var roles = iRolModel.ReadRoles();
+            ViewBag.Roles = JsonSerializer.Deserialize<List<SelectListItem>>((JsonElement)roles.Contenido!);
+
+            var resp = iUsuarioModel.GetUsuarioById(q);
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<Usuario>((JsonElement)resp.Contenido!);
+                return View(datos);
+            }
+
+            return View(new Usuario());
         }
     }
 }

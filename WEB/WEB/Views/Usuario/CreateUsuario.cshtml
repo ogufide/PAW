@@ -70,7 +70,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Login", "Home"))
+                            @if (ViewBag.msj != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.msj
+                                </div>
+                            }
+                            @using (Html.BeginForm("CreateUsuario", "Usuario"))
                             {
                                 <label>Identificación</label>
                                 <div class="mb-3">

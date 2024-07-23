@@ -41,6 +41,23 @@ namespace WEB.Models
             using (httpClient)
             {
                 string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Usuario/ReadUsuarios";
+                //string token = iContextAccesor.HttpContext!.Session.GetString("TOKEN")!.ToString();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var resp = httpClient.GetAsync(url).Result;
+
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
+
+        public Respuesta GetUsuarioById(int Identificacion)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Usuario/GetUsuarioById?Identificacion=" + Identificacion;
                 string token = iContextAccesor.HttpContext!.Session.GetString("TOKEN")!.ToString();
 
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

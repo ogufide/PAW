@@ -52,7 +52,7 @@ namespace API.Controllers
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryFirstAsync<Usuario>("IniciarSesion", new { ent.Correo, ent.Contrasenna }, commandType: CommandType.StoredProcedure);
+                var result = await context.QueryFirstOrDefaultAsync<Usuario>("IniciarSesion", new { ent.Correo, ent.Contrasenna }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {
@@ -71,7 +71,7 @@ namespace API.Controllers
             }
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         [Route("ReadUsuarios")]
         public async Task<IActionResult> ReadUsuarios()
@@ -110,7 +110,7 @@ namespace API.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(10),
+                expires: DateTime.UtcNow.AddMinutes(100),
                 signingCredentials: cred);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

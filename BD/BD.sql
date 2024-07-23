@@ -528,27 +528,16 @@ GO
 CREATE PROCEDURE ReadUsuarios
 AS
 BEGIN
-    SELECT identificacion, nombre, correo, U.Id_rol,
-           CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
-           R.descripcion
-    FROM dbo.usuario U
-    INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
-    WHERE U.estado = 1
+    SELECT * FROM dbo.usuario WHERE estado = 1
 END
 GO
-
 
 -- Leer un usuario por ID
 CREATE PROCEDURE GetUsuarioById
     @Identificacion VARCHAR(50)
 AS
 BEGIN
-    SELECT identificacion, nombre, correo, U.Id_rol,
-           CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
-           R.descripcion
-    FROM dbo.usuario U
-    INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
-    WHERE U.identificacion = @Identificacion AND U.estado = 1
+    SELECT * FROM dbo.usuario WHERE identificacion = @Identificacion AND estado = 1
 END
 GO
 

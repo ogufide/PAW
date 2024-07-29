@@ -15,7 +15,7 @@ namespace API.Controllers
     {
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("AgregarEmpleado")]
         public async Task<IActionResult> AgregarEmpleado(Empleados ent)
         {
@@ -45,9 +45,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPut]
         [Route("ActualizarEmpleado")]
-        public async Task<IActionResult> ActualizarEmpleado(int id, Empleados ent)
+        public async Task<IActionResult> ActualizarEmpleado(int Id_empleado, Empleados ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -57,7 +57,7 @@ namespace API.Controllers
 
                 var result = await context.ExecuteAsync("ActualizarEmpleado", new
                 {
-                    Id_empleado = id,
+                    Id_empleado = Id_empleado,
                     ent.Nombre,
                     ent.Apellidos,
                     ent.FechaNacimiento,
@@ -92,9 +92,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpDelete]
         [Route("EliminarEmpleado")]
-        public async Task<IActionResult> EliminarEmpleado(int id)
+        public async Task<IActionResult> EliminarEmpleado(int Id_empleado)
         {
             Respuesta resp = new Respuesta();
 
@@ -102,7 +102,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("EliminarEmpleado", new { Id_empleado = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("EliminarEmpleado", new { Id_empleado }, commandType: CommandType.StoredProcedure);
 
                 
                 if (result > 0)
@@ -126,7 +126,7 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("ConsultarEmpleados")]
-        public async Task<IActionResult> ConsultarEmpleados()
+        public async Task<IActionResult> ConsultarEmpleado()
         {
             Respuesta resp = new Respuesta();
 
@@ -134,7 +134,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var empleados = await context.QueryAsync<Empleados>("ConsultarEmpleados", commandType: CommandType.StoredProcedure);
+                var empleados = await context.QueryAsync<Empleados>("ConsultarEmpleado", new { }, commandType: CommandType.StoredProcedure);
 
                 if (empleados != null)
                 {
@@ -153,6 +153,37 @@ namespace API.Controllers
             }
         }
 
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ObtenerEmpleado")]
+        public async Task<IActionResult> ObtenerEmpleado(int Id_empleado)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                await context.OpenAsync();
+
+                var clientes = await context.QueryFirstOrDefaultAsync<Empleados>("ObtenerEmpleado", new { Id_empleado }, commandType: CommandType.StoredProcedure);
+
+                if (clientes != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "Empleado obtenido correctamente";
+                    resp.Contenido = clientes;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No se encontro al empleado.";
+                    resp.Contenido = false;
+                    return NotFound(resp);
+                }
+            }
+
+        }
 
     }
 }

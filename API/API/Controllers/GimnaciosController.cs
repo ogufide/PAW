@@ -15,7 +15,7 @@ namespace API.Controllers
     {
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("AgregarGimnasio")]
         public async Task<IActionResult> AgregarGimnasio(Gimnasios ent)
         {
@@ -44,9 +44,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPut]
         [Route("ActualizarGimnasio")]
-        public async Task<IActionResult> ActualizarGimnasio(Gimnasios ent)
+        public async Task<IActionResult> ActualizarGimnasio( int Id_gimnasio, Gimnasios ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -58,12 +58,12 @@ namespace API.Controllers
                 
                 var result = await context.ExecuteAsync("ActualizarGimnasio", new
                 {
-                    @Id_gimnasio = ent.Id_gimnasio,
-                    @Nombre = ent.Nombre,
-                    @Telefono = ent.Telefono,
-                    @Direccion = ent.Direccion,
-                    @Id_provincia = ent.Id_provincia,
-                    @Estado = ent.Estado
+                    Id_gimnasio = ent.Id_gimnasio,
+                    ent.Nombre,
+                    ent.Telefono,
+                    ent.Direccion,
+                    ent.Id_provincia,
+                    ent.Estado
                 }, commandType: CommandType.StoredProcedure);
 
                 
@@ -87,9 +87,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpDelete]
         [Route("EliminarGimnasio")]
-        public async Task<IActionResult> EliminarGimnasio(int id)
+        public async Task<IActionResult> EliminarGimnasio(int Id_gimnasio)
         {
             Respuesta resp = new Respuesta();
 
@@ -97,7 +97,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("EliminarGimnasio", new { Id_gimnasio = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("EliminarGimnasio", new { Id_gimnasio }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
@@ -120,14 +120,14 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("ConsultarGimnasio")]
-        public async Task<IActionResult> ConsultarGimnasio(int id)
+        public async Task<IActionResult> ConsultarGimnasio()
         {
-           
+
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryFirstOrDefaultAsync<Gimnasios>("ConsultarGimnasio", new { @Id_gimnasio = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.QueryAsync<Gimnasios>("ConsultarGimnasio", new { }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {
@@ -140,6 +140,36 @@ namespace API.Controllers
                 {
                     resp.Codigo = 0;
                     resp.Mensaje = "No hay Gimnasios registrados en este momento";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ObtenerGimnasio")]
+        public async Task<IActionResult> ObtenerGimnasio(int Id_gimnasio)
+        {
+           
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QueryFirstOrDefaultAsync<Gimnasios>("ObtenerGimnasio", new { Id_gimnasio }, commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No se encontro el gimnasio";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

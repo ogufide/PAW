@@ -23,6 +23,11 @@ namespace WEB.Models
             }
         }
 
+        public Respuesta ReadClaseById(int Id_clase)
+        {
+            throw new NotImplementedException();
+        }
+
         public Respuesta ReadClases()
         {
             using (httpClient)

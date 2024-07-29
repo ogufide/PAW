@@ -2,6 +2,7 @@
 using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,7 @@ namespace API.Controllers
     {
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("AgregarCliente")]
         public async Task<IActionResult> AgregarCliente(Clientes ent)
         {
@@ -44,9 +45,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPut]
         [Route("ActualizarCliente")]
-        public async Task<IActionResult> ActualizarCliente(int id, Clientes ent)
+        public async Task<IActionResult> ActualizarCliente(int Id_cliente, Clientes ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -56,7 +57,7 @@ namespace API.Controllers
 
                 var result = await context.ExecuteAsync("ActualizarCliente", new
                 {
-                   Id_cliente = id,
+                   Id_cliente = Id_cliente,
                    ent.Nombre,
                    ent.Apellidos,
                    ent.Correo,
@@ -84,9 +85,9 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpDelete]
         [Route("EliminarCliente")]
-        public async Task<IActionResult> EliminarCliente(int id)
+        public async Task<IActionResult> EliminarCliente(int Id_cliente)
         {
             Respuesta resp = new Respuesta();
 
@@ -94,7 +95,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("EliminarCliente", new { @Id_cliente = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("EliminarCliente", new { Id_cliente }, commandType: CommandType.StoredProcedure);
 
 
                 if (result > 0)
@@ -127,9 +128,9 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var clientes = await context.QueryAsync<Clientes>("ConsultarCliente", commandType: CommandType.StoredProcedure);
+                var clientes = await context.QueryAsync<Clientes>("ConsultarCliente", new { }, commandType: CommandType.StoredProcedure);
 
-                if (clientes != null)
+                if (clientes.Count() > 0)
                 {
                     resp.Codigo = 1;
                     resp.Mensaje = "Clientes obtenidos correctamente";
@@ -140,7 +141,38 @@ namespace API.Controllers
                 {
                     resp.Codigo = 0;
                     resp.Mensaje = "No se encontraron clientes.";
-                    resp.Contenido = null;
+                    resp.Contenido = false;
+                    return NotFound(resp);
+                }
+            }
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ObtenerCliente")]
+        public async Task<IActionResult> ObtenerCliente(int Id_cliente)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                await context.OpenAsync();
+
+                var clientes = await context.QueryFirstOrDefaultAsync<Clientes>("ObtenerCliente", new { Id_cliente}, commandType: CommandType.StoredProcedure);
+
+                if (clientes != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "Cliente obtenido correctamente";
+                    resp.Contenido = clientes;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No se encontro al cliente.";
+                    resp.Contenido = false;
                     return NotFound(resp);
                 }
             }

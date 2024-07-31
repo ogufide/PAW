@@ -47,7 +47,7 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpPut]
         [Route("ActualizarEmpleado")]
-        public async Task<IActionResult> ActualizarEmpleado(int Id_empleado, Empleados ent)
+        public async Task<IActionResult> ActualizarEmpleado(Empleados ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -55,22 +55,19 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("ActualizarEmpleado", new
-                {
-                    Id_empleado = Id_empleado,
-                    ent.Nombre,
-                    ent.Apellidos,
-                    ent.FechaNacimiento,
-                    ent.Genero,
-                    ent.Direccion,
-                    ent.Telefono,
-                    ent.Correo,
-                    ent.Puesto,
-                    ent.FechaContratacion,
-                    ent.Salario,
-                    ent.Estado
-                }, commandType: CommandType.StoredProcedure);
+                var parameters = new DynamicParameters();
+                parameters.Add("@Nombre", ent.Nombre);
+                parameters.Add("@Apellidos", ent.Apellidos);
+                parameters.Add("@FechaNacimiento", ent.FechaNacimiento);
+                parameters.Add("@Genero", ent.Genero);
+                parameters.Add("@Direccion", ent.Direccion);
+                parameters.Add("@Telefono", ent.Telefono);
+                parameters.Add("@Correo", ent.Correo);
+                parameters.Add("@Puesto", ent.Puesto);
+                parameters.Add("@FechaContratacion", ent.FechaContratacion);
+                parameters.Add("@Salario", ent.Salario);
 
+                var result = await context.ExecuteAsync("ActualizarEmpleado", parameters, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

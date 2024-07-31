@@ -46,7 +46,7 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpPut]
         [Route("ActualizarGimnasio")]
-        public async Task<IActionResult> ActualizarGimnasio( int Id_gimnasio, Gimnasios ent)
+        public async Task<IActionResult> ActualizarGimnasio(Gimnasios ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -55,18 +55,16 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                
-                var result = await context.ExecuteAsync("ActualizarGimnasio", new
-                {
-                    Id_gimnasio = ent.Id_gimnasio,
-                    ent.Nombre,
-                    ent.Telefono,
-                    ent.Direccion,
-                    ent.Id_provincia,
-                    ent.Estado
-                }, commandType: CommandType.StoredProcedure);
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id_gimnasio", ent.Id_gimnasio);
+                parameters.Add("@Nombre", ent.Nombre);
+                parameters.Add("@Telefono", ent.Telefono);
+                parameters.Add("@Direccion", ent.Direccion);
+                parameters.Add("@Id_provincia", ent.Id_provincia);
+                parameters.Add("@Estado", ent.Estado);
 
-                
+                var result = await context.ExecuteAsync("ActualizarGimnasio", parameters, commandType: CommandType.StoredProcedure);
+
                 if (result > 0)
                 {
                     resp.Codigo = 1;
@@ -77,9 +75,9 @@ namespace API.Controllers
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "No se pudo actualizar el gimnasio. Verifique los datos proporcionados.";
+                    resp.Mensaje = "No se encontró el gimnasio para actualizar o los datos proporcionados no son correctos.";
                     resp.Contenido = false;
-                    return Ok(resp);
+                    return NotFound(resp);
                 }
             }
         }

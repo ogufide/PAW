@@ -7,14 +7,29 @@ namespace WEB.Controllers
 {
     public class EmpleadosController(IEmpleadosModel iEmpleadosModel) : Controller
     {
+
+        [HttpGet]
+        public IActionResult AgregarEmpleado()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
         public IActionResult AgregarEmpleado(Empleados ent)
         {
             var respuesta = iEmpleadosModel.AgregarEmpleado(ent);
-            if (respuesta.Codigo == 1)
-                return RedirectToAction("Empleado", "Empleados");
-            else
+            if (respuesta.Codigo == 1) 
+            {
+                return RedirectToAction("AgregarEmpleado", "Empleados");
+            }
+
+            else 
+            {
                 ViewBag.msj = respuesta.Mensaje;
-            return View();
+                return View();
+            }
+                
         }
 
         
@@ -34,15 +49,21 @@ namespace WEB.Controllers
 
         
         [HttpPost]
-        public IActionResult ActualizarEmpleado(Empleados ent, int Id_empleado)
+        public IActionResult ActualizarEmpleado(Empleados ent)
         {
-            var respuesta = iEmpleadosModel.ActualizarEmpleado(ent, Id_empleado);
+            var respuesta = iEmpleadosModel.ActualizarEmpleado(ent);
 
-            if (respuesta.Codigo == 1)
+            if (respuesta.Codigo == 1) 
+            {
                 return RedirectToAction("ActualizarEmpleado", "Empleados");
-            else
+            }
+
+            else 
+            {
                 ViewBag.msj = respuesta.Mensaje;
-            return View();
+                return View();
+            }
+                
         }
 
 

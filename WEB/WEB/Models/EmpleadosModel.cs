@@ -21,11 +21,11 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta ActualizarEmpleado(int Id_empleado, Empleados ent)
+        public Respuesta ActualizarEmpleado(Empleados ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Empleados/ActualizarEmpleado?Id_empleado" + Id_empleado;
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Empleados/ActualizarEmpleado";
                 JsonContent body = JsonContent.Create(ent);
 
 

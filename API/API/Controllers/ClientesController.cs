@@ -47,7 +47,7 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpPut]
         [Route("ActualizarCliente")]
-        public async Task<IActionResult> ActualizarCliente(int Id_cliente, Clientes ent)
+        public async Task<IActionResult> ActualizarCliente(Clientes ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -55,16 +55,14 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("ActualizarCliente", new
-                {
-                   Id_cliente = Id_cliente,
-                   ent.Nombre,
-                   ent.Apellidos,
-                   ent.Correo,
-                   ent.Telefono,
-                   ent.Estado
-                }, commandType: CommandType.StoredProcedure);
+                var parameters = new DynamicParameters();
+                parameters.Add("@Nombre", ent.Nombre);
+                parameters.Add("@Apellidos", ent.Apellidos);
+                parameters.Add("@Correo", ent.Correo);
+                parameters.Add("@Telefono", ent.Telefono);
+                parameters.Add("@Estado", ent.Estado);
 
+                var result = await context.ExecuteAsync("ActualizarCliente", parameters, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

@@ -18,11 +18,17 @@ namespace WEB.Controllers
         public IActionResult AgregarGimnasio(Gimnasios ent)
         {
             var respuesta = iGimnasiosModel.AgregarGimnasio(ent);
-            if (respuesta.Codigo == 1)
-                return RedirectToAction("ConsultarGimnasio", "Gimnasios");
-            else
+            if (respuesta.Codigo == 1) 
+            {
+                return RedirectToAction("AgregarGimnasio", "Gimnasios");
+            }
+
+            else 
+            {
                 ViewBag.msj = respuesta.Mensaje;
-            return View();
+                return View();
+            }
+               
         }
 
 
@@ -43,16 +49,22 @@ namespace WEB.Controllers
 
         
         [HttpPost]
-        public IActionResult ActualizarGimnasio(Gimnasios ent, int Id_gimnasio)
+        public IActionResult ActualizarGimnasio(Gimnasios ent)
         {
-            var respuesta = iGimnasiosModel.ActualizarGimnasio(ent, Id_gimnasio);
+            var respuesta = iGimnasiosModel.ActualizarGimnasio(ent);
 
-            if (respuesta.Codigo == 1)
+            if (respuesta.Codigo == 1) 
+            {
                 return RedirectToAction("ConsultarGimnasio", "Gimnasios");
+            }
+                
             else
+            {
                 ViewBag.msj = respuesta.Mensaje;
-            return View();
+                return View();
+            }
         }
+                
 
 
         [HttpPost]
@@ -61,7 +73,10 @@ namespace WEB.Controllers
             var respuesta = iGimnasiosModel.EliminarGimnasio(Id_gimnasio);
 
             if (respuesta.Codigo == 1)
+            {
                 return RedirectToAction("ConsultarGimnasio", "Gimnasios");
+            }
+                
             else
             {
                 ViewBag.Mensaje = respuesta.Mensaje;

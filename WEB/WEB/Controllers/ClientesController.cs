@@ -24,19 +24,20 @@ namespace WEB.Controllers
         public IActionResult AgregarCliente(Clientes ent)
         {
             var respuesta = iClientesModel.AgregarCliente(ent);
-            if (respuesta.Codigo == 1)
+            if (respuesta.Codigo == 1) 
+            {
                 return RedirectToAction("AgregarCliente", "ClientesController");
-            else
+            }
+
+            else {
                 ViewBag.msj = respuesta.Mensaje;
-            return View();
+                return View();
+            }
+                
         }
 
 
-        [HttpGet]
-        public IActionResult ActualizarCliente()
-        {
-            return View();
-        }
+   
 
 
         [HttpGet]
@@ -61,7 +62,7 @@ namespace WEB.Controllers
             var respuesta = iClientesModel.ActualizarCliente(ent);
 
             if (respuesta.Codigo == 1)
-                return RedirectToAction("ActualizarCliente", "ClientesController");
+                return RedirectToAction("ActualizarCliente", "Clientes");
            
                 ViewBag.msj = respuesta.Mensaje;
                 return View();

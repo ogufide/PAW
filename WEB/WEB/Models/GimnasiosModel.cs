@@ -21,11 +21,11 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta ActualizarGimnasio(int Id_gimnasio, Gimnasios ent)
+        public Respuesta ActualizarGimnasio(Gimnasios ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Gimnasios/ActualizarGimnasio?Id_gimnasio" + Id_gimnasio;
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Gimnasios/ActualizarGimnasio";
                 JsonContent body = JsonContent.Create(ent);
 
 

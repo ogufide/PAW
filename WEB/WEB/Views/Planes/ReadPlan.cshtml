@@ -1,0 +1,38 @@
+﻿@model List<WEB.Entities.Plan>
+
+@{
+    ViewData["Title"] = "Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Plan" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_plan</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripcion</th>
+            <th>Gimnasio_codigo</th>
+            <th>Estado</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_plan</td>
+                <td>@item.Nombre</td>
+                <td>@item.Precio</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Gimnasio_codigo</td>
+                <td>@item.Estado</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/ReadPlan.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

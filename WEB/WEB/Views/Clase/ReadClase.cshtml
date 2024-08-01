@@ -1,0 +1,42 @@
+﻿@model List<WEB.Entities.Clase>
+
+@{
+    ViewData["Title"] = "Clase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Clases" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_clase</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>IdInstructor</th>
+            <th>Horario</th>
+            <th>Duracion</th>
+            <th>CapacidadMaxima</th>
+            <th>Estado</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_clase</td>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>@item.IdInstructor</td>
+                <td>@item.Horario</td>
+                <td>@item.Duracion</td>
+                <td>@item.CapacidadMaxima</td>
+                <td>@item.Estado</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/ReadClase.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

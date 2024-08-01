@@ -1,0 +1,52 @@
+﻿@model List<WEB.Entities.Empleados>
+
+@{
+    ViewData["Title"] = "Empleados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Empleados" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_empleado</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha Nacimiento</th>
+            <th>Genero</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Puesto</th>
+            <th>Fecha Contratacion</th>
+            <th>Salario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_empleado</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellidos</td>
+                <td>@item.FechaNacimiento</td>
+                <td>@item.Genero</td>
+                <td>@item.Direccion</td>
+                <td>@item.Telefono</td>
+                <td>@item.Correo</td>
+                <td>@item.Puesto</td>
+                <td>@item.FechaContratacion</td>
+                <td>@item.Salario</td>
+                <td>@item.Estado</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/validaciones.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

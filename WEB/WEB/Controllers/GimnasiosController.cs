@@ -55,7 +55,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1) 
             {
-                return RedirectToAction("ConsultarGimnasio", "Gimnasios");
+                return RedirectToAction("ActualizarGimnasio", "Gimnasios");
             }
                 
             else

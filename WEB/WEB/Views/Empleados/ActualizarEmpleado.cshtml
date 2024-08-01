@@ -43,12 +43,23 @@
 
                             <label for="FechaNacimiento">Fecha de nacimiento</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.FechaNacimiento, new { @type = "text", @class = "form-control", @placeholder = "FechaNacimiento", @required = "true", @id = "FechaNacimiento" })
+                                @Html.TextBoxFor(m => m.FechaNacimiento, new { @type = "date", @class = "form-control", @placeholder = "FechaNacimiento", @required = "true", @id = "FechaNacimiento" })
                             </div>
 
-                            <label for="Genero">Genero</label>
+                            <label for="Genero"></label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Genero, new { @type = "text", @class = "form-control", @placeholder = "Genero", @required = "true", @id = "Genero" })
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(m => m.Genero, "Masculino", new { @class = "form-check-input", @id = "GeneroMasculino" })
+                                    <label class="form-check-label" for="GeneroMasculino">
+                                        Masculino
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(m => m.Genero, "Femenino", new { @class = "form-check-input", @id = "GeneroFemenino" })
+                                    <label class="form-check-label" for="GeneroFemenino">
+                                        Femenino
+                                    </label>
+                                </div>
                             </div>
 
                             <label for="Direccion">Dirección</label>
@@ -63,7 +74,7 @@
 
                             <label for="Correo">Correo</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Correo, new { @type = "text", @class = "form-control", @placeholder = "Correo", @required = "true", @id = "Correo" })
+                                @Html.TextBoxFor(m => m.Correo, new { @type = "email", @class = "form-control", @placeholder = "Correo", @required = "true", @id = "Correo" })
                             </div>
 
                             <label for="Puesto">Puesto</label>
@@ -73,12 +84,12 @@
 
                             <label for="FechaContratacion">Fecha de contratacion</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.FechaContratacion, new { @type = "text", @class = "form-control", @placeholder = "FechaContratacion", @required = "true", @id = "FechaContratacion" })
+                                @Html.TextBoxFor(m => m.FechaContratacion, new { @type = "date", @class = "form-control", @placeholder = "FechaContratacion", @required = "true", @id = "FechaContratacion" })
                             </div>
 
                             <label for="Salario">Salario</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Salario, new { @type = "text", @class = "form-control", @placeholder = "Salario", @required = "true", @id = "Salario" })
+                                @Html.TextBoxFor(m => m.Salario, new { @type = "decimal", @class = "form-control", @placeholder = "Salario", @required = "true", @id = "Salario" })
                             </div>
 
 
@@ -91,12 +102,12 @@
                             </div>
 
                             <div class="">
-                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("", "")'">Actualizar</button>
+                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("index", "Home")'">Actualizar</button>
                             </div>
                         }
                     </div>
 
-                    }
+                    
 
                 </div>
             </div>

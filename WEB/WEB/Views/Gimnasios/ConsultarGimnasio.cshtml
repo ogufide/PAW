@@ -1,0 +1,40 @@
+﻿@model List<WEB.Entities.Gimnasios>
+
+@{
+    ViewData["Title"] = "Gimnasios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Gimnasios" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_gimnasio</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Provincia</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_gimnasio</td>
+                <td>@item.Nombre</td>
+                <td>@item.Telefono</td>
+                <td>@item.Direccion</td>
+                <td>@item.Id_provincia</td>
+                <td>@item.Estado</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/validaciones.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

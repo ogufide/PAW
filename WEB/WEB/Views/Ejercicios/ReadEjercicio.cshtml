@@ -1,0 +1,36 @@
+﻿@model List<WEB.Entities.Ejercicio>
+
+@{
+    ViewData["Title"] = "Ejercicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Ejercicios" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_ejercicio</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>GrupoMuscular</th>
+            <th>EquipoNecesario</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_ejercicio</td>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>@item.GrupoMuscular</td>
+                <td>@item.EquipoNecesario</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/ReadEjercicio.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

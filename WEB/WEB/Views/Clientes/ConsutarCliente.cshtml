@@ -1,0 +1,40 @@
+﻿@model List<WEB.Entities.Clientes>
+
+@{
+    ViewData["Title"] = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="tabla-Clientes" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id_cliente</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_cliente</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellidos</td>
+                <td>@item.Correo</td>
+                <td>@item.Telefono</td>
+                <td>@item.Estado</td>
+                <td>Acciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/plantilla/js/validaciones.js"></script>
+<script src="~/plantilla/js/jquery.min.js"></script>

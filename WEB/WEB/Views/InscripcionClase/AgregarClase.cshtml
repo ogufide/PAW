@@ -1,0 +1,65 @@
+﻿@model WEB.Entities.InscripcionClases
+
+@{
+    ViewData["Title"] = "Inscripcion Clase";
+
+}
+
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<style>
+    .form-container {
+        margin: auto;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 1rem rgba(0,0,0,0.1);
+    }
+
+    .form-header {
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-container">
+                <h2 class="form-header">@ViewData["Title"]</h2>
+                
+                @if(ViewBag.msj != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.msj
+                    </div>
+                }
+
+                <form asp-action="AgregarClase" method="post">
+                    <div class="form-group">
+                        <label asp-for="Id_cliente" class="control-label">ID Cliente</label>
+                        <input asp-for="Id_cliente" class="form-control" />
+                        <span asp-validation-for="Id_cliente" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdClase" class="control-label">ID Clase</label>
+                        <input asp-for="IdClase" class="form-control" />
+                        <span asp-validation-for="IdClase" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Inscribirse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Client-side validation -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

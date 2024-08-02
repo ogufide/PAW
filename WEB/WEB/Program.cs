@@ -14,6 +14,7 @@ builder.Services.AddScoped<IClasesModel, ClasesModel>();
 builder.Services.AddScoped<IClientesModel, ClientesModel>();
 builder.Services.AddScoped<IEmpleadosModel, EmpleadosModel>();
 builder.Services.AddScoped<IGimnasiosModel, GimnasiosModel>();
+builder.Services.AddScoped<IInscripcionClaseModel, InscripcionClaseModel>();
 
 
 var app = builder.Build();

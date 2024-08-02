@@ -1,84 +1,10 @@
---********************* CREACI�N DE BD *************************
-
-USE [master]
-GO
-CREATE DATABASE [Proyecto]
-GO
-ALTER DATABASE [Proyecto] SET ANSI_NULL_DEFAULT OFF 
-GO
-ALTER DATABASE [Proyecto] SET ANSI_NULLS OFF 
-GO
-ALTER DATABASE [Proyecto] SET ANSI_PADDING OFF 
-GO
-ALTER DATABASE [Proyecto] SET ANSI_WARNINGS OFF 
-GO
-ALTER DATABASE [Proyecto] SET ARITHABORT OFF 
-GO
-ALTER DATABASE [Proyecto] SET AUTO_CLOSE OFF 
-GO
-ALTER DATABASE [Proyecto] SET AUTO_SHRINK OFF 
-GO
-ALTER DATABASE [Proyecto] SET AUTO_UPDATE_STATISTICS ON 
-GO
-ALTER DATABASE [Proyecto] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
-ALTER DATABASE [Proyecto] SET CURSOR_DEFAULT  GLOBAL 
-GO
-ALTER DATABASE [Proyecto] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
-ALTER DATABASE [Proyecto] SET NUMERIC_ROUNDABORT OFF 
-GO
-ALTER DATABASE [Proyecto] SET QUOTED_IDENTIFIER OFF 
-GO
-ALTER DATABASE [Proyecto] SET RECURSIVE_TRIGGERS OFF 
-GO
-ALTER DATABASE [Proyecto] SET  DISABLE_BROKER 
-GO
-ALTER DATABASE [Proyecto] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
-ALTER DATABASE [Proyecto] SET DATE_CORRELATION_OPTIMIZATION OFF 
-GO
-ALTER DATABASE [Proyecto] SET TRUSTWORTHY OFF 
-GO
-ALTER DATABASE [Proyecto] SET ALLOW_SNAPSHOT_ISOLATION OFF 
-GO
-ALTER DATABASE [Proyecto] SET PARAMETERIZATION SIMPLE 
-GO
-ALTER DATABASE [Proyecto] SET READ_COMMITTED_SNAPSHOT OFF 
-GO
-ALTER DATABASE [Proyecto] SET HONOR_BROKER_PRIORITY OFF 
-GO
-ALTER DATABASE [Proyecto] SET RECOVERY FULL 
-GO
-ALTER DATABASE [Proyecto] SET  MULTI_USER 
-GO
-ALTER DATABASE [Proyecto] SET PAGE_VERIFY CHECKSUM  
-GO
-ALTER DATABASE [Proyecto] SET DB_CHAINING OFF 
-GO
-ALTER DATABASE [Proyecto] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
-GO
-ALTER DATABASE [Proyecto] SET TARGET_RECOVERY_TIME = 60 SECONDS 
-GO
-ALTER DATABASE [Proyecto] SET DELAYED_DURABILITY = DISABLED 
-GO
-ALTER DATABASE [Proyecto] SET ACCELERATED_DATABASE_RECOVERY = OFF  
-GO
-EXEC sys.sp_db_vardecimal_storage_format N'Proyecto', N'ON'
-GO
-ALTER DATABASE [Proyecto] SET QUERY_STORE = ON
-GO
-ALTER DATABASE [Proyecto] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
-GO
 USE [Proyecto]
 GO
+/****** Object:  Table [dbo].[asignacionPlanes]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
---********************* CREACI�N DE TABLAS *************************
-
 CREATE TABLE [dbo].[asignacionPlanes](
 	[Id_asignacion] [int] IDENTITY(1,1) NOT NULL,
 	[Id_cliente] [int] NULL,
@@ -91,6 +17,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[clases]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,6 +36,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[clientes]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,6 +57,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[ejercicios]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -145,6 +74,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[empleados]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,6 +101,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[gimnasios]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,6 +118,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[inscripcionesClases]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,6 +134,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[inventario]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,6 +152,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[membresias]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -236,6 +170,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[pagos]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,6 +187,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[planes]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -268,6 +204,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[planesEntrenamiento]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -284,6 +221,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[promociones]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -302,6 +240,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[provincias]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -315,6 +254,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[rol]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -323,13 +263,13 @@ CREATE TABLE [dbo].[rol](
 	[Id_rol] [tinyint] IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](50) NOT NULL,
 	[estado] [bit] NOT NULL,
-
  CONSTRAINT [PK_rol] PRIMARY KEY CLUSTERED 
 (
 	[Id_rol] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[rutinasEjercicios]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -347,6 +287,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[rutinasEntrenamiento]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -363,30 +304,33 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[usuario]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 CREATE TABLE [dbo].[usuario](
 	[identificacion] [varchar](50) NOT NULL,
 	[nombre] [varchar](100) NOT NULL,
 	[correo] [varchar](100) NOT NULL,
 	[contrasenna] [varchar](100) NOT NULL,
-	[Id_rol] [tinyint] NOT NULL DEFAULT 2,
-    [estado] [bit] NOT NULL DEFAULT 1,
+	[Id_rol] [tinyint] NOT NULL,
+	[estado] [bit] NOT NULL,
  CONSTRAINT [PK_tUsuario] PRIMARY KEY CLUSTERED 
 (
-	[Identificacion] ASC
+	[identificacion] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
  CONSTRAINT [UK_Correo] UNIQUE NONCLUSTERED 
 (
-	[Correo] ASC
+	[correo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
-
+/****** Object:  Table [dbo].[ventas]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE [dbo].[ventas](
 	[Id_venta] [int] IDENTITY(1,1) NOT NULL,
 	[Id_cliente] [int] NULL,
@@ -399,6 +343,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[ventasProductos]    Script Date: 1/8/2024 14:12:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -414,6 +359,10 @@ PRIMARY KEY CLUSTERED
 	[Id_producto] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[usuario] ADD  DEFAULT ((2)) FOR [Id_rol]
+GO
+ALTER TABLE [dbo].[usuario] ADD  DEFAULT ((1)) FOR [estado]
 GO
 ALTER TABLE [dbo].[asignacionPlanes]  WITH CHECK ADD FOREIGN KEY([Id_cliente])
 REFERENCES [dbo].[clientes] ([Id_cliente])
@@ -487,14 +436,206 @@ GO
 ALTER TABLE [dbo].[ventasProductos]  WITH CHECK ADD FOREIGN KEY([Id_venta])
 REFERENCES [dbo].[ventas] ([Id_venta])
 GO
-USE [master]
+/****** Object:  StoredProcedure [dbo].[CreateProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
 GO
-ALTER DATABASE [Proyecto] SET  READ_WRITE 
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Crear producto en inventario
+CREATE PROCEDURE [dbo].[CreateProducto]
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(200),
+    @CantidadStock INT,
+    @Precio DECIMAL(10, 2)
+AS
+BEGIN
+    INSERT INTO inventario (Nombre, Descripcion, CantidadStock, Precio)
+    VALUES (@Nombre, @Descripcion, @CantidadStock, @Precio)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateRol]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
 
---******************************* CREACI�N DE SP *******************************
-USE [Proyecto]
+-- Crear rol
+CREATE PROCEDURE [dbo].[CreateRol]
+    @descripcion VARCHAR(50)
+AS
+BEGIN
+    INSERT INTO rol (descripcion)
+    VALUES (@descripcion)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Crear usuario
+CREATE PROCEDURE [dbo].[CreateUsuario]
+    @identificacion VARCHAR(50),
+    @nombre VARCHAR(100),
+    @correo VARCHAR(100),
+    @contrasenna VARCHAR(100)
+AS
+BEGIN
+    INSERT INTO [dbo].[usuario] (identificacion, nombre, correo, contrasenna, estado, Id_rol)
+    VALUES (@identificacion, @nombre, @correo, @contrasenna, 1, 2)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- Crear ventasProductos
+CREATE PROCEDURE [dbo].[CreateVentasProducto]
+    @Id_venta INT,
+    @Id_producto INT,
+    @Cantidad INT
+AS
+BEGIN
+    INSERT INTO ventasProductos (Id_venta, Id_producto, Cantidad)
+    VALUES (@Id_venta, @Id_producto, @Cantidad)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Eliminar producto del inventario
+CREATE PROCEDURE [dbo].[DeleteProducto]
+    @Id_producto INT
+AS
+BEGIN
+    UPDATE inventario
+    SET estado = 0
+    WHERE Id_producto = @Id_producto
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteRol]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Eliminar rol
+CREATE PROCEDURE [dbo].[DeleteRol]
+    @Id_rol INT
+AS
+BEGIN
+    UPDATE rol
+    SET estado = 0
+    WHERE Id_rol = @Id_rol
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Eliminar usuario
+CREATE PROCEDURE [dbo].[DeleteUsuario]
+    @Identificacion VARCHAR(50)
+AS
+BEGIN
+    UPDATE usuario
+    SET estado = 0
+    WHERE identificacion = @Identificacion
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Eliminar ventasProductos
+CREATE PROCEDURE [dbo].[DeleteVentasProducto]
+    @Id_venta INT,
+    @Id_producto INT
+AS
+BEGIN
+    UPDATE ventasProductos
+    SET estado = 0
+    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetProductoById]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Leer un producto del inventario por ID
+CREATE PROCEDURE [dbo].[GetProductoById]
+    @Id_producto INT
+AS
+BEGIN
+    SELECT * FROM inventario WHERE Id_producto = @Id_producto AND estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetRolById]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Leer un rol por ID
+CREATE PROCEDURE [dbo].[GetRolById]
+    @Id_rol INT
+AS
+BEGIN
+    SELECT * FROM rol WHERE Id_rol = @Id_rol AND estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetUsuarioById]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- Leer un usuario por ID
+CREATE PROCEDURE [dbo].[GetUsuarioById]
+    @Identificacion VARCHAR(50)
+AS
+BEGIN
+    SELECT identificacion, nombre, correo, U.Id_rol,
+           CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
+           R.descripcion
+    FROM dbo.usuario U
+    INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
+    WHERE U.identificacion = @Identificacion AND U.estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetVentasProductoById]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Leer un registro de ventasProductos por ID de venta y producto
+CREATE PROCEDURE [dbo].[GetVentasProductoById]
+    @Id_venta INT,
+    @Id_producto INT
+AS
+BEGIN
+    SELECT * FROM ventasProductos WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto AND estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[IniciarSesion]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [dbo].[IniciarSesion]
@@ -510,22 +651,40 @@ BEGIN
         AND U.estado = 1
 END
 GO
+/****** Object:  StoredProcedure [dbo].[ReadProductos]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
--- Crear usuario
-CREATE PROCEDURE CreateUsuario
-    @identificacion VARCHAR(50),
-    @nombre VARCHAR(100),
-    @correo VARCHAR(100),
-    @contrasenna VARCHAR(100)
+-- Leer todos los productos del inventario
+CREATE PROCEDURE [dbo].[ReadProductos]
 AS
 BEGIN
-    INSERT INTO [dbo].[usuario] (identificacion, nombre, correo, contrasenna, estado, Id_rol)
-    VALUES (@identificacion, @nombre, @correo, @contrasenna, 1, 2)
+    SELECT * FROM inventario WHERE estado = 1
 END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadRoles]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Leer todos los roles
+CREATE PROCEDURE [dbo].[ReadRoles]
+AS
+BEGIN
+    SELECT * FROM rol WHERE estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadUsuarios]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
 -- Leer todos los usuarios
-CREATE PROCEDURE ReadUsuarios
+CREATE PROCEDURE [dbo].[ReadUsuarios]
 AS
 BEGIN
     SELECT identificacion, nombre, correo, U.Id_rol,
@@ -536,24 +695,97 @@ BEGIN
     WHERE U.estado = 1
 END
 GO
+/****** Object:  StoredProcedure [dbo].[ReadVentasProductos]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-
--- Leer un usuario por ID
-CREATE PROCEDURE GetUsuarioById
-    @Identificacion VARCHAR(50)
+-- Leer todos los registros de ventasProductos
+CREATE PROCEDURE [dbo].[ReadVentasProductos]
 AS
 BEGIN
-    SELECT identificacion, nombre, correo, U.Id_rol,
-           CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
-           R.descripcion
-    FROM dbo.usuario U
-    INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
-    WHERE U.identificacion = @Identificacion AND U.estado = 1
+    SELECT * FROM ventasProductos WHERE estado = 1
 END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_InsertarInscripcionClase]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_InsertarInscripcionClase]
+    @Id_cliente INT,
+    @IdClase INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @FechaInscripcion DATETIME = GETDATE();
+
+    INSERT INTO [Proyecto].[dbo].[inscripcionesClases] (Id_cliente, IdClase, FechaInscripcion)
+    VALUES (@Id_cliente, @IdClase, @FechaInscripcion);
+
+    SELECT 
+        SCOPE_IDENTITY() AS NewId,
+        c.Nombre AS NombreClase,
+        cl.Nombre AS NombreCliente,
+        @FechaInscripcion AS FechaInscripcion
+    FROM 
+        [Proyecto].[dbo].[inscripcionesClases] ic
+        JOIN [Proyecto].[dbo].[Clases] c ON ic.IdClase = c.Id_clase
+        JOIN [Proyecto].[dbo].[Clientes] cl ON ic.Id_cliente = cl.Id_cliente
+    WHERE
+        ic.Id_inscripcion = SCOPE_IDENTITY();
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Actualizar producto en inventario
+CREATE PROCEDURE [dbo].[UpdateProducto]
+    @Id_producto INT,
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(200),
+    @CantidadStock INT,
+    @Precio DECIMAL(10, 2)
+AS
+BEGIN
+    UPDATE inventario
+    SET Nombre = @Nombre,
+        Descripcion = @Descripcion,
+        CantidadStock = @CantidadStock,
+        Precio = @Precio
+    WHERE Id_producto = @Id_producto
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateRol]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Actualizar rol
+CREATE PROCEDURE [dbo].[UpdateRol]
+    @Id_rol INT,
+    @descripcion VARCHAR(50)
+AS
+BEGIN
+    UPDATE rol
+    SET descripcion = @descripcion
+    WHERE Id_rol = @Id_rol
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
 -- Actualizar usuario
-CREATE PROCEDURE UpdateUsuario
+CREATE PROCEDURE [dbo].[UpdateUsuario]
     @Identificacion VARCHAR(50),
     @nombre VARCHAR(50),
     @correo VARCHAR(50),
@@ -571,159 +803,14 @@ BEGIN
     WHERE identificacion = @Identificacion
 END
 GO
-
--- Eliminar usuario
-CREATE PROCEDURE DeleteUsuario
-    @Identificacion VARCHAR(50)
-AS
-BEGIN
-    UPDATE usuario
-    SET estado = 0
-    WHERE identificacion = @Identificacion
-END
+/****** Object:  StoredProcedure [dbo].[UpdateVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+SET ANSI_NULLS ON
 GO
-
-
--- Crear rol
-CREATE PROCEDURE CreateRol
-    @descripcion VARCHAR(50)
-AS
-BEGIN
-    INSERT INTO rol (descripcion)
-    VALUES (@descripcion)
-END
-GO
-
--- Leer todos los roles
-CREATE PROCEDURE ReadRoles
-AS
-BEGIN
-    SELECT * FROM rol WHERE estado = 1
-END
-GO
-
--- Leer un rol por ID
-CREATE PROCEDURE GetRolById
-    @Id_rol INT
-AS
-BEGIN
-    SELECT * FROM rol WHERE Id_rol = @Id_rol AND estado = 1
-END
-GO
-
--- Actualizar rol
-CREATE PROCEDURE UpdateRol
-    @Id_rol INT,
-    @descripcion VARCHAR(50)
-AS
-BEGIN
-    UPDATE rol
-    SET descripcion = @descripcion
-    WHERE Id_rol = @Id_rol
-END
-GO
-
--- Eliminar rol
-CREATE PROCEDURE DeleteRol
-    @Id_rol INT
-AS
-BEGIN
-    UPDATE rol
-    SET estado = 0
-    WHERE Id_rol = @Id_rol
-END
-GO
-
--- Crear producto en inventario
-CREATE PROCEDURE CreateProducto
-    @Nombre VARCHAR(50),
-    @Descripcion VARCHAR(200),
-    @CantidadStock INT,
-    @Precio DECIMAL(10, 2)
-AS
-BEGIN
-    INSERT INTO inventario (Nombre, Descripcion, CantidadStock, Precio)
-    VALUES (@Nombre, @Descripcion, @CantidadStock, @Precio)
-END
-GO
-
--- Leer todos los productos del inventario
-CREATE PROCEDURE ReadProductos
-AS
-BEGIN
-    SELECT * FROM inventario WHERE estado = 1
-END
-GO
-
--- Leer un producto del inventario por ID
-CREATE PROCEDURE GetProductoById
-    @Id_producto INT
-AS
-BEGIN
-    SELECT * FROM inventario WHERE Id_producto = @Id_producto AND estado = 1
-END
-GO
-
--- Actualizar producto en inventario
-CREATE PROCEDURE UpdateProducto
-    @Id_producto INT,
-    @Nombre VARCHAR(50),
-    @Descripcion VARCHAR(200),
-    @CantidadStock INT,
-    @Precio DECIMAL(10, 2)
-AS
-BEGIN
-    UPDATE inventario
-    SET Nombre = @Nombre,
-        Descripcion = @Descripcion,
-        CantidadStock = @CantidadStock,
-        Precio = @Precio
-    WHERE Id_producto = @Id_producto
-END
-GO
-
--- Eliminar producto del inventario
-CREATE PROCEDURE DeleteProducto
-    @Id_producto INT
-AS
-BEGIN
-    UPDATE inventario
-    SET estado = 0
-    WHERE Id_producto = @Id_producto
-END
-GO
--- Crear ventasProductos
-CREATE PROCEDURE CreateVentasProducto
-    @Id_venta INT,
-    @Id_producto INT,
-    @Cantidad INT
-AS
-BEGIN
-    INSERT INTO ventasProductos (Id_venta, Id_producto, Cantidad)
-    VALUES (@Id_venta, @Id_producto, @Cantidad)
-END
-GO
-
--- Leer todos los registros de ventasProductos
-CREATE PROCEDURE ReadVentasProductos
-AS
-BEGIN
-    SELECT * FROM ventasProductos WHERE estado = 1
-END
-GO
-
--- Leer un registro de ventasProductos por ID de venta y producto
-CREATE PROCEDURE GetVentasProductoById
-    @Id_venta INT,
-    @Id_producto INT
-AS
-BEGIN
-    SELECT * FROM ventasProductos WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto AND estado = 1
-END
+SET QUOTED_IDENTIFIER ON
 GO
 
 -- Actualizar ventasProductos
-CREATE PROCEDURE UpdateVentasProducto
+CREATE PROCEDURE [dbo].[UpdateVentasProducto]
     @Id_venta INT,
     @Id_producto INT,
     @Cantidad INT
@@ -733,26 +820,4 @@ BEGIN
     SET Cantidad = @Cantidad
     WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
 END
-GO
-
--- Eliminar ventasProductos
-CREATE PROCEDURE DeleteVentasProducto
-    @Id_venta INT,
-    @Id_producto INT
-AS
-BEGIN
-    UPDATE ventasProductos
-    SET estado = 0
-    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
-END
-GO
-
--- Datos Necesarios
-SET IDENTITY_INSERT [dbo].[rol] ON 
-GO
-INSERT [dbo].[rol] ([Id_rol], [descripcion], [estado]) VALUES (1, N'Administrador',1)
-GO
-INSERT [dbo].[rol] ([Id_rol], [descripcion], [estado]) VALUES (2, N'Usuario',1)
-GO
-SET IDENTITY_INSERT [dbo].[rol] OFF
 GO

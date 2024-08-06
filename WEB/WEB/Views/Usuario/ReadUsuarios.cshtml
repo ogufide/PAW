@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Lista de Usuarios</h2>
+
+
 <table id="tabla-Usuarios" class="table table-hover">
     <thead>
         <tr>
@@ -27,6 +30,17 @@
                 <td>@item.Correo</td>
                 <td>@item.Descripcion</td>
                 <td>@item.Estado</td>
+                <td>
+
+                    <button type="button" class="btn btn-primary Modales" data-toggle="modal" data-target="#ModalUsuarios"
+                            data-id="@item.Identificacion" data-name="@item.Nombre">
+                        <i class="fa fa-pen"></i>
+                    </button>
+
+                    <a class="btn btn-primary" href="@Url.Action("UpdateUsuario", "Usuario", new { q = item.Identificacion })">
+                        <i class="fa fa-user"></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

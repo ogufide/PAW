@@ -45,7 +45,7 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult ActualizarUsuario(int q)
+        public IActionResult UpdateUsuario(int q)
         {
             var roles = iRolModel.ReadRoles();
             ViewBag.Roles = JsonSerializer.Deserialize<List<SelectListItem>>((JsonElement)roles.Contenido!);

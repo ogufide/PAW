@@ -9,7 +9,7 @@
 
 $(document).on("click", ".Modales", function () {
 
-    $("#Consecutivo").val($(this).attr("data-id"));
+    $("#Identificacion").val($(this).attr("data-id"));
     $("#Nombre").text($(this).attr("data-name"));
 
 });

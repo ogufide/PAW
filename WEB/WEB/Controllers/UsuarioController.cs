@@ -60,5 +60,17 @@ namespace WEB.Controllers
 
             return View(new Usuario());
         }
+
+        [HttpPost]
+        public IActionResult CambiarEstadoUsuario(Usuario ent)
+        {
+            var resp = iUsuarioModel.CambiarEstadoUsuario(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("ConsultarUsuarios", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API.Entities;
+using API.Models;
 using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolController(IConfiguration iConfiguration) : ControllerBase
+    public class RolController(IConfiguration iConfiguration, IComunesModel iComunesModel) : ControllerBase
     {
         [Authorize]
         [HttpPost]
@@ -46,6 +47,9 @@ namespace API.Controllers
         [Route("ReadRoles")]
         public async Task<IActionResult> ReadRoles()
         {
+            if (!iComunesModel.EsAdministrador(User))
+                return StatusCode(403);
+
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
@@ -62,7 +66,7 @@ namespace API.Controllers
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "No hay usuarios registrados en este momento";
+                    resp.Mensaje = "No hay roles registrados en este momento";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

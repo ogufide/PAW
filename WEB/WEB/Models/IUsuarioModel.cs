@@ -9,5 +9,9 @@ namespace WEB.Models
         Respuesta IniciarSesion(Usuario ent);
         Respuesta ReadUsuarios();
         Respuesta GetUsuarioById(int Identificacion);
+
+        Respuesta UpdateUsuario(Usuario ent);
+        Respuesta CambiarEstadoUsuario(Usuario ent);
+
     }
 }

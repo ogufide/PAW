@@ -27,10 +27,20 @@ namespace WEB.Controllers
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<Usuario>((JsonElement)resp.Contenido!);
-               // HttpContext.Session.SetString("TOKEN", datos!.Token!);
+
+                if (datos!.EsTemporal)
+                {
+                    if (datos!.VigenciaTemporal <= DateTime.Now)
+                    {
+                        ViewBag.msj = "Su contraseña temporal ha caducado.";
+                        return View();
+                    }
+                }
+
+                HttpContext.Session.SetString("TOKEN", datos!.Token!);
                 HttpContext.Session.SetString("NOMBRE", datos!.Nombre!);
-                // HttpContext.Session.SetString("ROL", datos!.Id_rol!);
-                HttpContext.Session.SetString("IDENTIFICACION", datos!.Identificacion!);
+                HttpContext.Session.SetString("ROL", datos!.Id_rol.ToString());
+                HttpContext.Session.SetInt32("IDENTIFICACION", datos!.Identificacion);
                 return RedirectToAction("Principal", "Home");
             }
 

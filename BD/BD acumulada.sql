@@ -371,7 +371,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[usuario](
-	[identificacion] [varchar](50) NOT NULL,
+	[identificacion] [int] UNIQUE NOT NULL,
 	[nombre] [varchar](100) NOT NULL,
 	[correo] [varchar](100) NOT NULL,
 	[contrasenna] [varchar](100) NOT NULL,

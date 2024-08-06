@@ -9,18 +9,22 @@ namespace WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MembresiaController(IMembresiaModel iMembresiaModel) : ControllerBase
+    public class MembresiaController(IMembresiaModel iMembresiaModel) : Controller
     {
-
-        [HttpGet]
         public IActionResult ConsultarMembresias()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ConsultarMembresias(Membresia ent)
         {
             var resp = iMembresiaModel.ConsultarMembresias();
 
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<List<Membresia>>((JsonElement)resp.Contenido!);
-                return View(datos!.Where(x => x.Consecutivo != HttpContext.Session.GetInt32("CONSECUTIVO")).ToList());
+                return View(datos!.Where(x => x.Id_membresia != HttpContext.Session.GetInt32("CONSECUTIVO")).ToList());
             }
 
             return View(new List<Membresia>());

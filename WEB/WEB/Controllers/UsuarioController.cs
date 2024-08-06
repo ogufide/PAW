@@ -35,10 +35,10 @@ namespace WEB.Controllers
         {
             var resp = iUsuarioModel.ReadUsuarios();
 
-            if (resp.Codigo == 1)
+            if (resp.Codigo == 1 )
             {
                 var datos = JsonSerializer.Deserialize<List<Usuario>>((JsonElement)resp.Contenido!);
-                return View(datos!.Where(x => x.Identificacion != HttpContext.Session.GetString("IDENTIFICACION")).ToList());
+                return View(datos!.Where(x => x.Identificacion != HttpContext.Session.GetInt32("IDENTIFICACION")).ToList());
             }
 
             return View(new List<Usuario>());

@@ -11,7 +11,7 @@ namespace WEB.Models
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Membresia/ConsultarMembresias";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Membresias/ConsultarMembresias";
                 string token = iContextAccesor.HttpContext!.Session.GetString("TOKEN")!.ToString();
 
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

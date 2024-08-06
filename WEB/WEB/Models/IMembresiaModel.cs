@@ -2,7 +2,7 @@
 
 namespace WEB.Models
 {
-    public class IMembresiaModel
+    public interface IMembresiaModel
     {
         Respuesta ConsultarMembresias();
 

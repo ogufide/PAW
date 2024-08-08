@@ -42,7 +42,9 @@ namespace API.Controllers
             }
         }
 
-        [Authorize]
+        
+        
+        //[Authorize]
         [HttpGet]
         [Route("ReadRoles")]
         public async Task<IActionResult> ReadRoles()

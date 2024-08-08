@@ -1,6 +1,6 @@
 USE [Proyecto]
 GO
-/****** Object:  Table [dbo].[asignacionPlanes]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[asignacionPlanes]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -17,7 +17,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[clases]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[clases]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,13 +30,14 @@ CREATE TABLE [dbo].[clases](
 	[Horario] [varchar](50) NOT NULL,
 	[Duracion] [int] NOT NULL,
 	[CapacidadMaxima] [int] NOT NULL,
+	[Estado] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id_clase] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[clientes]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[clientes]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -57,7 +58,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ejercicios]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[ejercicios]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -74,7 +75,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[empleados]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[empleados]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +102,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[gimnasios]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[gimnasios]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +119,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[inscripcionesClases]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[inscripcionesClases]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +135,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[inventario]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[inventario]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +153,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[membresias]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[membresias]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +171,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[pagos]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[pagos]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,7 +188,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[planes]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[planes]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -198,13 +199,14 @@ CREATE TABLE [dbo].[planes](
 	[Precio] [int] NOT NULL,
 	[Descripcion] [text] NULL,
 	[Gimnasio_codigo] [int] NOT NULL,
+	[Estado] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id_plan] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[planesEntrenamiento]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[planesEntrenamiento]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -221,7 +223,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[promociones]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[promociones]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -240,7 +242,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[provincias]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[provincias]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -254,7 +256,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rol]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[rol]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -269,7 +271,7 @@ CREATE TABLE [dbo].[rol](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rutinasEjercicios]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[rutinasEjercicios]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -287,7 +289,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rutinasEntrenamiento]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[rutinasEntrenamiento]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,13 +306,13 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[usuario]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[usuario](
-	[identificacion] [varchar](50) NOT NULL,
+	[identificacion] [int] NOT NULL,
 	[nombre] [varchar](100) NOT NULL,
 	[correo] [varchar](100) NOT NULL,
 	[contrasenna] [varchar](100) NOT NULL,
@@ -323,10 +325,14 @@ CREATE TABLE [dbo].[usuario](
  CONSTRAINT [UK_Correo] UNIQUE NONCLUSTERED 
 (
 	[correo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[identificacion] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ventas]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[ventas]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -343,7 +349,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ventasProductos]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  Table [dbo].[ventasProductos]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -436,7 +442,84 @@ GO
 ALTER TABLE [dbo].[ventasProductos]  WITH CHECK ADD FOREIGN KEY([Id_venta])
 REFERENCES [dbo].[ventas] ([Id_venta])
 GO
-/****** Object:  StoredProcedure [dbo].[CreateProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[CambiarEstadoUsuario]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[CambiarEstadoUsuario]
+	@Identificacion INT
+AS
+BEGIN
+
+	UPDATE usuario
+	   SET estado = CASE WHEN estado = 1 THEN 0 ELSE 1 END
+	 WHERE Identificacion = @Identificacion
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateClase]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Crear clase
+CREATE PROCEDURE [dbo].[CreateClase]
+	@Nombre VARCHAR(50),
+	@Descripcion VARCHAR(200),
+	@IdInstructor int,
+	@Horario VARCHAR(50),
+	@Duracion int,
+	@CapacidadMaxima int,
+	@Estado bit
+
+AS
+BEGIN
+    INSERT INTO clases (Nombre, Descripcion, IdInstructor, Horario, Duracion, CapacidadMaxima, Estado)
+    VALUES (@Nombre, @Descripcion, @IdInstructor, @Horario, @Duracion, @CapacidadMaxima, @Estado)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateEjercicio]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- Crear ejercicio
+CREATE PROCEDURE [dbo].[CreateEjercicio]
+	@Nombre VARCHAR(50),
+	@Descripcion VARCHAR(200),
+	@GrupoMuscular VARCHAR(50),
+	@EquipoNecesario VARCHAR(100)
+
+AS
+BEGIN
+    INSERT INTO ejercicios (Nombre, Descripcion, GrupoMuscular, EquipoNecesario)
+    VALUES (@Nombre, @Descripcion, @GrupoMuscular, @EquipoNecesario)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreatePlan]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Crear un plan
+CREATE PROCEDURE [dbo].[CreatePlan]
+	@Nombre VARCHAR(50),
+	@Precio int,
+	@Descripcion text,
+	@Gimnasio_codigo int
+AS
+BEGIN
+    INSERT INTO planes (Nombre, Precio, Descripcion, Gimnasio_codigo)
+    VALUES (@Nombre, @Precio, @Descripcion, @Gimnasio_codigo)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -454,7 +537,7 @@ BEGIN
     VALUES (@Nombre, @Descripcion, @CantidadStock, @Precio)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CreateRol]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[CreateRol]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -470,7 +553,7 @@ BEGIN
     VALUES (@descripcion)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CreateUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[CreateUsuario]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -488,7 +571,7 @@ BEGIN
     VALUES (@identificacion, @nombre, @correo, @contrasenna, 1, 2)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CreateVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[CreateVentasProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -504,7 +587,57 @@ BEGIN
     VALUES (@Id_venta, @Id_producto, @Cantidad)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[DeleteClase]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Eliminar clase
+CREATE PROCEDURE [dbo].[DeleteClase]
+    @Id_clase INT
+AS
+BEGIN
+    UPDATE clases
+    SET Estado = 0
+    WHERE Id_clase = @Id_clase
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteEjercicio]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- Eliminar Ejercicio
+CREATE PROCEDURE [dbo].[DeleteEjercicio]
+    @Id_ejercicio INT
+AS
+BEGIN
+    DELETE 
+    FROM ejercicios
+    WHERE Id_ejercicio = @Id_ejercicio
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeletePlan]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- Eliminar plan
+CREATE PROCEDURE [dbo].[DeletePlan]
+    @Id_plan INT
+AS
+BEGIN
+    UPDATE planes
+    SET Estado = 0
+    WHERE Id_plan = @Id_plan
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -520,7 +653,7 @@ BEGIN
     WHERE Id_producto = @Id_producto
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteRol]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[DeleteRol]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -536,7 +669,7 @@ BEGIN
     WHERE Id_rol = @Id_rol
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[DeleteUsuario]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -552,7 +685,7 @@ BEGIN
     WHERE identificacion = @Identificacion
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[DeleteVentasProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -569,7 +702,7 @@ BEGIN
     WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetProductoById]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[GetProductoById]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -583,7 +716,7 @@ BEGIN
     SELECT * FROM inventario WHERE Id_producto = @Id_producto AND estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetRolById]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[GetRolById]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -597,7 +730,7 @@ BEGIN
     SELECT * FROM rol WHERE Id_rol = @Id_rol AND estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetUsuarioById]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[GetUsuarioById]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -609,6 +742,7 @@ CREATE PROCEDURE [dbo].[GetUsuarioById]
     @Identificacion VARCHAR(50)
 AS
 BEGIN
+    SELECT * FROM dbo.usuario WHERE identificacion = @Identificacion AND estado = 1
     SELECT identificacion, nombre, correo, U.Id_rol,
            CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
            R.descripcion
@@ -617,7 +751,7 @@ BEGIN
     WHERE U.identificacion = @Identificacion AND U.estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetVentasProductoById]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[GetVentasProductoById]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -632,7 +766,7 @@ BEGIN
     SELECT * FROM ventasProductos WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto AND estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[IniciarSesion]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[IniciarSesion]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -651,7 +785,60 @@ BEGIN
         AND U.estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ReadProductos]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[ReadClase]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Ver las clases
+CREATE PROCEDURE [dbo].[ReadClase]
+AS
+BEGIN
+    SELECT * FROM clases WHERE Estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadClaseById]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Ver clase especifica
+CREATE PROCEDURE [dbo].[ReadClaseById]
+	@Id_clase int
+AS
+BEGIN
+    SELECT * FROM clases WHERE Id_clase = @Id_clase AND Estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadEjercicio]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Ver todos los ejercicios
+CREATE PROCEDURE [dbo].[ReadEjercicio]
+AS
+BEGIN
+    SELECT * FROM ejercicios
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadPlan]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Ver todos los planes
+CREATE PROCEDURE [dbo].[ReadPlan]
+AS
+BEGIN
+    SELECT * FROM planes WHERE Estado = 1
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ReadProductos]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -664,7 +851,7 @@ BEGIN
     SELECT * FROM inventario WHERE estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ReadRoles]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[ReadRoles]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -677,7 +864,7 @@ BEGIN
     SELECT * FROM rol WHERE estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ReadUsuarios]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[ReadUsuarios]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -687,6 +874,7 @@ GO
 CREATE PROCEDURE [dbo].[ReadUsuarios]
 AS
 BEGIN
+    SELECT * FROM dbo.usuario WHERE estado = 1
     SELECT identificacion, nombre, correo, U.Id_rol,
            CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
            R.descripcion
@@ -695,7 +883,7 @@ BEGIN
     WHERE U.estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ReadVentasProductos]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[ReadVentasProductos]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -708,7 +896,7 @@ BEGIN
     SELECT * FROM ventasProductos WHERE estado = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_InsertarInscripcionClase]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[sp_InsertarInscripcionClase]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -724,21 +912,84 @@ BEGIN
 
     INSERT INTO [Proyecto].[dbo].[inscripcionesClases] (Id_cliente, IdClase, FechaInscripcion)
     VALUES (@Id_cliente, @IdClase, @FechaInscripcion);
-
-    SELECT 
-        SCOPE_IDENTITY() AS NewId,
-        c.Nombre AS NombreClase,
-        cl.Nombre AS NombreCliente,
-        @FechaInscripcion AS FechaInscripcion
-    FROM 
-        [Proyecto].[dbo].[inscripcionesClases] ic
-        JOIN [Proyecto].[dbo].[Clases] c ON ic.IdClase = c.Id_clase
-        JOIN [Proyecto].[dbo].[Clientes] cl ON ic.Id_cliente = cl.Id_cliente
-    WHERE
-        ic.Id_inscripcion = SCOPE_IDENTITY();
+	RETURN @@ROWCOUNT;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateClase]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Actualizar clase
+CREATE PROCEDURE [dbo].[UpdateClase]
+	@Id_clase int,
+	@Nombre VARCHAR(50),
+	@Descripcion VARCHAR(50),
+	@IdInstructor int,
+	@Horario VARCHAR(50),
+	@Duracion int,
+	@CapacidadMaxima int
+AS
+BEGIN
+    UPDATE clases
+    SET Nombre = @Nombre,
+	Descripcion = @Descripcion,
+	IdInstructor = @IdInstructor,
+	Horario = @Horario,
+	Duracion = @Duracion, 
+	CapacidadMaxima = @CapacidadMaxima
+    WHERE Id_clase = @Id_clase
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateEjercicio]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Actualizar ejercicio
+CREATE PROCEDURE [dbo].[UpdateEjercicio]
+	@Id_ejercicio INT,
+	@Nombre VARCHAR(50),
+	@Descripcion VARCHAR(200),
+	@GrupoMuscular VARCHAR(50),
+	@EquipoNecesario VARCHAR(100)
+AS
+BEGIN
+    UPDATE ejercicios
+    SET Nombre = @Nombre, 
+	Descripcion = @Descripcion,
+	GrupoMuscular = @GrupoMuscular, 	
+	EquipoNecesario = @EquipoNecesario
+    WHERE Id_ejercicio = @Id_ejercicio
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdatePlan]    Script Date: 8/8/2024 17:38:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Actualizar plan
+CREATE PROCEDURE [dbo].[UpdatePlan]
+	@Id_plan INT,
+	@Nombre VARCHAR(50),
+	@Precio int,
+	@Descripcion text,
+	@Gimnasio_codigo int,
+	@Estado bit
+AS
+BEGIN
+    UPDATE planes
+    SET Nombre = @Nombre,
+	Precio = @Precio,
+	Descripcion = @Descripcion,
+	Gimnasio_codigo = @Gimnasio_codigo
+    WHERE Id_plan = @Id_plan
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -761,7 +1012,7 @@ BEGIN
     WHERE Id_producto = @Id_producto
 END
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateRol]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateRol]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -778,7 +1029,7 @@ BEGIN
     WHERE Id_rol = @Id_rol
 END
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateUsuario]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateUsuario]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -803,7 +1054,7 @@ BEGIN
     WHERE identificacion = @Identificacion
 END
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateVentasProducto]    Script Date: 1/8/2024 14:12:55 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateVentasProducto]    Script Date: 8/8/2024 17:38:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

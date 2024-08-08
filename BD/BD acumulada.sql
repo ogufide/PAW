@@ -950,6 +950,21 @@ BEGIN
 END
 GO
 
+USE [Proyecto]
+GO
+
+CREATE PROCEDURE [dbo].[CambiarEstadoUsuario]
+	@Identificacion INT
+AS
+BEGIN
+
+	UPDATE usuario
+	   SET estado = CASE WHEN estado = 1 THEN 0 ELSE 1 END
+	 WHERE Identificacion = @Identificacion
+
+END
+GO
+
 -- Datos Necesarios
 SET IDENTITY_INSERT [dbo].[rol] ON 
 GO

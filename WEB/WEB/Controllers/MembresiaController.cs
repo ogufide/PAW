@@ -7,7 +7,7 @@ using WEB.Models;
 
 namespace WEB.Controllers
 {
-    [Route("api/[controller]")]
+   /* [Route("api/[controller]")]
     [ApiController]
     public class MembresiaController(IMembresiaModel iMembresiaModel) : Controller
     {
@@ -29,6 +29,6 @@ namespace WEB.Controllers
 
             return View(new List<Membresia>());
         }
-    }
+    }*/
 }
 

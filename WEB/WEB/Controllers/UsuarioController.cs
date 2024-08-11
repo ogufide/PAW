@@ -30,6 +30,7 @@ namespace WEB.Controllers
             return View();
         }
 
+        [FiltroSesiones]
         [HttpGet]
         public IActionResult ReadUsuarios()
         {
@@ -44,6 +45,7 @@ namespace WEB.Controllers
             return View(new List<Usuario>());
         }
 
+        [FiltroSesiones]
         [HttpGet]
         public IActionResult UpdateUsuario(int q)
         {
@@ -61,16 +63,52 @@ namespace WEB.Controllers
             return View(new Usuario());
         }
 
+        [FiltroSesiones]
         [HttpPost]
         public IActionResult CambiarEstadoUsuario(Usuario ent)
         {
             var resp = iUsuarioModel.CambiarEstadoUsuario(ent);
 
             if (resp.Codigo == 1)
-                return RedirectToAction("ConsultarUsuarios", "Home");
+                return RedirectToAction("ReadUsuarios", "Usuario");
 
             ViewBag.msj = resp.Mensaje;
             return View();
+        }
+
+        [FiltroSesiones]
+        [HttpGet]
+        public IActionResult CreateRol()
+        {
+            return View();
+        }
+
+        [FiltroSesiones]
+        [HttpPost]
+        public IActionResult CreateRol(Rol ent)
+        {
+            var resp = iRolModel.CreateRol(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("ReadRoles", "Usuario");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
+        }
+
+        [FiltroSesiones]
+        [HttpGet]
+        public IActionResult ReadRoles()
+        {
+            var resp = iRolModel.ReadRolesMant();
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<List<Rol>>((JsonElement)resp.Contenido!);
+                return View(datos!.ToList());
+            }
+
+            return View(new List<Rol>());
         }
     }
 }

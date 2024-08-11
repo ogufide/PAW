@@ -12,8 +12,7 @@ namespace API.Controllers
     [ApiController]
     public class InscripcionClaseController(IConfiguration iConfiguration) : ControllerBase
     {
-
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         [Route("AgregarClase")]
         public async Task<IActionResult> AgregarClase(InscripcionClase inscripcion)
@@ -30,7 +29,7 @@ namespace API.Controllers
                     },
                     commandType: CommandType.StoredProcedure);
 
-                if (result > 0)
+                if (result < 0)
                 {
                     resp.Codigo = 1;
                     resp.Mensaje = "Inscripción creada correctamente";

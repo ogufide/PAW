@@ -16,7 +16,11 @@ namespace API.Controllers
         public IActionResult CatchError()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
+
             return Problem(detail: context!.Error.Message, title: context.Path);
+
+
+
         }
     }
 }

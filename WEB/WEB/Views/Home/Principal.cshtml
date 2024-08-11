@@ -1,12 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<WEB.Entities.Producto>
+
 @{
-}@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
         <Class class="container-fluid py-4">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -101,6 +100,39 @@
                 </div>
             </div>
             </Class>
+=======
+<div class="card">
+    <div class="card-body register-card-body">
+        <h4 class="">Productos disponibles</h4>
+>>>>>>> 84d04fff914028de4d51304a2b3aadfcf1f24d9c
 
+        <div class="row">
 
-                                <h1>Aca va el contenido de la primera pagina</h1>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div style="text-align:center">
+                            <img class="card-img-top" src="@item.Imagen" width="150" height="200" style="margin-top:20px">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5><br />
+                            <p class="card-text">@if (@item.Descripcion!.Length > 160)
+                                {
+                                    @item.Descripcion.Substring(0, 160)
+                                }
+                                else
+                                {
+                                    @item.Descripcion
+                                } ... </p>
+                            <p class="card-text">Cantidad: @item.Inventario</p>
+                            <p class="card-text">Precio: ¢ @item.PrecioUnitario.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>

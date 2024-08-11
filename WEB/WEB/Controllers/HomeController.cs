@@ -1,3 +1,4 @@
+using JN_WEB.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,7 +9,7 @@ using WEB.Models;
 namespace WEB.Controllers
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class HomeController(IUsuarioModel iUsuarioModel, IComunModel iComunModel) : Controller
+    public class HomeController(IUsuarioModel iUsuarioModel, IComunModel iComunModel, IProductoModel iProductoModel) : Controller
     {
         
         
@@ -40,6 +41,7 @@ namespace WEB.Controllers
                 HttpContext.Session.SetString("TOKEN", datos!.Token!);
                 HttpContext.Session.SetString("NOMBRE", datos!.Nombre!);
                 HttpContext.Session.SetString("ROL", datos!.Id_rol.ToString());
+                HttpContext.Session.SetString("NROL", datos!.Descripcion!);
                 HttpContext.Session.SetInt32("IDENTIFICACION", datos!.Identificacion);
                 return RedirectToAction("Principal", "Home");
             }
@@ -48,6 +50,7 @@ namespace WEB.Controllers
             return View();
         }
 
+        [FiltroSesiones]
         [HttpGet]
         public IActionResult Salir()
         {
@@ -80,10 +83,61 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult Principal()
+        public IActionResult Admin()
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Principal()
+        {
+            var resp = iProductoModel.ReadProductos();
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<List<Producto>>((JsonElement)resp.Contenido!);
+                return View(datos);
+            }
+
+            return View(new List<Producto>());
+        }
+
+        [FiltroSesiones]
+        [HttpGet]
+        public IActionResult CreateProducto()
+        {
+            return View();
+        }
+
+        [FiltroSesiones]
+        [HttpPost]
+        public IActionResult CreateProducto(Producto ent)
+        {
+            var resp = iProductoModel.CreateProducto(ent);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("Principal", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
+        }
+
+        [FiltroSesiones]
+        [HttpGet]
+        public IActionResult Home()
+        {
+            var resp = iProductoModel.ReadProductos();
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<List<Producto>>((JsonElement)resp.Contenido!);
+                return View(datos);
+            }
+
+            return View(new List<Producto>());
+        }
+
+
     }
 }
 

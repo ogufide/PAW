@@ -391,6 +391,7 @@ GO
 
 CREATE TABLE [dbo].[ventas](
 	[Id_venta] [int] IDENTITY(1,1) NOT NULL,
+	[IdProducto] [int] NOT NULL,
 	[Id_cliente] [int] NULL,
 	[Id_empleado] [int] NULL,
 	[FechaVenta] [date] NOT NULL,
@@ -405,15 +406,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ventasProductos](
-	[Id_venta] [int] NOT NULL,
-	[Id_producto] [int] NOT NULL,
-	[Cantidad] [int] NOT NULL,
+CREATE TABLE [dbo].[productos](
+	[IdProducto] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Descripcion] [varchar](500) NOT NULL,
+	[PrecioUnitario] [decimal](18, 2) NOT NULL,
+	[Inventario] [int] NOT NULL,
+	[Imagen] [varchar](500) NOT NULL,
+
 	[estado] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[Id_venta] ASC,
-	[Id_producto] ASC
+	[IdProducto] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -483,11 +487,8 @@ GO
 ALTER TABLE [dbo].[ventas]  WITH CHECK ADD FOREIGN KEY([Id_empleado])
 REFERENCES [dbo].[empleados] ([Id_empleado])
 GO
-ALTER TABLE [dbo].[ventasProductos]  WITH CHECK ADD FOREIGN KEY([Id_producto])
-REFERENCES [dbo].[inventario] ([Id_producto])
-GO
-ALTER TABLE [dbo].[ventasProductos]  WITH CHECK ADD FOREIGN KEY([Id_venta])
-REFERENCES [dbo].[ventas] ([Id_venta])
+ALTER TABLE [dbo].[ventas]  WITH CHECK ADD FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[productos] ([IdProducto])
 GO
 USE [master]
 GO
@@ -530,7 +531,6 @@ GO
 CREATE PROCEDURE ReadUsuarios
 AS
 BEGIN
-    SELECT * FROM dbo.usuario WHERE estado = 1
     SELECT identificacion, nombre, correo, U.Id_rol,
            CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
            R.descripcion
@@ -538,7 +538,6 @@ BEGIN
     INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
     WHERE U.estado = 1
 END
-GO
 
 
 -- Leer un usuario por ID
@@ -602,7 +601,8 @@ GO
 CREATE PROCEDURE ReadRoles
 AS
 BEGIN
-    SELECT * FROM rol WHERE estado = 1
+    SELECT Id_rol AS 'value', descripcion AS  'text'
+	FROM rol WHERE estado = 1
 END
 GO
 
@@ -641,115 +641,69 @@ GO
 -- Crear producto en inventario
 CREATE PROCEDURE CreateProducto
     @Nombre VARCHAR(50),
-    @Descripcion VARCHAR(200),
-    @CantidadStock INT,
-    @Precio DECIMAL(10, 2)
+    @Descripcion VARCHAR(500),
+    @Inventario INT,
+    @PrecioUnitario DECIMAL(18, 2),
+    @Imagen VARCHAR(500)
 AS
 BEGIN
-    INSERT INTO inventario (Nombre, Descripcion, CantidadStock, Precio)
-    VALUES (@Nombre, @Descripcion, @CantidadStock, @Precio)
+    INSERT INTO productos (Nombre, Descripcion, Inventario, PrecioUnitario, Imagen, Estado)
+    VALUES (@Nombre, @Descripcion, @Inventario, @PrecioUnitario, @Imagen, 1)
 END
 GO
+
 
 -- Leer todos los productos del inventario
 CREATE PROCEDURE ReadProductos
 AS
 BEGIN
-    SELECT * FROM inventario WHERE estado = 1
+    SELECT * FROM productos WHERE Estado = 1
 END
 GO
+
 
 -- Leer un producto del inventario por ID
 CREATE PROCEDURE GetProductoById
-    @Id_producto INT
+    @IdProducto INT
 AS
 BEGIN
-    SELECT * FROM inventario WHERE Id_producto = @Id_producto AND estado = 1
+    SELECT * FROM productos WHERE IdProducto = @IdProducto AND Estado = 1
 END
 GO
+
 
 -- Actualizar producto en inventario
 CREATE PROCEDURE UpdateProducto
-    @Id_producto INT,
+    @IdProducto INT,
     @Nombre VARCHAR(50),
-    @Descripcion VARCHAR(200),
-    @CantidadStock INT,
-    @Precio DECIMAL(10, 2)
+    @Descripcion VARCHAR(500),
+    @Inventario INT,
+    @PrecioUnitario DECIMAL(18, 2),
+    @Imagen VARCHAR(500)
 AS
 BEGIN
-    UPDATE inventario
+    UPDATE productos
     SET Nombre = @Nombre,
         Descripcion = @Descripcion,
-        CantidadStock = @CantidadStock,
-        Precio = @Precio
-    WHERE Id_producto = @Id_producto
+        Inventario = @Inventario,
+        PrecioUnitario = @PrecioUnitario,
+        Imagen = @Imagen
+    WHERE IdProducto = @IdProducto AND Estado = 1
 END
 GO
+
 
 -- Eliminar producto del inventario
 CREATE PROCEDURE DeleteProducto
-    @Id_producto INT
+    @IdProducto INT
 AS
 BEGIN
-    UPDATE inventario
-    SET estado = 0
-    WHERE Id_producto = @Id_producto
-END
-GO
--- Crear ventasProductos
-CREATE PROCEDURE CreateVentasProducto
-    @Id_venta INT,
-    @Id_producto INT,
-    @Cantidad INT
-AS
-BEGIN
-    INSERT INTO ventasProductos (Id_venta, Id_producto, Cantidad)
-    VALUES (@Id_venta, @Id_producto, @Cantidad)
+    UPDATE productos
+    SET Estado = 0
+    WHERE IdProducto = @IdProducto
 END
 GO
 
--- Leer todos los registros de ventasProductos
-CREATE PROCEDURE ReadVentasProductos
-AS
-BEGIN
-    SELECT * FROM ventasProductos WHERE estado = 1
-END
-GO
-
--- Leer un registro de ventasProductos por ID de venta y producto
-CREATE PROCEDURE GetVentasProductoById
-    @Id_venta INT,
-    @Id_producto INT
-AS
-BEGIN
-    SELECT * FROM ventasProductos WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto AND estado = 1
-END
-GO
-
--- Actualizar ventasProductos
-CREATE PROCEDURE UpdateVentasProducto
-    @Id_venta INT,
-    @Id_producto INT,
-    @Cantidad INT
-AS
-BEGIN
-    UPDATE ventasProductos
-    SET Cantidad = @Cantidad
-    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
-END
-GO
-
--- Eliminar ventasProductos
-CREATE PROCEDURE DeleteVentasProducto
-    @Id_venta INT,
-    @Id_producto INT
-AS
-BEGIN
-    UPDATE ventasProductos
-    SET estado = 0
-    WHERE Id_venta = @Id_venta AND Id_producto = @Id_producto
-END
-GO
 
 /****** Object:  StoredProcedure [dbo].[sp_InsertarInscripcionClase]    Script Date: 1/8/2024 14:12:55 ******/
 CREATE PROCEDURE [dbo].[sp_InsertarInscripcionClase]
@@ -950,20 +904,25 @@ BEGIN
 END
 GO
 
-USE [Proyecto]
-GO
-
+-- Cambiar estado usuario
 CREATE PROCEDURE [dbo].[CambiarEstadoUsuario]
-	@Identificacion INT
+	@identificacion INT
 AS
 BEGIN
 
 	UPDATE usuario
 	   SET estado = CASE WHEN estado = 1 THEN 0 ELSE 1 END
-	 WHERE Identificacion = @Identificacion
-
+	 WHERE identificacion = @identificacion
 END
 GO
+
+-- Leer todos los roles mant
+CREATE PROCEDURE [dbo].[ReadRolesMant]
+AS
+BEGIN
+    SELECT Id_rol, descripcion, estado
+	FROM rol
+END
 
 -- Datos Necesarios
 SET IDENTITY_INSERT [dbo].[rol] ON 

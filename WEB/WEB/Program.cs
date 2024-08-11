@@ -1,3 +1,4 @@
+using JN_WEB.Models;
 using WEB.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddScoped<IEmpleadosModel, EmpleadosModel>();
 builder.Services.AddScoped<IGimnasiosModel, GimnasiosModel>();
 builder.Services.AddScoped<IInscripcionClaseModel, InscripcionClaseModel>();
 builder.Services.AddScoped<IMembresiaModel, MembresiaModel>();
+builder.Services.AddScoped<IProductoModel, ProductoModel>();
 
 
 var app = builder.Build();

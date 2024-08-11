@@ -1,104 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<WEB.Entities.Producto>
+
 @{
-}@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-        <Class class="container-fluid py-4">
-            <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Monto de hoy</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            $53,000
-                                            <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Usuarios de hoy</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            2,300
-                                            <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Nuevos Clientes</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            +3,462
-                                            <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            $103,430
-                                            <span class="text-success text-sm font-weight-bolder">+5%</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                        <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </Class>
+<div class="card">
+    <div class="card-body register-card-body">
+        <h4 class="">Productos disponibles</h4>
 
+        <div class="row">
 
-                                <h1>Aca va el contenido de la primera pagina</h1>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div style="text-align:center">
+                            <img class="card-img-top" src="@item.Imagen" width="150" height="200" style="margin-top:20px">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5><br />
+                            <p class="card-text">@if (@item.Descripcion!.Length > 160)
+                                {
+                                    @item.Descripcion.Substring(0, 160)
+                                }
+                                else
+                                {
+                                    @item.Descripcion
+                                } ... </p>
+                            <p class="card-text">Cantidad: @item.Inventario</p>
+                            <p class="card-text">Precio: ¢ @item.PrecioUnitario.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>

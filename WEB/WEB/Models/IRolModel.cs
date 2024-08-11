@@ -5,5 +5,7 @@ namespace WEB.Models
     public interface IRolModel
     {
         Respuesta ReadRoles();
+        Respuesta ReadRolesMant();
+        Respuesta CreateRol(Rol ent);
     }
 }

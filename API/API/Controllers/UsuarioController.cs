@@ -163,12 +163,43 @@ namespace API.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateUsuario")]
+        public async Task<IActionResult> UpdateUsuario(Usuario ent)
+        {
+            if (!iComunesModel.EsAdministrador(User))
+                return StatusCode(403);
+
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.ExecuteAsync("ActualizarUsuario", new { ent.Identificacion, ent.Nombre, ent.Correo, ent.Id_rol }, commandType: CommandType.StoredProcedure);
+
+                if (result > 0)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = true;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "La información del usuario no se pudo actualizar";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
         private string GenerarToken(int Consecutivo, int IdRol)
         {
             string SecretKey = iConfiguration.GetSection("Llaves:SecretKey").Value!;
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, Consecutivo.ToString()));
-            claims.Add(new Claim("IdRol", IdRol.ToString()));
+            claims.Add(new Claim("Id_rol", IdRol.ToString()));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);

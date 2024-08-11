@@ -1,0 +1,50 @@
+﻿@model WEB.Entities.Producto
+
+@{
+    ViewData["Title"] = "Registro Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> Crear Producto Nuevo</h2>
+
+<div class="register-box">
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Registro de Productos</p>
+
+            @if (ViewBag.msj != null)
+            {
+                <div class="alert alert-secondary" style="text-align:center" role="alert">
+                    @ViewBag.msj
+                </div>
+            }
+
+            @using (Html.BeginForm("CreateProducto", "Home"))
+            {
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
+                </div>
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Descripcion, new { @type = "text", @class = "form-control", @placeholder = "Descripcion" })
+                </div>
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.PrecioUnitario, new { @type = "text", @class = "form-control", @placeholder = "Precio" })
+
+                </div>
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Inventario, new { @type = "text", @class = "form-control", @placeholder = "Inventario" })
+
+                </div>
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Imagen, new { @type = "text", @class = "form-control", @placeholder = "Imagen" })
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

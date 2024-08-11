@@ -11,7 +11,7 @@ namespace API.Models
         public bool EsAdministrador(ClaimsPrincipal User)
         {
             var userrol = User.Claims.Select(Claim => new { Claim.Type, Claim.Value })
-                .FirstOrDefault(x => x.Type == "IdRol")!.Value;
+                .FirstOrDefault(x => x.Type == "Id_rol")!.Value;
 
             return (userrol == "1" ? true : false);
         }

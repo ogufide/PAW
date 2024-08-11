@@ -24,7 +24,7 @@ namespace API.Controllers
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("CreateRol", new { ent.Descripcion, ent.Estado }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("CreateRol", new { ent.Descripcion }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

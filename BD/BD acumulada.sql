@@ -531,7 +531,6 @@ GO
 CREATE PROCEDURE ReadUsuarios
 AS
 BEGIN
-    SELECT * FROM dbo.usuario WHERE estado = 1
     SELECT identificacion, nombre, correo, U.Id_rol,
            CASE WHEN U.estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS estado, 
            R.descripcion
@@ -539,7 +538,6 @@ BEGIN
     INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
     WHERE U.estado = 1
 END
-GO
 
 
 -- Leer un usuario por ID
@@ -917,6 +915,14 @@ BEGIN
 	 WHERE identificacion = @identificacion
 END
 GO
+
+-- Leer todos los roles mant
+CREATE PROCEDURE [dbo].[ReadRolesMant]
+AS
+BEGIN
+    SELECT Id_rol, descripcion, estado
+	FROM rol
+END
 
 -- Datos Necesarios
 SET IDENTITY_INSERT [dbo].[rol] ON 

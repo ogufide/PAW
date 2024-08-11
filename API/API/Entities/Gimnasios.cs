@@ -6,7 +6,7 @@
         public string? Nombre { get; set; }
         public string? Telefono { get; set; }
         public string? Direccion { get; set; }
-        public int Id_provincia { get; set; }
+        public int? Id_provincia { get; set; }
         public bool? Estado { get; set; }
 
     }

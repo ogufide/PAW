@@ -30,7 +30,7 @@
                                     @ViewBag.msj
                                 </div>
                             }
-                            @using (Html.BeginForm("RegistrarCliente", "Clientes"))
+                            @using (Html.BeginForm("AgregarCliente", "Clientes"))
                             {
                                 <label>Nombre</label>
                                 <div class="mb-3">
@@ -56,7 +56,7 @@
                                     </label>
                                 </div>
                                 <div class="">
-                                    <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" onclick="location.href='@Url.Action("index", "home")'">Registrar</button>
+                                    <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" onclick="location.href='@Url.Action("Principal", "home")'">Registrar</button>
                                 </div>
                             }
 

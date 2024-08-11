@@ -17,13 +17,13 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("ConsultarProvincia")]
-        public async Task<IActionResult> ConsultarProvincia(int id)
+        public async Task<IActionResult> ConsultarProvincia()
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryFirstOrDefaultAsync<Gimnasios>("ConsultarProvincia", new { @Id_provincia = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.QueryAsync<Provincias>("ConsultarProvincia", new { }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {
@@ -41,5 +41,39 @@ namespace API.Controllers
                 }
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ObtenerProvincia")]
+        public async Task<IActionResult> ObtenerProvincia(int Id_provincia)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                await context.OpenAsync();
+
+                var provincia = await context.QueryFirstOrDefaultAsync<Provincias>("ObtenerProvinica", new { Id_provincia }, commandType: CommandType.StoredProcedure);
+
+                if (provincia != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "Provincia obtenida correctamente";
+                    resp.Contenido = provincia;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No se encontro la provincia.";
+                    resp.Contenido = false;
+                    return NotFound(resp);
+                }
+            }
+
+        }
+
+
+
     }
 }

@@ -31,12 +31,23 @@
                 <td>@item.Duracion</td>
                 <td>@item.CapacidadMaxima</td>
                 <td>@item.Estado</td>
-                <td>Acciones</td>
+                
+                <td>
+                    <button type="button" class="btn btn-primary Modales" data-toggle="modal" data-target="#ModalClase"
+                            data-id="@item.Id_clase" data-name="@item.Nombre">
+                        <i class="fa fa-pen"></i>
+                    </button>
+
+                    <a class="btn btn-primary" href="@Url.Action("UpdateClase", "Clases", new { q = item.Id_clase })">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    
+                 </td>
             </tr>
         }
     </tbody>
 </table>
 
 
-<script src="~/plantilla/js/ReadClase.js"></script>
+<script src="~/plantilla/js/ReadClases.js"></script>
 <script src="~/plantilla/js/jquery.min.js"></script>

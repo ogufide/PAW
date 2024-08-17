@@ -10,5 +10,9 @@ namespace WEB.Models
 
         Respuesta ReadClaseById(int Id_clase);
 
+        Respuesta UpdateClase(Clase ent);
+
+        Respuesta DeleteClase(int Id_clase);
+
     }
 }

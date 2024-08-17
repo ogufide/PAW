@@ -23,11 +23,6 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta ReadClaseById(int Id_clase)
-        {
-            throw new NotImplementedException();
-        }
-
         public Respuesta ReadClases()
         {
             using (httpClient)
@@ -58,35 +53,36 @@ namespace WEB.Models
             }
         }
 
-        //public Respuesta UpdateClase()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/UpdateClase";
+        public Respuesta UpdateClase(Clase ent)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/UpdateClase";
+                JsonContent body = JsonContent.Create(ent);
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.PutAsync(url, body).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
-        //public Respuesta DeleteClase()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/DeleteClase";
+        public Respuesta DeleteClase(int Id_clase)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/DeleteClase?Id_clase=" + Id_clase;
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.DeleteAsync(url).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
     }
 }

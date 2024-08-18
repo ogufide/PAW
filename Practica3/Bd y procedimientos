@@ -1,0 +1,91 @@
+ Create database Practica_3
+   use Practica_3
+
+-- Crear la tabla Principal
+CREATE TABLE Principal (
+    CodigoCompra VARCHAR(50) PRIMARY KEY,
+    Descripcion VARCHAR(255),
+    Precio DECIMAL(10, 2),
+    Saldo DECIMAL(10, 2),
+    Estado VARCHAR(20)
+);
+
+-- Crear la tabla Abonos
+CREATE TABLE Abonos (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    CodigoCompra VARCHAR(50),
+    MontoAbono DECIMAL(10, 2),
+    FechaAbono DATE,
+    FOREIGN KEY (CodigoCompra) REFERENCES Principal(CodigoCompra)
+);
+
+--1
+CREATE PROCEDURE ConsultarProductos
+AS
+BEGIN
+    SELECT CodigoCompra, Descripcion, Precio, Saldo, Estado
+    FROM Principal
+    ORDER BY 
+        CASE 
+            WHEN Estado = 'Pendiente' THEN 0
+            ELSE 1
+        END,
+        Estado
+END
+
+
+
+--2
+CREATE PROCEDURE ObtenerCompras
+AS
+BEGIN
+    SELECT CodigoCompra, Descripcion
+    FROM Principal
+    WHERE Estado = 'Pendiente'
+END
+
+--3
+CREATE PROCEDURE ConsultarSaldo
+    @CodigoCompra VARCHAR(50)
+AS
+BEGIN
+    SELECT Saldo
+    FROM Principal
+    WHERE CodigoCompra = @CodigoCompra
+END
+
+--4
+CREATE PROCEDURE RegistrarAbonoyActualizar
+    @CodigoCompra VARCHAR(50),
+    @MontoAbono DECIMAL(10, 2)
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Insertar en la tabla Abonos
+        INSERT INTO Abonos (CodigoCompra, MontoAbono, FechaAbono)
+        VALUES (@CodigoCompra, @MontoAbono, GETDATE());
+
+        -- Actualizar en la tabla Principal
+        UPDATE Principal
+        SET Saldo = Saldo - @MontoAbono,
+            Estado = CASE 
+                        WHEN Saldo - @MontoAbono <= 0 THEN 'Cancelado'
+                        ELSE Estado
+                     END
+        WHERE CodigoCompra = @CodigoCompra;
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        -- Deshacer la transacción en caso de error
+        ROLLBACK TRANSACTION;
+        -- Lanzar el error al llamador
+        THROW;
+    END CATCH;
+END;
+
+
+

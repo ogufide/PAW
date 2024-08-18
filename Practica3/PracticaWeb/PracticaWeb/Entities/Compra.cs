@@ -1,0 +1,12 @@
+﻿namespace PracticaWeb.Entities
+{
+    public class Compra
+    {
+
+        public int CodigoCompra { get; set; }
+        public string? Descripcion { get; set; }
+        public decimal Precio { get; set; }
+        public decimal Saldo { get; set; }
+        public string? Estado { get; set; }
+    }
+}

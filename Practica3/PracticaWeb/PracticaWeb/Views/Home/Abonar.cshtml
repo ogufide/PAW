@@ -1,0 +1,80 @@
+﻿@model PracticaWeb.Entities.Compra
+@{
+    ViewData["Title"] = "Abonar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Abonar Compra</h2>
+hr />
+<div class="card-body register-card-body">
+    <h4 class="">Datos del usuario</h4>
+    <hr>
+    <br />
+
+    @if (ViewBag.msj != null)
+    {
+        <div class="alert alert-secondary" style="text-align:center" role="alert">
+            @ViewBag.msj
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+
+            @using (Html.BeginForm("UpdateUsuario", "Usuario"))
+            {
+                @Html.HiddenFor(m => m.CodigoCompra)
+
+                @Html.Label("Código Compra")
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.CodigoCompra, new { @type = "text", @class = "form-control", @placeholder = "Código Compra" })
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+                @Html.Label("Descripción")
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Descripcion, new { @type = "readonly", @class = "form-control", @placeholder = "Descripción" })
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+                @Html.Label("Precio")
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Precio, new { @type = "readonly", @class = "form-control", @placeholder = "Precio" })
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+                @Html.Label("Saldo")
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Saldo, new { @type = "readonly", @class = "form-control", @placeholder = "Saldo" })
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+
+                @Html.Label("Abono")
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Saldo, new { @type = "required", @class = "form-control", @placeholder = "Abono" })
+                    <div class="input-group-append">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Abonar</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+

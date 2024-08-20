@@ -1,34 +1,49 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using WEB.Entities;
 using WEB.Models;
 
 namespace WEB.Controllers
 {
-   /* [Route("api/[controller]")]
-    [ApiController]
     public class MembresiaController(IMembresiaModel iMembresiaModel) : Controller
     {
-        public IActionResult ConsultarMembresias()
+        [HttpGet]
+        public IActionResult CreateMembresia()
         {
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult ConsultarMembresias(Membresia ent)
+        public IActionResult CreateMembresia(Membresia ent)
         {
-            var resp = iMembresiaModel.ConsultarMembresias();
+            var respuesta = iMembresiaModel.CreateMembresia(ent);
+
+            if (respuesta.Codigo == 1)
+            {
+                return RedirectToAction("ReadMembresia", "Membresia");
+            }
+            else
+            {
+
+                ViewBag.msj = respuesta.Mensaje;
+                return View("CreateMembresia", ent);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ReadMembresia()
+        {
+            var resp = iMembresiaModel.ReadMembresia();
 
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<List<Membresia>>((JsonElement)resp.Contenido!);
-                return View(datos!.Where(x => x.Id_membresia != HttpContext.Session.GetInt32("CONSECUTIVO")).ToList());
+                return View(datos);
             }
 
-            return View(new List<Membresia>());
+            return View(new List<Gimnasios>());
         }
-    }*/
+    }
 }
 

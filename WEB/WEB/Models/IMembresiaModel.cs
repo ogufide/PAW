@@ -4,7 +4,8 @@ namespace WEB.Models
 {
     public interface IMembresiaModel
     {
-        //Respuesta ConsultarMembresias();
+        Respuesta CreateMembresia(Membresia ent);
 
+        Respuesta ReadMembresia();
     }
 }

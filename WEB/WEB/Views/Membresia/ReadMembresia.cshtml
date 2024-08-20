@@ -1,33 +1,51 @@
 ﻿@model List<WEB.Entities.Membresia>
 
-
 @{
     ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table id="tabla-Membresias" class="table table-hover">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Plan</th>
-            <th>Codigo de cliente</th>
-            <th>Acciones</th>
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Lista de Membresías</h2>
+        <a href="@Url.Action("CreateMembresia", "Membresia")" class="btn btn-primary">
+            Agregar Membresía
+        </a>
+    </div>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table id="tabla-Membresias" class="table table-hover">
+        <thead>
             <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Descripcion</td>
-                
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Plan</th>
+                <th>Código de cliente</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Descripcion</td>
+                    <td>@item.Precio</td>
+                    <td>@item.Plan_codigo</td>
+                    <td>@item.Cliente_codigo</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
+<script src="~/plantilla/js/ConsultaUsuarios.js"></script>
 <script src="~/plantilla/js/jquery.min.js"></script>

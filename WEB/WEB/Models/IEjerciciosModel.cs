@@ -8,5 +8,9 @@ namespace WEB.Models
 
         Respuesta ReadEjercicios();
 
+        Respuesta UpdateEjercicio(Ejercicio ent);
+
+        Respuesta DeleteEjercicio(int Id_ejercicio);
+
     }
 }

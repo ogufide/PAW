@@ -53,35 +53,36 @@ namespace WEB.Models
             }
         }
 
-        //public Respuesta UpdatePlan()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Plan/UpdatePlan";
+        public Respuesta UpdatePlan(Plan ent)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Plan/UpdatePlan ";
+                JsonContent body = JsonContent.Create(ent);
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.PutAsync(url, body).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
-        //public Respuesta DeletePlan()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Plan/DeletePlan";
+        public Respuesta DeletePlan(int Id_plan)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/DeletePlan?Id_plan=" + Id_plan;
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.DeleteAsync(url).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
     }
 }

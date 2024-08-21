@@ -37,35 +37,36 @@ namespace WEB.Models
             }
         }
 
-        //public Respuesta UpdateEjercicio()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Ejercicio/UpdateEjercicio";
+        public Respuesta UpdateEjercicio(Ejercicio ent)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/UpdateEjercicio";
+                JsonContent body = JsonContent.Create(ent);
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.PutAsync(url, body).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
-        //public Respuesta DeleteEjercicio()
-        //{
-        //    using (httpClient)
-        //    {
-        //        string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Ejercicio/DeleteEjercicio";
+        public Respuesta DeleteEjercicio(int Id_ejercicio)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/DeleteEjercicio?Id_ejercicio=" + Id_ejercicio;
 
-        //        var resp = httpClient.GetAsync(url).Result;
+                var resp = httpClient.DeleteAsync(url).Result;
 
-        //        if (resp.IsSuccessStatusCode)
-        //            return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-        //        else
-        //            return new Respuesta();
-        //    }
-        //}
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
 
     }
 }

@@ -6,44 +6,47 @@ using WEB.Models;
 
 namespace WEB.Controllers
 {
-    public class ClasesController(IClasesModel iClasesModel) : Controller
+    public class EjerciciosController(IEjerciciosModel iEjerciciosModel) : Controller
     {
         [HttpGet]
-        public IActionResult CreateClase(Clase ent)
-        { 
-            var respuesta = iClasesModel.CreateClase(ent);
+        public IActionResult CreateEjercicio(Ejercicio ent)
+        {
+            var respuesta = iEjerciciosModel.CreateEjercicio(ent);
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("CreateClase", "Clases");
+                return RedirectToAction("CreateEjercicio", "Ejercicios");
             }
+
             else
             {
                 ViewBag.msj = respuesta.Mensaje;
                 return View();
             }
+
         }
 
         [HttpGet]
-        public IActionResult ReadClases()
+        public IActionResult ReadEjercicios()
         {
-            var resp = iClasesModel.ReadClases();
+            var resp = iEjerciciosModel.ReadEjercicios();
 
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<List<Clase>>((JsonElement)resp.Contenido!);
                 return View(datos);
             }
+
             return View(new List<Clase>());
         }
 
         [HttpGet]
-        public IActionResult UpdateClase(Clase ent)
+        public IActionResult UpdateEjercicio(Ejercicio ent)
         {
-            var respuesta = iClasesModel.UpdateClase(ent);
+            var respuesta = iEjerciciosModel.UpdateEjercicio(ent);
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("UpdateClase", "Clases");
+                return RedirectToAction("UpdateEjercicio", "Ejercicios");
             }
 
             else
@@ -54,13 +57,13 @@ namespace WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteClase(int Id_clase)
+        public IActionResult DeleteEjercicio(int Id_ejercicio)
         {
-            var respuesta = iClasesModel.DeleteClase(Id_clase);
+            var respuesta = iEjerciciosModel.DeleteEjercicio(Id_ejercicio);
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("DeleteClases", "Clases");
+                return RedirectToAction("DeleteEjercicio", "Ejercicios");
             }
 
             else

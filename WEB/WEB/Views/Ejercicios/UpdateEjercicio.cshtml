@@ -1,7 +1,7 @@
-﻿@model WEB.Entities.Clase
+﻿@model WEB.Entities.Ejercicio
 
 @{
-    ViewData["Title"] = "CreateClase";
+    ViewData["Title"] = "UpdateEjercicio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,7 +12,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 text-center mx-auto">
                     <h1 class="text-white mb-2 mt-5">¡Bienvenido!</h1>
-                    <p class="text-lead text-white">Aqui es para crear una clase.</p>
+                    <p class="text-lead text-white">Aqui es para actualizar la información de los ejercicios.</p>
                 </div>
             </div>
         </div>
@@ -21,6 +21,7 @@
         <div class="row mt-lg-n10 mt-md-n11 mt-n10">
             <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                 <div class="card z-index-0">
+
                     <div class="card-body">
                         @if (ViewBag.msj != null)
                         {
@@ -28,9 +29,8 @@
                                 @ViewBag.msj
                             </div>
                         }
-                        @using (Html.BeginForm("CreateClase", "Clases", FormMethod.Post, new { id = "gymForm" }))
+                        @using (Html.BeginForm("UpdateEjercicio", "Ejercicio", FormMethod.Post, new { id = "gymForm" }))
                         {
-
                             <label for="Nombre">Nombre</label>
                             <div class="mb-3">
                                 @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true", @id = "Nombre" })
@@ -41,29 +41,14 @@
                                 @Html.TextBoxFor(m => m.Descripcion, new { @type = "text", @class = "form-control", @placeholder = "Descripcion", @required = "true", @id = "Descripcion" })
                             </div>
 
-                            <label for="IdInstructor">IdInstructor</label>
+                            <label for="GrupoMuscular">GrupoMuscular</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.IdInstructor, new { @type = "int", @class = "form-control", @placeholder = "IdInstructor", @required = "true", @id = "IdInstructor" })
+                                @Html.TextBoxFor(m => m.GrupoMuscular, new { @type = "int", @class = "form-control", @placeholder = "GrupoMuscular", @required = "true", @id = "GrupoMuscular" })
                             </div>
 
-                            <label for="Horario">Horario</label>
+                            <label for="EquipoNecesario">EquipoNecesario</label>
                             <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Horario, new { @type = "date", @class = "form-control", @placeholder = "Horario", @required = "true", @id = "Horario" })
-                            </div>
-
-                            <label for="Duracion">Duracion</label>
-                            <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Duracion, new { @type = "int", @class = "form-control", @placeholder = "Duracion", @required = "true", @id = "Duracion" })
-                            </div>
-
-                            <label for="CapacidadMaxima">CapacidadMaxima</label>
-                            <div class="mb-3">
-                                @Html.TextBoxFor(m => m.CapacidadMaxima, new { @type = "int", @class = "form-control", @placeholder = "CapacidadMaxima", @required = "true", @id = "CapacidadMaxima" })
-                            </div>
-
-                            <label for="Estado">Estado</label>
-                            <div class="mb-3">
-                                @Html.TextBoxFor(m => m.Estado, new { @type = "int", @class = "form-control", @placeholder = "Estado", @required = "true", @id = "Estado" })
+                                @Html.TextBoxFor(m => m.EquipoNecesario, new { @type = "date", @class = "form-control", @placeholder = "EquipoNecesario", @required = "true", @id = "EquipoNecesario" })
                             </div>
 
                             <div class="form-check form-check-info text-left">
@@ -74,7 +59,7 @@
                             </div>
 
                             <div class="">
-                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton">Crear</button>
+                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("index", "Home")'">Actualizar</button>
                             </div>
                         }
                     </div>
@@ -100,7 +85,6 @@
         termsCheckbox.addEventListener('change', validateForm);
 
         form.addEventListener('input', validateForm);
-
 
         validateForm();
     });

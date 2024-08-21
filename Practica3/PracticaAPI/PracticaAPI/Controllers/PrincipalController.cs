@@ -103,7 +103,7 @@ namespace PracticaAPI.Controllers
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("RegistrarAbonoyActualizar", new { ent.CodigoCompra, ent.MontoAbono, ent.FechaAbono }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("RegistrarAbonoyActualizar", new { ent.Id_Compra, ent.Monto, ent.Fecha }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

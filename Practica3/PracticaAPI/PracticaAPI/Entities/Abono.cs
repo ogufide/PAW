@@ -2,9 +2,9 @@
 {
     public class Abono
     {
-        public int Id_abono { get; set; }
-        public string? CodigoCompra { get; set; }
-        public decimal? MontoAbono { get; set; }
-        public DateOnly? FechaAbono { get; set; }
+        public int Id_Abono { get; set; }
+        public string? Id_Compra { get; set; }
+        public decimal? Monto { get; set; }
+        public DateOnly? Fecha { get; set; }
     }
 }

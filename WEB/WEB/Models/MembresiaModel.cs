@@ -1,20 +1,34 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using WEB.Entities;
+
 
 namespace WEB.Models
 {
-    public class MembresiaModel(HttpClient httpClient, IConfiguration iConfiguration, IHttpContextAccessor iContextAccesor) : IMembresiaModel
+    public class MembresiaModel(HttpClient httpClient, IConfiguration iConfiguration) : IMembresiaModel
     {
-        public Respuesta ConsultarMembresias()
+        public Respuesta CreateMembresia(Membresia ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Membresias/ConsultarMembresias";
-                string token = iContextAccesor.HttpContext!.Session.GetString("TOKEN")!.ToString();
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Membresia/CreateMembresia";
+                JsonContent body = JsonContent.Create(ent);
+                var resp = httpClient.PostAsync(url, body).Result;
 
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
+
+        public Respuesta ReadMembresia()
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Membresia/ReadMembresia";
+
                 var resp = httpClient.GetAsync(url).Result;
 
                 if (resp.IsSuccessStatusCode)
@@ -25,3 +39,5 @@ namespace WEB.Models
         }
     }
 }
+
+

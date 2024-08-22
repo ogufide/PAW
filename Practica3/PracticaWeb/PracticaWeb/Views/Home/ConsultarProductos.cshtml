@@ -1,0 +1,51 @@
+﻿@model List<PracticaWeb.Entities.Principal>
+
+@{
+    ViewData["Title"] = "Consulta de productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Consultar Productos</h2>
+<hr />
+<div class="card">
+    <div class="card-body register-card-body">
+        <h4 class="login-box-msg">Productos</h4>
+
+        @if (ViewBag.msj != null)
+        {
+            <div class="alert alert-info" style="text-align:center" role="alert">
+                @ViewBag.msj
+            </div>
+        }
+
+        <table id="tabla-Carrito" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Precio</th>
+                    <th>Saldo</th>
+                    <th>Descripcion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Precio.ToString("N2")</td>
+                        <td>@item.Saldo.ToString("N2")</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.Estado</td>
+                        <td>
+
+                            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Abonar", "Home")'">Pagar</button>
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ICompraModel, CompraModel>();
+builder.Services.AddScoped<IPrincipalModel, PrincipalModel>();
 
 
 var app = builder.Build();

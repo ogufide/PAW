@@ -8,21 +8,22 @@ namespace PracticaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrincipalController (IConfiguration iConfiguration) : ControllerBase 
+    public class PrincipalController(IConfiguration iConfiguration) : ControllerBase
     {
 
         [HttpGet]
         [Route("ConsultarProductos")]
         public async Task<IActionResult> ConsultarProductos()
         {
-
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryAsync<Principal>("ConsultarProductos", new { }, commandType: CommandType.StoredProcedure);
+                var result = await context.QueryAsync<Principal>("ConsultarProductos",
+                    new { },
+                    commandType: System.Data.CommandType.StoredProcedure);
 
-                if (result != null)
+                if (result.Count() > 0)
                 {
                     resp.Codigo = 1;
                     resp.Mensaje = "OK";
@@ -32,7 +33,7 @@ namespace PracticaAPI.Controllers
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "No hay productos.";
+                    resp.Mensaje = "No hay productos registrados en este momento.";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

@@ -7,10 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PracticaWeb.Controllers
 {
-    public class HomeController(ICompraModel iCompraModel) : Controller
+    public class HomeController(ICompraModel iCompraModel, IPrincipalModel iPrincipalModel) : Controller
     {
 
         public IActionResult Index()
@@ -21,6 +22,30 @@ namespace PracticaWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public ActionResult ConsultarProductos()
+        {
+            var respuesta = iPrincipalModel.ConsultarProductos();
+
+            if (respuesta.Codigo == 1)
+            {
+                var contenido = respuesta.Contenido?.ToString();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+                };
+                if (!string.IsNullOrEmpty(contenido))
+                {
+                    var datos = JsonSerializer.Deserialize<List<Principal>>(contenido, options);
+                    return View(datos);
+                }
+
+
+            }
+
+            return View(new List<Principal>());
         }
 
         [HttpGet]

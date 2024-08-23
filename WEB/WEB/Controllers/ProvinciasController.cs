@@ -24,32 +24,34 @@ namespace WEB.Controllers
 
             return View(new List<Provincias>());
         }
-    }
 
-    [HttpGet]
-    public IActionResult ObtenerProvincia(int Id_provincia)
-    {
-        var resp = iProvinciasModel.ObtenerProvincia(Id_provincia);
-
-        if (resp.Codigo == 1 && resp.Contenido != null)
+        [HttpGet]
+        public IActionResult ObtenerProvincia(int Id_provincia)
         {
-            try
-            {
-                // Asumiendo que resp.Contenido es una cadena JSON que contiene la lista de provincias
-                var jsonString = resp.Contenido.ToString();
-                var datos = JsonSerializer.Deserialize<List<Provincias>>(jsonString);
-                return View(datos);
-            }
-            catch (JsonException ex)
-            {
-                // Manejo de errores de deserialización
-                ModelState.AddModelError("", "Error al deserializar los datos de provincias: " + ex.Message);
-                
-            }
-        }
+            var resp = iProvinciasModel.ObtenerProvincia(Id_provincia);
 
-        return View(new List<Provincias>());
+            if (resp.Codigo == 1 && resp.Contenido != null)
+            {
+                try
+                {
+                    // Asumiendo que resp.Contenido es una cadena JSON que contiene la lista de provincias
+                    var jsonString = resp.Contenido.ToString();
+                    var datos = JsonSerializer.Deserialize<List<Provincias>>(jsonString!);
+                    return View(datos);
+                }
+                catch (JsonException ex)
+                {
+                    // Manejo de errores de deserialización
+                    ModelState.AddModelError("", "Error al deserializar los datos de provincias: " + ex.Message);
+
+                }
+            }
+
+            return View(new List<Provincias>());
+        }
     }
+
+  
 
 
 

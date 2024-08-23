@@ -38,7 +38,7 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta ReadClasesById(int Id_clase)
+        public Respuesta ReadClaseById(int Id_clase)
         {
             using (httpClient)
             {

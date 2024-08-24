@@ -41,15 +41,15 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("ReadClase")]
-        public async Task<IActionResult> ReadClase()
+        [Route("ReadClases")]
+        public async Task<IActionResult> ReadClases()
         {
 
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryAsync<Plan>("ReadClase", new { }, commandType: CommandType.StoredProcedure);
+                var result = await context.QueryAsync<Clase>("ReadClase", new { }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {

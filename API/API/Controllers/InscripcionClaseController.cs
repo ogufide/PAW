@@ -29,7 +29,7 @@ namespace API.Controllers
                     },
                     commandType: CommandType.StoredProcedure);
 
-                if (result < 0)
+                if (result > 0)
                 {
                     resp.Codigo = 1;
                     resp.Mensaje = "Inscripción creada correctamente";

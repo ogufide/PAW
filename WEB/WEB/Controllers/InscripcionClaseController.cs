@@ -15,7 +15,6 @@ namespace WEB.Controllers
         [HttpGet]
         public IActionResult AgregarClase()
         {
-            // Obtener datos de clientes y clases
             var respClientes = iClienteModel.ConsultarCliente();
             var respClases = iClasesmodel.ReadClases();
 
@@ -32,7 +31,6 @@ namespace WEB.Controllers
                 clases = JsonSerializer.Deserialize<List<Clase>>((JsonElement)respClases.Contenido!);
             }
 
-            // Preparar el modelo con los dropdowns
             var model = new InscripcionClases
             {
                 NombreCliente = clientes.Select(c => new SelectListItem
@@ -53,12 +51,44 @@ namespace WEB.Controllers
         [HttpPost]
         public IActionResult AgregarClase(InscripcionClases ent)
         {
-            var respuesta = iInscripcionClaseModel.AgregarClase(ent);
-            if (respuesta.Codigo == 1)
-                return RedirectToAction("AgregarClase", "InscripcionClase");
-            else
-                ViewBag.msj = respuesta.Mensaje;
-            return View();
+            if (ModelState.IsValid)
+            {
+                
+                var respuesta = iInscripcionClaseModel.AgregarClase(ent);
+                if (respuesta.Codigo == 1)
+                {
+                    return RedirectToAction("AgregarClase", "InscripcionClase");
+                }
+                else
+                {
+                    ViewBag.msj = respuesta.Mensaje;
+                }
+            }
+
+            
+            var respClientes = iClienteModel.ConsultarCliente();
+            var respClases = iClasesmodel.ReadClases();
+
+            ent.NombreCliente = respClientes.Codigo == 1
+                ? JsonSerializer.Deserialize<List<Clientes>>((JsonElement)respClientes.Contenido!).Select(c => new SelectListItem
+                {
+                    Value = c.Id_cliente.ToString(),
+                    Text = c.Nombre
+                }).ToList()
+                : new List<SelectListItem>();
+
+            ent.NombreClase = respClases.Codigo == 1
+                ? JsonSerializer.Deserialize<List<Clase>>((JsonElement)respClases.Contenido!).Select(c => new SelectListItem
+                {
+                    Value = c.Id_clase.ToString(),
+                    Text = c.Nombre
+                }).ToList()
+                : new List<SelectListItem>();
+
+            return View(ent);
         }
+
+
+
     }
 }

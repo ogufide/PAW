@@ -27,7 +27,7 @@ namespace WEB.Models
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clase/ReadClases";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Clases/ReadClases";
 
                 var resp = httpClient.GetAsync(url).Result;
 
@@ -36,6 +36,16 @@ namespace WEB.Models
                 else
                     return new Respuesta();
             }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         }
 
         public Respuesta ReadClaseById(int Id_clase)

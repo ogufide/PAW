@@ -30,7 +30,7 @@
                                     @ViewBag.msj
                                 </div>
                             }
-                            @using (Html.BeginForm("UpdateInscripcion", "InscripcionClase", FormMethod.Post, new { id = "classForm" }))
+                            @using (Html.BeginForm("UpdateInscripcion", "InscripcionClase", FormMethod.Post , new { id = "classForm" }))
                             {
                                 @Html.HiddenFor(m => m.Id_inscripcion)
 
@@ -45,7 +45,8 @@
                                
 
                                 <div class="">
-                                    <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="updateButton" onclick="location.href='@Url.Action("ReadInscripcion", "InscripcionClase")'">Actualizar</button>
+                                    <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="updateButton">Actualizar</button>
+                                    <a href="@Url.Action("ReadInscripcion", "InscripcionClase")" class="btn btn-secondary w-100 mt-2 mb-0">Cancelar</a>
                                 </div>
                             }
 

@@ -108,15 +108,15 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpDelete]
+        [HttpPost]
         [Route("DeleteInscripcion")]
-        public async Task<IActionResult> DeleteInscripcion(int id)
+        public async Task<IActionResult> DeleteInscripcion(InscripcionClase ent)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("DeleteInscripcion", new { Id_inscripcion = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("DeleteInscripcion", new { ent.Id_inscripcion }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
@@ -138,13 +138,13 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("GetInscripcionById")]
-        public async Task<IActionResult> GetInscripcionById(int id)
+        public async Task<IActionResult> GetInscripcionById(int Id_inscripcion)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QuerySingleOrDefaultAsync<InscripcionClase>("GetInscripcionById", new { Id_inscripcion = id }, commandType: CommandType.StoredProcedure);
+                var result = await context.QuerySingleOrDefaultAsync<InscripcionClase>("GetInscripcionById", new { Id_inscripcion }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {

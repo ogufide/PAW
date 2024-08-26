@@ -7,7 +7,7 @@ namespace WEB.Models
         Respuesta AgregarClase(InscripcionClases ent);
         Respuesta ReadInscripcion();
         Respuesta UpdateInscripcion(InscripcionClases ent);
-        Respuesta DeleteInscripcion(int Id_inscripcion);
+        Respuesta DeleteInscripcion(InscripcionClases ent);
         Respuesta GetInscripcionById(int id_inscripcion);
 
     }

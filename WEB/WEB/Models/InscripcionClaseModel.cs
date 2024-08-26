@@ -51,13 +51,13 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta DeleteInscripcion(int Id_inscripcion)
+        public Respuesta DeleteInscripcion(InscripcionClases ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "InscripcionClase/DeleteInscripcion?Id_inscripcion=" + Id_inscripcion;
-
-                var resp = httpClient.DeleteAsync(url).Result;
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "InscripcionClase/DeleteInscripcion";
+                JsonContent body = JsonContent.Create(ent);
+                var resp = httpClient.PostAsync(url, body).Result;
 
                 if (resp.IsSuccessStatusCode)
                     return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;

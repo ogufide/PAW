@@ -1,42 +1,50 @@
 ﻿@model List<WEB.Entities.InscripcionClases>
 
 @{
-    ViewData["Title"] = "Inscripcion Clases";
+    ViewData["Title"] = "Inscripciones de Clases";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table id="tabla-Clases" class="table table-hover">
-    <thead>
-        <tr>
-            <th>Cliente</th>
-            <th>Clase</th>
-            <th>Fecha de Inscripcion</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.SelectedNombreCliente</td>
-                <td>@item.SelectedNombreClase</td>
-                <td>@item.FechaInscripcion?.ToString("dd/MM/yyyy")</td>
+<main class="main-content mt-0">
+    <section class="container">
+        <div class="d-flex justify-content-between mb-4">
+            <h1>@ViewData["Title"]</h1>
+            <a class="btn btn-success" href="@Url.Action("AgregarClase", "InscripcionClase")">
+                <i class="fa fa-plus"></i> Agregar Inscripción
+            </a>
+        </div>
 
-                <td>
-                    <button type="button" class="btn btn-primary Modales" data-toggle="modal" data-target="#ModalInscripcion"
-                            data-id="@item.Id_inscripcion" data-name="@item.SelectedNombreClase">
-                        <i class="fa fa-pen"></i>
-                    </button>
+        <table id="tabla-Clases" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Clase</th>
+                    <th>Fecha de Inscripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SelectedNombreCliente</td>
+                        <td>@item.SelectedNombreClase</td>
+                        <td>@item.FechaInscripcion?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("UpdateInscripcion", "InscripcionClase", new { Id_inscripcion = item.Id_inscripcion })">
+                                <i class="fa fa-pen"></i>
+                            </a>
 
-                    <a class="btn btn-primary" href="@Url.Action("UpdateInscripcion", "InscripcionClase", new { q = item.Id_inscripcion })">
-                        <i class="fa fa-user"></i>
-                    </a>
+                            <a class="btn btn-danger" href="@Url.Action("DeleteInscripcion", "InscripcionClase", new { Id_inscripcion = item.Id_inscripcion })">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<script src="~/plantilla/js/ReadInscripcion.js"></script>
 <script src="~/plantilla/js/jquery.min.js"></script>
+<script src="~/plantilla/js/ReadInscripcion.js"></script>

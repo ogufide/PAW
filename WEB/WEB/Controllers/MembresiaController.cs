@@ -13,7 +13,6 @@ namespace WEB.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult CreateMembresia(Membresia ent)
         {
@@ -25,11 +24,11 @@ namespace WEB.Controllers
             }
             else
             {
-
                 ViewBag.msj = respuesta.Mensaje;
-                return View("CreateMembresia", ent);
+                return View(ent);
             }
         }
+
 
         [HttpGet]
         public IActionResult ReadMembresia()
@@ -42,7 +41,7 @@ namespace WEB.Controllers
                 return View(datos);
             }
 
-            return View(new List<Gimnasios>());
+            return View(new List<Membresia>());
         }
     }
 }

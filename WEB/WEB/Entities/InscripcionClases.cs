@@ -7,6 +7,8 @@ namespace WEB.Entities
         public int? Id_inscripcion { get; set; }
         public int? Id_cliente { get; set; }
         public int? IdClase { get; set; }
+        public string? SelectedNombreCliente { get; set; }
+        public string? SelectedNombreClase { get; set; }
         public IEnumerable<SelectListItem>? NombreClase { get; set; }
         public IEnumerable<SelectListItem>? NombreCliente { get; set; }
         public DateTime? FechaInscripcion { get; set; }

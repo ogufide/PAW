@@ -46,6 +46,123 @@ namespace API.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ReadInscripcion")]
+        public async Task<IActionResult> ReadInscripcion()
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QueryAsync<InscripcionClase>("ReadInscripcion", commandType: CommandType.StoredProcedure);
+
+                if (result.Any())
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No hay productos registrados en este momento";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        [Route("UpdateInscripcion")]
+        public async Task<IActionResult> UpdateInscripcion(InscripcionClase ent)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.ExecuteAsync("UpdateInscripcion", new
+                {
+                    ent.Id_inscripcion,
+                    ent.Id_cliente,
+                    ent.IdClase   
+                }, commandType: CommandType.StoredProcedure);
+
+                if (result > 0)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "Inscripcion actualizada correctamente";
+                    resp.Contenido = true;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "Error al actualizar la inscripcion";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        [Route("DeleteInscripcion")]
+        public async Task<IActionResult> DeleteInscripcion(int id)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.ExecuteAsync("DeleteInscripcion", new { Id_inscripcion = id }, commandType: CommandType.StoredProcedure);
+
+                if (result > 0)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "Inscripcion eliminada correctamente";
+                    resp.Contenido = true;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "Error al eliminar la inscripcion";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetInscripcionById")]
+        public async Task<IActionResult> GetInscripcionById(int id)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QuerySingleOrDefaultAsync<InscripcionClase>("GetInscripcionById", new { Id_inscripcion = id }, commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "Inscripcion no encontrada";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
 
     }
 }

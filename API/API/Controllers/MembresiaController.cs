@@ -3,6 +3,7 @@ using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 
 namespace API.Controllers
@@ -20,7 +21,14 @@ namespace API.Controllers
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("CreateMembresia", new { ent.Id_membresia, ent.Nombre, ent.Descripcion, ent.Precio, ent.Plan_codigo, ent.Cliente_codigo, ent.Estado }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("CreateMembresia", new
+                {
+                    ent.Nombre,
+                    ent.Descripcion,
+                    ent.Precio,
+                    ent.Plan_codigo,
+                    ent.Cliente_codigo
+                }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

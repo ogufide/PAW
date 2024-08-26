@@ -8,7 +8,7 @@
         public int? Precio { get; set; }
         public int? Plan_codigo { get; set; }
         public int? Cliente_codigo { get; set; }
-        public bool? Estado { get; set; }
+        public string? Estado { get; set; }
 
     }
 }

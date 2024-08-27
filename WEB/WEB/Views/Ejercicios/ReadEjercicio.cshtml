@@ -1,9 +1,17 @@
 ﻿@model List<WEB.Entities.Ejercicio>
 
 @{
-    ViewData["Title"] = "Ejercicio";
+    ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Lista de Ejercicios</h2>
+        <a href="@Url.Action("CreateEjercicio", "Ejercicios")" class="btn btn-primary">
+            Agregar un ejercicio.
+        </a>
+    </div>
 
 <table id="tabla-Ejercicios" class="table table-hover">
     <thead>
@@ -25,7 +33,14 @@
                 <td>@item.Descripcion</td>
                 <td>@item.GrupoMuscular</td>
                 <td>@item.EquipoNecesario</td>
-                <td>Acciones</td>
+                <td>
+                    <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
+                        Eliminar
+                    </button>
+                </td>
             </tr>
         }
     </tbody>

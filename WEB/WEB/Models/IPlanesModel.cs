@@ -8,7 +8,7 @@ namespace WEB.Models
 
         Respuesta ReadPlan();
 
-        Respuesta ReadPlanById(int Id_plan);
+        Respuesta GetPlanById(int Id_plan);
 
         Respuesta UpdatePlan(Plan ent);
 

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IPlanesModel, PlanesModel>();
 
 
 
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

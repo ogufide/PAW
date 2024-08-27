@@ -36,16 +36,7 @@ namespace WEB.Models
                 else
                     return new Respuesta();
             }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         }
 
         public Respuesta ReadClaseById(int Id_clase)

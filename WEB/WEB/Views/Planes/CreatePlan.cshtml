@@ -1,4 +1,4 @@
-﻿@model WEB.Entities.Ejercicio
+﻿@model WEB.Entities.Plan
 
 @{
     ViewData["Title"] = "Principal";
@@ -6,7 +6,7 @@
 }
 
 <div class="container mt-2">
-    @using (Html.BeginForm("CreateEjercicio", "Ejercicios", FormMethod.Post, new { id = "gymForm" }))
+    @using (Html.BeginForm("CreatePlan", "Planes", FormMethod.Post, new { id = "gymForm" }))
     {
 
         <label for="Nombre">Nombre</label>
@@ -14,19 +14,24 @@
             @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true", @id = "Nombre" })
         </div>
 
+        <label for="Precio">Precio</label>
+        <div class="mb-3">
+            @Html.TextBoxFor(m => m.Precio, new { @type = "int", @class = "form-control", @placeholder = "Precio", @required = "true", @id = "Precio" })
+        </div>
+
         <label for="Descripcion">Descripcion</label>
         <div class="mb-3">
             @Html.TextBoxFor(m => m.Descripcion, new { @type = "text", @class = "form-control", @placeholder = "Descripcion", @required = "true", @id = "Descripcion" })
         </div>
 
-        <label for="GrupoMuscular">GrupoMuscular</label>
+        <label for="Gimnasio_codigo">Gimnasio_codigo</label>
         <div class="mb-3">
-            @Html.TextBoxFor(m => m.GrupoMuscular, new { @type = "int", @class = "form-control", @placeholder = "GrupoMuscular", @required = "true", @id = "GrupoMuscular" })
+            @Html.TextBoxFor(m => m.Gimnasio_codigo, new { @type = "int", @class = "form-control", @placeholder = "Gimnasio_codigo", @required = "true", @id = "Gimnasio_codigo" })
         </div>
 
-        <label for="EquipoNecesario">EquipoNecesario</label>
+        <label for="Estado">Estado</label>
         <div class="mb-3">
-            @Html.TextBoxFor(m => m.EquipoNecesario, new { @type = "date", @class = "form-control", @placeholder = "EquipoNecesario", @required = "true", @id = "EquipoNecesario" })
+            @Html.TextBoxFor(m => m.Estado, new { @type = "int", @class = "form-control", @placeholder = "Estado", @required = "true", @id = "Estado" })
         </div>
 
         <div class="">

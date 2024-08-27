@@ -1,22 +1,13 @@
 ﻿@model WEB.Entities.Clase
 
 @{
-    ViewData["Title"] = "UpdateClase";
+    ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2> Editar Clase </h2>
+
 <section class="min-vh-100 mb-8">
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym.jpeg")');">
-        <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5 text-center mx-auto">
-                    <h1 class="text-white mb-2 mt-5">¡Bienvenido!</h1>
-                    <p class="text-lead text-white">Aqui es para actualizar la información de la clase.</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="row mt-lg-n10 mt-md-n11 mt-n10">
             <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
@@ -29,7 +20,7 @@
                                 @ViewBag.msj
                             </div>
                         }
-                        @using (Html.BeginForm("UpdateClase", "Clases", FormMethod.Post, new { id = "gymForm" }))
+                        @using (Html.BeginForm("UpdateClase", "Clases"))
                         {
                             <label for="Nombre">Nombre</label>
                             <div class="mb-3">
@@ -66,17 +57,12 @@
                                 @Html.TextBoxFor(m => m.Estado, new { @type = "int", @class = "form-control", @placeholder = "Estado", @required = "true", @id = "Estado" })
                             </div>
 
-
-
-                            <div class="form-check form-check-info text-left">
-                                <input class="form-check-input" type="checkbox" value="" id="termsCheckbox">
-                                <label class="form-check-label" for="termsCheckbox">
-                                    Estoy de acuerdo con los <a href="javascript:;" class="text-dark font-weight-bolder">Términos y Condiciones</a>
-                                </label>
-                            </div>
-
-                            <div class="">
-                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("index", "Home")'">Actualizar</button>
+                            <div class="row">
+                                <div class="col-8">
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">Editar</button>
+                                </div>
                             </div>
                         }
                     </div>
@@ -85,24 +71,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const termsCheckbox = document.getElementById('termsCheckbox');
-        const registerButton = document.getElementById('registerButton');
-        const form = document.getElementById('gymForm');
-
-        function validateForm() {
-            const formElements = form.querySelectorAll('input[required], select[required]');
-            let allValid = Array.from(formElements).every(el => el.value.trim() !== '');
-
-            registerButton.disabled = !(allValid && termsCheckbox.checked);
-        }
-
-        termsCheckbox.addEventListener('change', validateForm);
-
-        form.addEventListener('input', validateForm);
-
-        validateForm();
-    });
-</script>

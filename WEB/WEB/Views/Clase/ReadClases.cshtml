@@ -1,9 +1,17 @@
 ﻿@model List<WEB.Entities.Clase>
 
 @{
-    ViewData["Title"] = "Clase";
+    ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Clases Disponibles</h2>
+        <a href="@Url.Action("CreateClase", "Clases")" class="btn btn-primary">
+            Agregar Clase
+        </a>
+    </div>
 
 <table id="tabla-Clases" class="table table-hover">
     <thead>
@@ -31,16 +39,13 @@
                 <td>@item.Duracion</td>
                 <td>@item.CapacidadMaxima</td>
                 <td>@item.Estado</td>
-                
                 <td>
-                    <button type="button" class="btn btn-primary Modales" data-toggle="modal" data-target="#ModalClase"
-                            data-id="@item.Id_clase" data-name="@item.Nombre">
-                        <i class="fa fa-pen"></i>
+                    <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
+                        Editar
                     </button>
-
-                    <a class="btn btn-primary" href="@Url.Action("UpdateClase", "Clases", new { q = item.Id_clase })">
-                        <i class="fa fa-user"></i>
-                    </a>
+                    <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
+                        Eliminar
+                    </button>
                     
                  </td>
             </tr>

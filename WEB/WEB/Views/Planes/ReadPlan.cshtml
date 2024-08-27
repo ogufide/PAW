@@ -1,9 +1,17 @@
 ﻿@model List<WEB.Entities.Plan>
 
 @{
-    ViewData["Title"] = "Plan";
+    ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Clases Disponibles</h2>
+        <a href="@Url.Action("CreatePlan", "Planes")" class="btn btn-primary">
+            Agregar un plan.e
+        </a>
+    </div>
 
 <table id="tabla-Plan" class="table table-hover">
     <thead>
@@ -27,7 +35,15 @@
                 <td>@item.Descripcion</td>
                 <td>@item.Gimnasio_codigo</td>
                 <td>@item.Estado</td>
-                <td>Acciones</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
+                            Eliminar
+                        </button>
+
+                    </td>>
             </tr>
         }
     </tbody>

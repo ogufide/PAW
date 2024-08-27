@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/plantilla/img/logo-fill.png">
+    <link rel="icon" type="image/png" href="~/plantilla/img/logo-fill.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Harmony Gym</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link id="pagestyle" href="~/plantilla/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/ConsultarGimnasios.css" />
+</head>
+
+<body>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        <nav class="navbar-main">
+            <div class="navbar-logo">
+                <h1>Listado de Gimnasios</h1>
+                <p>Aquí puedes ver, actualizar o eliminar gimnasios.</p>
+            </div>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="Busca algo...">
+                </div>
+            </div>
+            <div class="session-info">
+                <i class="fa fa-user user-icon"></i>
+                <div class="user-details">
+                    <span class="user-name">@Context.Session.GetString("NOMBRE")!.ToString()</span>
+                    <span class="user-role">@Context.Session.GetString("NROL")!.ToString()</span>
+                </div>
+                <a href="@Url.Action("Gimnasio", "Home")" class="btn-salir">
+                    <i class="fas fa-door-open"></i> Salir
+                </a>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <section class="content">
+            @RenderBody()
+        </section>
+    </main>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

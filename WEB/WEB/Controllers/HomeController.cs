@@ -1,6 +1,8 @@
 using JN_WEB.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 using WEB.Entities;
@@ -9,10 +11,10 @@ using WEB.Models;
 namespace WEB.Controllers
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public class HomeController(IUsuarioModel iUsuarioModel, IComunModel iComunModel, IProductoModel iProductoModel) : Controller
+    public class HomeController(IUsuarioModel iUsuarioModel, IComunModel iComunModel, IProductoModel iProductoModel, IGimnasiosModel iGimnasiosModel) : Controller
     {
-        
-        
+
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -136,6 +138,38 @@ namespace WEB.Controllers
 
             return View(new List<Producto>());
         }
+
+
+
+
+        [HttpGet]
+        public IActionResult Gimnasio(int Id_gimnasio)
+        {
+            var resp = iGimnasiosModel.ObtenerGimnasio(Id_gimnasio);
+
+            if (resp.Codigo == 1)
+            {
+                var gimnasio = JsonSerializer.Deserialize<Gimnasios>((JsonElement)resp.Contenido!);
+
+                if (gimnasio != null)
+                {
+                    HttpContext.Session.SetString("NOMBRE", gimnasio.Nombre ?? "Nombre no disponible");
+                    HttpContext.Session.SetString("TELEFONO", gimnasio.Telefono ?? "Teléfono no disponible");
+                    HttpContext.Session.SetString("DIRECCION", gimnasio.Direccion ?? "Dirección no disponible");
+                    HttpContext.Session.SetString("PROVINCIA", gimnasio.Provincia ?? "Provincia no disponible");
+
+                    return View(gimnasio);
+                }
+            }
+
+            return View("Error");
+        }
+
+
+
+
+
+
 
 
     }

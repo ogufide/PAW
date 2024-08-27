@@ -19,12 +19,13 @@ namespace WEB.Controllers
             if (resp.Codigo == 1)
             {
                 var datos = JsonSerializer.Deserialize<List<Provincias>>((JsonElement)resp.Contenido!);
-                return View(datos);
+                return Json(datos);
             }
 
-            return View(new List<Provincias>());
+            return Json(new List<Provincias>());
         }
 
+<<<<<<< Updated upstream
         [HttpGet]
         public IActionResult ObtenerProvincia(int Id_provincia)
         {
@@ -56,4 +57,25 @@ namespace WEB.Controllers
 
 
 
+=======
+
+        [HttpGet]
+        public IActionResult ObtenerProvincia(int Id_Provincia)
+        {
+            var resp = iProvinciasModel.ObtenerProvincia(Id_Provincia);
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<Provincias>((JsonElement)resp.Contenido!);
+                return View(datos);
+            }
+
+            return View(new Provincias());
+        }
+
+
+
+    }
+
+>>>>>>> Stashed changes
 }

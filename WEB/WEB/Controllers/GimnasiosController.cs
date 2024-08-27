@@ -67,7 +67,7 @@ namespace WEB.Controllers
                 
 
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult EliminarGimnasio(int Id_gimnasio)
         {
             var respuesta = iGimnasiosModel.EliminarGimnasio(Id_gimnasio);
@@ -98,5 +98,9 @@ namespace WEB.Controllers
 
             return View(new List<Gimnasios>());
         }
+
+
+
+
     }
 }

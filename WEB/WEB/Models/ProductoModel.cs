@@ -6,6 +6,7 @@ using JN_WEB.Models;
 
 namespace WEB.Models
 {
+    
     public class ProductoModel(HttpClient httpClient, IConfiguration iConfiguration, IHttpContextAccessor iContextAccesor) : IProductoModel
     {
         public Respuesta ReadProductos()

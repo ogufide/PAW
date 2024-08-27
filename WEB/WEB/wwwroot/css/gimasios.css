@@ -1,0 +1,366 @@
+/* Estilos globales */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #000;
+    border-bottom: 1px solid #333;
+    transition: background-color 200ms linear;
+}
+
+.navbar-scrolled {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    flex: 1; 
+}
+
+    .navbar-brand img {
+        height: 40px; 
+        transition: transform 0.3s ease;
+    }
+
+        .navbar-brand img:hover {
+            transform: scale(1.1);
+        }
+
+.gym-name {
+    color: #fff;
+    font-size: 15px; 
+    font-weight: 600;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Opciones del navbar */
+.navbar-nav {
+    margin-left: auto; 
+}
+
+.nav-link {
+    color: #fff;
+    margin: 0 0.5rem; 
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-decoration: none; 
+}
+
+    .nav-link:hover {
+        color: #ffd700; 
+        text-decoration: underline; 
+    }
+
+.input-group {
+    max-width: 250px; 
+    margin-top: 1rem;
+}
+
+.input-group-text {
+    background-color: #444;
+    border: none;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0;
+    background-color: #555;
+    color: #fff;
+}
+
+    .form-control::placeholder {
+        color: #ccc;
+    }
+
+.nav-link i.fas.fa-door-open {
+    color: #fff;
+    margin-right: 0.5rem;
+}
+
+.nav-link:hover i.fas.fa-door-open {
+    color: #f0f0f0;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        text-align: center;
+        margin-left: 0; 
+    }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 4px;
+        }
+
+    .input-group {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+
+
+/* Hero Carousel */
+.hero-carousel .carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-image-1.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Secciones con fondo */
+#programas, #planes {
+    background-color: #fff;
+    padding: 80px 0;
+    color: #333;
+}
+
+#programas {
+    background-image: url('background-programas.jpg');
+}
+
+#planes {
+    background-image: url('background-planes.jpg');
+}
+
+/* Títulos de secciones */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #333;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* Tarjetas */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+.card-text {
+    color: #444;
+}
+
+/* Testimonios */
+.testimonial-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Planes */
+.plan {
+    background-color: rgba(0, 0, 0, 0.6);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .plan h3 {
+        font-size: 2rem;
+        color: #ffd700;
+        margin-bottom: 20px;
+    }
+
+.plan-details {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.plan-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+/* Botones */
+.btn-gold {
+    background-color: #ffd700;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+    .btn-gold:hover {
+        background-color: #f1c40f;
+    }
+
+/* Pie de página */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer-info {
+    margin-bottom: 20px;
+}
+
+    .footer-info h5 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+
+    .footer-info p {
+        margin-bottom: 5px;
+        font-size: 1rem;
+    }
+
+/* Redes sociales */
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+}
+
+.btn-instagram {
+    background-color: #e4405f;
+}
+
+.btn-twitter {
+    background-color: #1da1f2;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: bounce 1s;
+}
+
+.social-btn i {
+    font-size: 24px;
+}
+
+/* Animación opcional al hacer hover */
+@keyframes bounce {
+    0%, 20%, 50% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Sección de entrenadores */
+.coaches-section {
+    text-align: center;
+}
+
+h1 {
+    color: #00ffcc;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #ffd700;
+    font-size: 16px;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.coach-list {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 20px 0;
+}
+
+.coach {
+    margin: 0 10px;
+    text-align: center;
+}
+
+.coach-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #00ffcc;
+    overflow: hidden;
+}
+
+    .coach-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.coach-name {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 1rem;
+        }
+
+    .input-group {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}

@@ -31,14 +31,14 @@ namespace API.Controllers
                 if (result > 0)
                 {
                     resp.Codigo = 1;
-                    resp.Mensaje = "OK";
+                    resp.Mensaje = "Gimnasio guardado con exito!";
                     resp.Contenido = true;
                     return Ok(resp);
                 }
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "La información del Gimnasio ya se encuentra registrada";
+                    resp.Mensaje = "No se registro la información del Gimnasio";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

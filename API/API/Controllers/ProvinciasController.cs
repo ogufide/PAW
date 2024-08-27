@@ -53,7 +53,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var provincia = await context.QueryFirstOrDefaultAsync<Provincias>("ObtenerProvinica", new { Id_provincia }, commandType: CommandType.StoredProcedure);
+                var provincia = await context.QueryFirstOrDefaultAsync<Provincias>("ObtenerProvincia", new { Id_provincia }, commandType: CommandType.StoredProcedure);
 
                 if (provincia != null)
                 {

@@ -1,42 +1,77 @@
 ﻿@model List<WEB.Entities.Gimnasios>
-
 @{
     ViewData["Title"] = "Gimnasios";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutConsultarGym.cshtml";
 }
 
 
-<table id="tabla-Gimnasios" class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id_gimnasio</th>
-            <th>Nombre</th>
-            <th>Telefono</th>
-            <th>Direccion</th>
-            <th>Provincia</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-
-
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="cards-container">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id_gimnasio</td>
-                <td>@item.Nombre</td>
-                <td>@item.Telefono</td>
-                <td>@item.Direccion</td>
-                <td>@item.Id_provincia</td>
-                <td>@item.Estado</td>
-                <td>Acciones</td>
-            </tr>
+            <div class="card">
+                <div class="card-header">
+                    <h3>@item.Nombre</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Teléfono:</strong> @item.Telefono</p>
+                    <p><strong>Provincia:</strong> @item.Provincia</p>
+                    <p><strong>Dirección:</strong> @item.Direccion</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Gimnasio", "Home", new { Id_gimnasio = item.Id_gimnasio })" class="action-btn" aria-label="Ver detalles del gimnasio @item.Nombre">Ver Gimnasio</a>
+                </div>
+                <div class="card-options">
+                    <a href="@Url.Action("ActualizarGimnasio", "Gimnasios", new { Id_gimnasio = item.Id_gimnasio })" class="update-btn" aria-label="Actualizar gimnasio @item.Nombre">Actualizar</a>
+                    <button class="delete-btn" onclick="confirmarEliminacion(@item.Id_gimnasio)" aria-label="Eliminar gimnasio @item.Nombre">Eliminar</button>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
+ 
+    <footer class="text-center">
+        <p>&copy; Bienvenidos. Todos los derechos reservados.</p>
+        <p>Diseñado por [Grupo 7 del curso Programación avanzada en web]</p> 
+   </footer>
 
 
 
 <script src="~/plantilla/js/validaciones.js"></script>
 <script src="~/plantilla/js/jquery.min.js"></script>
+
+
+    <script>
+        const confirmarEliminacion = (id_gimnasio) => {
+            if (confirm("¿Estás seguro de que quieres eliminar este gimnasio?")) {
+            EliminarGimnasio(id_gimnasio);
+            }
+        }
+
+    const EliminarGimnasio = (id_gimnasio) => {
+            fetch(`/Gimnasios/EliminarGimnasio/${id_gimnasio}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Error en la respuesta del servidor');
+            })
+            .then(data => {
+                alert("Gimnasio eliminado con éxito.");
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error al eliminar gimnasio:', error);
+                alert("Error al eliminar el gimnasio: " + error.message);
+            });
+        }
+    </script>
+
+
+
+

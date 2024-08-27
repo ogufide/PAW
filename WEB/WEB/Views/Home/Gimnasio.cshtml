@@ -1,0 +1,300 @@
+﻿@model WEB.Entities.Gimnasios
+@{
+    ViewData["Title"] = "Registro Producto";
+    Layout = "~/Views/Shared/_LayoutGimnasio.cshtml";
+}
+
+
+
+<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('@Url.Content("~/plantilla/img/gym/5.jpg")');">
+            <div class="carousel-caption">
+                <h1>Transforma tu vida con @Context.Session.GetString("NOMBRE")</h1>
+                <p>Regístrate ahora y obtén 7 días GRATIS. Vive la experiencia de entrenar con InstaFit a la hora que quieras y desde donde sea.</p>
+                <a href="#" class="btn btn-gold btn-lg">¡Comienza Ahora!</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('@Url.Content("~/plantilla/img/gym/8.jpg")');">
+            <div class="carousel-caption">
+                <h1>Alcanza tus metas fitness</h1>
+                <p>Con nuestros entrenadores expertos y equipos de última generación.</p>
+                <a href="#" class="btn btn-gold btn-lg">Descubre Más</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('@Url.Content("~/plantilla/img/gym/1.webp")');">
+            <div class="carousel-caption">
+                <h1>¡Tu salud, nuestra prioridad!</h1>
+                <p>Únete a nosotros y mejora tu bienestar con entrenamientos personalizados y apoyo constante.</p>
+                <a href="#" class="btn btn-gold btn-lg">Empieza Hoy</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('@Url.Content("~/plantilla/img/gym/20.jpg")');">
+            <div class="carousel-caption">
+                <h1>Supera tus límites</h1>
+                <p>Con nuestras instalaciones de vanguardia y programas innovadores diseñados para cada necesidad.</p>
+                <a href="#" class="btn btn-gold btn-lg">Conoce Nuestros Planes</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<div id="programas" class="container section">
+    <h2 class="section-title" data-aos="fade-up">Nuestros Programas</h2>
+    <div class="row">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card">
+                <img src="~/plantilla/img/gym/fortalecetucuerpo.webp" class="card-img-top" alt="FORTALECE TU CUERPO">
+                <div class="card-body">
+                    <h5 class="card-title">FORTALECE tu CUERPO</h5>
+                    <p class="card-text">Programa diseñado para aumentar tu fuerza y resistencia muscular.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card">
+                <img src="~/plantilla/img/gym/3.webp" class="card-img-top" alt="HIIT">
+                <div class="card-body">
+                    <h5 class="card-title">HIIT (Entrenamiento Interválico de Alta Intensidad)</h5>
+                    <p class="card-text">Un entrenamiento efectivo para quemar grasa y mejorar tu resistencia cardiovascular en menos tiempo.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card">
+                <img src="~/plantilla/img/gym/22.jpg" class="card-img-top" alt="ENTRENAMIENTO PERSONAL">
+                <div class="card-body">
+                    <h5 class="card-title">ENTRENAMIENTO PERSONAL</h5>
+                    <p class="card-text">Sesiones personalizadas con entrenadores profesionales para alcanzar tus objetivos específicos.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="card">
+                <img src="~/plantilla/img/gym/19.jpg" class="card-img-top" alt="CROSSFIT">
+                <div class="card-body">
+                    <h5 class="card-title">CROSSFIT</h5>
+                    <p class="card-text">Entrenamiento de alta intensidad para mejorar tu fuerza, resistencia y agilidad.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card">
+                <img src="~/plantilla/img/gym/21.jpg" class="card-img-top" alt="YOGA">
+                <div class="card-body">
+                    <h5 class="card-title">YOGA</h5>
+                    <p class="card-text">Programa de yoga para mejorar tu flexibilidad, equilibrio y bienestar mental.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+            <div class="card">
+                <img src="~/plantilla/img/gym/2.webp" class="card-img-top" alt="PILATES">
+                <div class="card-body">
+                    <h5 class="card-title">PILATES</h5>
+                    <p class="card-text">Entrenamiento centrado en la fuerza del core y la estabilidad corporal.</p>
+                    <a href="@Url.Action("GimnasioSuscripciones", "Home")" class="btn btn-gold">Más Información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="coaches-section">
+    <h1>COACHES</h1>
+    <p class="subtitle">Reunimos a los mejores instructores certificados de health, fitness y disciplinas enfocadas en el bienestar integral para ofrecerte todo en un solo lugar.</p>
+
+    <div class="coach-list">
+        <div class="coach">
+            <div class="coach-image">
+                <img src="path/to/augusto.jpg" alt="Augusto Almeyra">
+            </div>
+            <div class="coach-name">Augusto Almeyra</div>
+        </div>
+        <div class="coach">
+            <div class="coach-image">
+                <img src="path/to/mariana.jpg" alt="Mariana Torres">
+            </div>
+            <div class="coach-name">Mariana Torres</div>
+        </div>
+        <div class="coach">
+            <div class="coach-image">
+                <img src="path/to/jonatan.jpg" alt="Jonatan Karmona">
+            </div>
+            <div class="coach-name">Jonatan Karmona</div>
+        </div>
+        <div class="coach">
+            <div class="coach-image">
+                <img src="path/to/pilar.jpg" alt="Pilar Gómez">
+            </div>
+            <div class="coach-name">Pilar Gómez</div>
+        </div>
+        <div class="coach">
+            <div class="coach-image">
+                <img src="path/to/raul.jpg" alt="Raúl Victoria">
+            </div>
+            <div class="coach-name">Raúl Victoria</div>
+        </div>
+    </div>
+</div>
+
+    <div id="galeria" class="container section">
+        <h2 class="section-title" data-aos="fade-up">Galería</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <a href="gallery-1-large.jpg" data-lightbox="gym-gallery">
+                    <img src="gallery-1-thumb.jpg" class="img-fluid" alt="Gym Image 1">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="gallery-2-large.jpg" data-lightbox="gym-gallery">
+                    <img src="gallery-2-thumb.jpg" class="img-fluid" alt="Gym Image 2">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <a href="gallery-3-large.jpg" data-lightbox="gym-gallery">
+                    <img src="gallery-3-thumb.jpg" class="img-fluid" alt="Gym Image 3">
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div id="planes" class="container section">
+    <h2 class="section-title" data-aos="fade-up">Suscripciones</h2>
+    <div class="row">
+        <!-- Plan Individual -->
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="plan" style="background-image: url('@Url.Content("~/plantilla/img/gym/24.jpg")');">
+                <h3>PLAN INDIVIDUAL</h3>
+                <div class="plan-details">
+                    <p class="plan-price">Desde $75/mes + IVA</p>
+                    <ul>
+                        <li>Acceso ilimitado al gimnasio</li>
+                        <li>Clases grupales incluidas</li>
+                        <li>Asesoramiento nutricional</li>
+                    </ul>
+                    <a href="#" class="btn btn-gold">Suscribirse</a>
+                </div>
+            </div>
+        </div>
+        <!-- Plan Familiar -->
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="plan" style="background-image: url('@Url.Content("~/plantilla/img/gym/25.jpg")');">
+                <h3>PLAN FAMILIAR</h3>
+                <div class="plan-details">
+                    <p class="plan-price">Desde $70/mes + IVA por persona</p>
+                    <ul>
+                        <li>Acceso para toda la familia</li>
+                        <li>Clases grupales incluidas</li>
+                        <li>Descuentos en servicios adicionales</li>
+                    </ul>
+                    <a href="#" class="btn btn-gold">Suscribirse</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="plan" style="background-image: url('@Url.Content("~/plantilla/img/gym/24.jpg")');">
+                <h3>PLAN PREMIUM</h3>
+                <div class="plan-details">
+                    <p class="plan-price">Desde $120/mes + IVA</p>
+                    <ul>
+                        <li>Acceso ilimitado al gimnasio</li>
+                        <li>Clases grupales ilimitadas</li>
+                        <li>Entrenamiento personal mensual</li>
+                        <li>Asesoramiento nutricional avanzado</li>
+                        <li>Acceso a áreas exclusivas</li>
+                    </ul>
+                    <a href="#" class="btn btn-gold">Suscribirse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="contacto" class="container section">
+    <h2 class="section-title" data-aos="fade-up">Contáctanos</h2>
+    <div class="row">
+        <!-- Formulario de Contacto -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <form id="contactForm" class="contact-form">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Tu mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-gold">Enviar</button>
+            </form>
+        </div>
+        <!-- Información de Contacto y Mapa -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <h4>Información de Contacto</h4>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i>  la @Context.Session.GetString("DIRECCION"), en @Context.Session.GetString("PROVINCIA"), COSTA RICA</p>
+                <p><i class="fas fa-phone"></i> telefono @Context.Session.GetString("TELEFONO"), </p>
+                <p><i class="fas fa-envelope"></i> contacto@goldsgym.com</p>
+                <p><i class="fas fa-clock"></i> Horarios: Lunes a Viernes 6:00 - 22:00, Sábado 8:00 - 18:00, Domingo Cerrado</p>
+                <p><i class="fas fa-share-alt"></i> Síguenos en nuestras redes sociales:</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/GoldsGym" target="_blank" class="social-btn btn-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/GoldsGym" target="_blank" class="social-btn btn-instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/GoldsGym" target="_blank" class="social-btn btn-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://wa.me/1234567890" target="_blank" class="social-btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="map-container mt-4">
+                <h4>Encuéntranos aquí</h4>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126847.75847955866!2d-99.23078359561873!3d19.512933662092035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842f6f87f19a2adf%3A0xb9f5f6d6e7e8c5f0!2sCiudad%20de%20México%2C%20CDMX!5e0!3m2!1ses!2smx!4v1683823443403!5m2!1ses!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   
+
+    <footer class="text-center">
+    <p>&copy; 2024 @Context.Session.GetString("NOMBRE"). Todos los derechos reservados.</p>
+        <p>Diseñado por [Grupo 7 del curso Programación avanzada en web]</p>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+
+

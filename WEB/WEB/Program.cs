@@ -19,10 +19,7 @@ builder.Services.AddScoped<IInscripcionClaseModel, InscripcionClaseModel>();
 builder.Services.AddScoped<IMembresiaModel, MembresiaModel>();
 builder.Services.AddScoped<IProvinciasModel, ProvinciasModel>();
 builder.Services.AddScoped<IProductoModel, ProductoModel>();
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 
 var app = builder.Build();

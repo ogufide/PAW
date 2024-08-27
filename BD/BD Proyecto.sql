@@ -665,7 +665,25 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
+---------Seleccionar membresia
+CREATE PROCEDURE [dbo].[GetMembresiaById]
+    @Id_membresia INT
+AS
+BEGIN
+    SELECT 
+        Id_membresia AS SelectedIdMembresia,
+        Nombre,
+        Descripcion,
+        Precio,
+        Plan_codigo,
+        Cliente_codigo,
+        Estado
+    FROM 
+        dbo.membresias
+    WHERE 
+        Id_membresia = @Id_membresia;
+END;
+GO
 -- Crear un plan
 CREATE PROCEDURE [dbo].[CreatePlan]
 	@Nombre VARCHAR(50),

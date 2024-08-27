@@ -76,6 +76,7 @@ namespace API.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPut]
         [Route("UpdateMembresia")]
         public async Task<IActionResult> UpdateMembresia(Membresia ent)
@@ -105,6 +106,7 @@ namespace API.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpDelete]
         [Route("DeleteMembresia")]
         public async Task<IActionResult> DeleteMembresia(int Id_membresia)
@@ -134,6 +136,35 @@ namespace API.Controllers
                 }
             }
         }
+
+    
+        [HttpGet]
+        [Route("GetMembresiaById")]
+        public async Task<IActionResult> GetMembresiaById(int Id_membresia)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QuerySingleOrDefaultAsync<Membresia>("GetMembresiaById", new { Id_membresia }, commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "Membresia no encontrada";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
+
 
 
     }

@@ -34,12 +34,11 @@
                     <td>@item.Plan_codigo</td>
                     <td>@item.Cliente_codigo</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
-                            Editar
-                        </button>
-                        <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
-                            Eliminar
-                        </button>
+
+
+                        <a class="btn btn-danger" href="@Url.Action("DeleteMembresia", "Membresia", new { Id_membresia = item.Id_membresia })">
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
             }

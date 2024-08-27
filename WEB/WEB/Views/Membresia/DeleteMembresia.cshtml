@@ -1,0 +1,36 @@
+﻿@model WEB.Entities.Membresia
+
+@{
+    ViewData["Title"] = "Eliminar Membresia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main-content mt-0">
+    <section class="min-vh-100 mb-8">
+        <div class="container">
+            <div class="card shadow-sm border-0 rounded-lg">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Confirmar Eliminación</h2>
+
+                    <div class="mb-4">
+                        <p><strong>Nombre:</strong> @Model.Nombre</p>
+                        <p><strong>Descripción:</strong> @Model.Descripcion</p>
+                        <p><strong>Precio:</strong> @Model.Precio</p>
+                        <p><strong>Plan:</strong> @Model.Plan_codigo</p>
+                        <p><strong>Código de cliente:</strong> @Model.Cliente_codigo</p>
+                    </div>
+
+                    <form method="post" action="@Url.Action("DeleteMembresia", "Membresia")">
+                        @Html.HiddenFor(model => model.Id_membresia)
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                            <a href="@Url.Action("ReadMembresia", "Membresia")" class="btn btn-secondary">Cancelar</a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

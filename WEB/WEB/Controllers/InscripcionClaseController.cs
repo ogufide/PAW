@@ -59,7 +59,7 @@ namespace WEB.Controllers
                 var respuesta = iInscripcionClaseModel.AgregarClase(ent);
                 if (respuesta.Codigo == 1)
                 {
-                    return RedirectToAction("AgregarClase", "InscripcionClase");
+                    return RedirectToAction("ReadInscripcion", "InscripcionClase");
                 }
                 else
                 {

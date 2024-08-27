@@ -1,0 +1,62 @@
+﻿@model WEB.Entities.Rutina
+
+@{
+    ViewData["Title"] = "Eliminar Rutina";
+    Layout = "~/Views/Shared/_LayoutExterno.cshtml";
+}
+
+<main class="main-content mt-0">
+    <section class="min-vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-10">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header bg-gradient-danger text-white text-center py-4" style="background-image: url('@Url.Content("~/plantilla/img/gym/14.jpg")'); background-size: cover;">
+                            <h2 class="card-title mb-0">Confirmar Eliminación</h2>
+                            <p class="mb-0">¿Estás seguro de que deseas eliminar esta Rutina?</p>
+                        </div>
+                        <div class="card-body p-5">
+                            @if (ViewBag.msj != null)
+                            {
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    @ViewBag.msj
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("DeleteRutina", "Rutina", FormMethod.Post, new { id = "deleteForm" }))
+                            {
+                                @Html.HiddenFor(m => m.Id_rutina)
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Plan:</label>
+                                    <div class="form-control-plaintext">@Model.NombrePlan</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Nombre:</label>
+                                    <div class="form-control-plaintext">@Model.Nombre</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Descripción:</label>
+                                    <div class="form-control-plaintext">@Model.Descripcion</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Día de la Semana:</label>
+                                    <div class="form-control-plaintext">@Model.DiaSemana</div>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger btn-lg">Eliminar</button>
+                                    <a href="@Url.Action("ReadRutina", "Rutina")" class="btn btn-secondary btn-lg">Cancelar</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

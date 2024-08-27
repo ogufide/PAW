@@ -3,43 +3,44 @@ using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using Dapper;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InscripcionClaseController(IConfiguration iConfiguration) : ControllerBase
+    public class RutinaController(IConfiguration iConfiguration) : ControllerBase
     {
         [AllowAnonymous]
         [HttpPost]
-        [Route("AgregarClase")]
-        public async Task<IActionResult> AgregarClase(InscripcionClase inscripcion)
+        [Route("CreateRutina")]
+        public async Task<IActionResult> CreateRutina(Rutina rutina)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("sp_InsertarInscripcionClase",
+                var result = await context.ExecuteAsync("CreateRutina",
                     new
                     {
-                        inscripcion.Id_cliente,
-                        inscripcion.IdClase
+                        rutina.Id_plan,
+                        rutina.Nombre,
+                        rutina.Descripcion,
+                        rutina.DiaSemana
                     },
                     commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
                     resp.Codigo = 1;
-                    resp.Mensaje = "Inscripción creada correctamente";
+                    resp.Mensaje = "Rutina creada correctamente";
                     resp.Contenido = true;
                     return Ok(resp);
                 }
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "Error al crear la inscripción";
+                    resp.Mensaje = "Error al crear la Rutina";
                     resp.Contenido = false;
                     return Ok(resp);
                 }
@@ -48,14 +49,14 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("ReadInscripcion")]
-        public async Task<IActionResult> ReadInscripcion()
+        [Route("ReadRutina")]
+        public async Task<IActionResult> ReadRutina()
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QueryAsync<InscripcionClase>("ReadInscripcion", commandType: CommandType.StoredProcedure);
+                var result = await context.QueryAsync<Rutina>("ReadRutina", commandType: CommandType.StoredProcedure);
 
                 if (result.Any())
                 {
@@ -67,7 +68,7 @@ namespace API.Controllers
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "No hay Inscripciones registradas en este momento";
+                    resp.Mensaje = "No hay Rutinas registradas en este momento";
                     resp.Contenido = false;
                     return Ok(resp);
                 }
@@ -76,31 +77,33 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        [Route("UpdateInscripcion")]
-        public async Task<IActionResult> UpdateInscripcion(InscripcionClase ent)
+        [Route("UpdateRutina")]
+        public async Task<IActionResult> UpdateRutina(Rutina ent)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("UpdateInscripcion", new
+                var result = await context.ExecuteAsync("UpdateRutina", new
                 {
-                    ent.Id_inscripcion,
-                    ent.Id_cliente,
-                    ent.IdClase   
+                    ent.Id_rutina,
+                    ent.Id_plan,
+                    ent.Nombre,
+                    ent.Descripcion,
+                    ent.DiaSemana
                 }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
                     resp.Codigo = 1;
-                    resp.Mensaje = "Inscripcion actualizada correctamente";
+                    resp.Mensaje = "Rutina actualizada correctamente";
                     resp.Contenido = true;
                     return Ok(resp);
                 }
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "Error al actualizar la inscripcion";
+                    resp.Mensaje = "Error al actualizar la Rutina";
                     resp.Contenido = false;
                     return Ok(resp);
                 }
@@ -109,26 +112,26 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("DeleteInscripcion")]
-        public async Task<IActionResult> DeleteInscripcion(InscripcionClase ent)
+        [Route("DeleteRutina")]
+        public async Task<IActionResult> DeleteRutina(Rutina ent)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("DeleteInscripcion", new { ent.Id_inscripcion }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("DeleteRutina", new { ent.Id_rutina }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
                     resp.Codigo = 1;
-                    resp.Mensaje = "Inscripcion eliminada correctamente";
+                    resp.Mensaje = "Rutina eliminada correctamente";
                     resp.Contenido = true;
                     return Ok(resp);
                 }
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "Error al eliminar la inscripcion";
+                    resp.Mensaje = "Error al eliminar la Rutina";
                     resp.Contenido = false;
                     return Ok(resp);
                 }
@@ -137,14 +140,14 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("GetInscripcionById")]
-        public async Task<IActionResult> GetInscripcionById(int Id_inscripcion)
+        [Route("GetRutinaById")]
+        public async Task<IActionResult> GetRutinaById(int Id_rutina)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.QuerySingleOrDefaultAsync<InscripcionClase>("GetInscripcionById", new { Id_inscripcion }, commandType: CommandType.StoredProcedure);
+                var result = await context.QuerySingleOrDefaultAsync<Rutina>("GetRutinaById", new { Id_rutina }, commandType: CommandType.StoredProcedure);
 
                 if (result != null)
                 {
@@ -156,7 +159,7 @@ namespace API.Controllers
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "Inscripcion no encontrada";
+                    resp.Mensaje = "Rutina no encontrada";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

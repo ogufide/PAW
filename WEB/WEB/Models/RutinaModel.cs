@@ -1,18 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿
 using WEB.Entities;
 
 namespace WEB.Models
 {
-    public class PlanesModel(HttpClient httpClient, IConfiguration iConfiguration) : IPlanesModel
+    public class RutinaModel(HttpClient httpClient, IConfiguration iConfiguration) : IRutinaModel
     {
-
-        public Respuesta CreatePlan(Plan ent)
+        public Respuesta CreateRutina(Rutina ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Planes/CreatePlan";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Rutina/CreateRutina";
                 JsonContent body = JsonContent.Create(ent);
                 var resp = httpClient.PostAsync(url, body).Result;
 
@@ -22,12 +19,11 @@ namespace WEB.Models
                     return new Respuesta();
             }
         }
-
-        public Respuesta ReadPlan()
+        public Respuesta ReadRutina()
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Planes/ReadPlan";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Rutina/ReadRutina";
 
                 var resp = httpClient.GetAsync(url).Result;
 
@@ -37,27 +33,11 @@ namespace WEB.Models
                     return new Respuesta();
             }
         }
-
-        public Respuesta ReadPlanById(int Id_plan)
+        public Respuesta UpdateRutina(Rutina ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Planes/ReadPlanById?Id_plan=" + Id_plan;
-                
-                var resp = httpClient.GetAsync(url).Result;
-
-                if (resp.IsSuccessStatusCode)
-                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
-                else
-                    return new Respuesta();
-            }
-        }
-
-        public Respuesta UpdatePlan(Plan ent)
-        {
-            using (httpClient)
-            {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Planes/UpdatePlan ";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Rutina/UpdateRutina";
                 JsonContent body = JsonContent.Create(ent);
 
                 var resp = httpClient.PutAsync(url, body).Result;
@@ -69,13 +49,27 @@ namespace WEB.Models
             }
         }
 
-        public Respuesta DeletePlan(int Id_plan)
+        public Respuesta DeleteRutina(Rutina ent)
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Planes/DeletePlan?Id_plan=" + Id_plan;
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Rutina/DeleteRutina";
+                JsonContent body = JsonContent.Create(ent);
+                var resp = httpClient.PostAsync(url, body).Result;
 
-                var resp = httpClient.DeleteAsync(url).Result;
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
+
+        public Respuesta GetRutinaById(int Id_rutina)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Rutina/GetRutinaById?Id_rutina=" + Id_rutina;
+                var resp = httpClient.GetAsync(url).Result;
 
                 if (resp.IsSuccessStatusCode)
                     return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;

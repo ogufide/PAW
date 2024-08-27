@@ -1,0 +1,58 @@
+﻿@model List<WEB.Entities.Rutina>
+
+@{
+    ViewData["Title"] = "Inscripciones de Rutinas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main-content mt-4">
+    <section class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary">@ViewData["Title"]</h1>
+            <a class="btn btn-success" href="@Url.Action("CreateRutina", "Rutina")">
+                <i class="fa fa-plus me-2"></i>Agregar Rutina
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table id="tabla-Clases" class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Plan</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" style="width: 40%;">Descripción</th>
+                                <th scope="col">Día Semana</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.NombrePlan</td>
+                                    <td>@item.Nombre</td>
+                                    <td class="text-wrap">@item.Descripcion</td>
+                                    <td>@item.DiaSemana</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-outline-primary btn-sm mx-1" href="@Url.Action("UpdateRutina", "Rutina", new { Id_rutina = item.Id_rutina })" title="Editar">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <a class="btn btn-outline-danger btn-sm mx-1" href="@Url.Action("DeleteRutina", "Rutina", new { Id_rutina = item.Id_rutina })" title="Eliminar">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script src="~/plantilla/js/jquery.min.js"></script>
+<script src="~/plantilla/js/ReadRutina.js"></script>

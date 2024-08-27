@@ -24,7 +24,7 @@ namespace API.Controllers
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("AgregarCliente", new { ent.Nombre, ent.Apellidos, ent.Correo, ent.Telefono,}, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("AgregarCliente", new { ent.Nombre, ent.Apellidos, ent.Correo, ent.Telefono, ent.Plan}, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
@@ -60,6 +60,7 @@ namespace API.Controllers
                 parameters.Add("@Apellidos", ent.Apellidos);
                 parameters.Add("@Correo", ent.Correo);
                 parameters.Add("@Telefono", ent.Telefono);
+                parameters.Add("@Plan", ent.Plan);
 
                 var result = await context.ExecuteAsync("ActualizarCliente", parameters, commandType: CommandType.StoredProcedure);
 

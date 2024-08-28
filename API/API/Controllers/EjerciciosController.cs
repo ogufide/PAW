@@ -12,7 +12,7 @@ namespace API.Controllers
     [ApiController]
     public class EjerciciosController(IConfiguration iConfiguration) : ControllerBase
     {
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         [Route("CreateEjercicio")]
         public async Task<IActionResult> CreateEjercicio(Ejercicio ent)
@@ -69,7 +69,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut]
         [Route("UpdateEjercicio")]
         public async Task<IActionResult> UpdateEjercicio(Ejercicio ent)
@@ -106,7 +106,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpDelete]
         [Route("DeleteEjercicio")]
         public async Task<IActionResult> DeleteEjercicio(int Id_ejercicio)

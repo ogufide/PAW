@@ -11,7 +11,7 @@ namespace API.Controllers
     [ApiController]
     public class PlanesController(IConfiguration iConfiguration) : ControllerBase
     {
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         [Route("CreatePlan")]
         public async Task<IActionResult> CreatePlan(Plan ent)
@@ -97,7 +97,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut]
         [Route("UpdatePlan")]
         public async Task<IActionResult> UpdatePlan(Plan ent)
@@ -135,7 +135,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpDelete]
         [Route("DeletePlan")]
         public async Task<IActionResult> DeletePlan(int Id_plan)

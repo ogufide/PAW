@@ -11,7 +11,7 @@ namespace API.Controllers
     [ApiController]
     public class ClasesController(IConfiguration iConfiguration) : ControllerBase
     {
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         [Route("CreateClase")]
         public async Task<IActionResult> CreateClase(Clase ent)
@@ -97,7 +97,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut]
         [Route("UpdateClase")]
         public async Task<IActionResult> UpdateClase(Clase ent)
@@ -136,7 +136,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpDelete]
         [Route("DeleteClase")]
         public async Task<IActionResult> DeleteClase(int Id_clase)

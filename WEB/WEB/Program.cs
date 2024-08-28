@@ -1,4 +1,4 @@
-using JN_WEB.Models;
+using WEB.Interface;
 using WEB.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +21,6 @@ builder.Services.AddScoped<IProvinciasModel, ProvinciasModel>();
 builder.Services.AddScoped<IProductoModel, ProductoModel>();
 builder.Services.AddScoped<IRutinaModel, RutinaModel>();
 builder.Services.AddScoped<IPlanesModel, PlanesModel>();
-
-
 
 
 var app = builder.Build();

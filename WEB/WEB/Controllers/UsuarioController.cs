@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WEB.Entities;
-using WEB.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WEB.Interface;
 
 
 namespace WEB.Controllers
@@ -109,6 +109,24 @@ namespace WEB.Controllers
             }
 
             return View(new List<Rol>());
+        }
+
+        [HttpGet]
+        public IActionResult RecuperarAcceso()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RecuperarAcceso(Usuario ent)
+        {
+            var resp = iUsuarioModel.RecuperarAcceso(ent.Identificacion.ToString()!);
+
+            if (resp.Codigo == 1)
+                return RedirectToAction("Login", "Home");
+
+            ViewBag.msj = resp.Mensaje;
+            return View();
         }
     }
 }

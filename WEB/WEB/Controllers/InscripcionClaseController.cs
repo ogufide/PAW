@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WEB.Entities;
-using WEB.Models;
+using WEB.Interface;
 
 namespace WEB.Controllers
 {

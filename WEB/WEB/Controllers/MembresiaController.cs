@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using WEB.Entities;
-using WEB.Models;
+using WEB.Interface;
 
 namespace WEB.Controllers
 {

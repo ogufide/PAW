@@ -1,4 +1,4 @@
-﻿namespace WEB.Models
+﻿namespace WEB.Interface
 {
     public interface IComunModel
     {

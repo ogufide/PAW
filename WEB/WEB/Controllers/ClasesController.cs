@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 using WEB.Entities;
-using WEB.Models;
+using WEB.Interface;
 
 namespace WEB.Controllers
 {

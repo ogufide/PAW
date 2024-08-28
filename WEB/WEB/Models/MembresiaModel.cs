@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using WEB.Entities;
+using WEB.Interface;
 
 
 namespace WEB.Models

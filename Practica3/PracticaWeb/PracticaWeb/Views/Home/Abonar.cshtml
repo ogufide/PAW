@@ -1,4 +1,4 @@
-﻿@model PracticaWeb.Entities.Compra
+﻿@model PracticaWeb.Entities.Principal
 @{
     ViewData["Title"] = "Abonar";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,13 +23,13 @@ hr />
         </div>
         <div class="col-6">
 
-            @using (Html.BeginForm("UpdateUsuario", "Usuario"))
+            @using (Html.BeginForm("Abonar", "Home"))
             {
-                @Html.HiddenFor(m => m.CodigoCompra)
+                @Html.HiddenFor(m => m.Id_Compra)
 
                 @Html.Label("Código Compra")
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(m => m.CodigoCompra, new { @type = "text", @class = "form-control", @placeholder = "Código Compra" })
+                    @Html.TextBoxFor(m => m.Id_Compra, new { @type = "text", @class = "form-control", @placeholder = "Código Compra" })
                     <div class="input-group-append">
                     </div>
                 </div>
@@ -58,7 +58,7 @@ hr />
 
                 @Html.Label("Abono")
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(m => m.Saldo, new { @type = "required", @class = "form-control", @placeholder = "Abono" })
+                    @Html.TextBoxFor(m => m.Estado, new { @type = "required", @class = "form-control", @placeholder = "Estado" })
                     <div class="input-group-append">
                     </div>
                 </div>

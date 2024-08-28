@@ -1,4 +1,3 @@
-using JN_WEB.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 using WEB.Entities;
-using WEB.Models;
+using WEB.Interface;
 
 namespace WEB.Controllers
 {

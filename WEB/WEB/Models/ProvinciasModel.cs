@@ -1,4 +1,5 @@
 ﻿using WEB.Entities;
+using WEB.Interface;
 
 namespace WEB.Models
 {

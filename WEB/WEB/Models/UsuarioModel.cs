@@ -1,6 +1,7 @@
 ﻿using WEB.Entities;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using WEB.Interface;
 
 namespace WEB.Models
 {
@@ -99,6 +100,21 @@ namespace WEB.Models
                 JsonContent body = JsonContent.Create(ent);
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var resp = httpClient.PutAsync(url, body).Result;
+
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;
+                else
+                    return new Respuesta();
+            }
+        }
+
+        public Respuesta RecuperarAcceso(string Identificacion)
+        {
+            using (httpClient)
+            {
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Usuario/RecuperarAcceso?Identificacion=" + Identificacion;
+
+                var resp = httpClient.GetAsync(url).Result;
 
                 if (resp.IsSuccessStatusCode)
                     return resp.Content.ReadFromJsonAsync<Respuesta>().Result!;

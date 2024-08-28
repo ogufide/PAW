@@ -1,20 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [Proyecto]    Script Date: 8/27/2024 3:13:05 PM ******/
 CREATE DATABASE [Proyecto]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'Proyecto', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Proyecto.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'Proyecto_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Proyecto_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
-GO
-ALTER DATABASE [Proyecto] SET COMPATIBILITY_LEVEL = 160
-GO
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [Proyecto].[dbo].[sp_fulltext_database] @action = 'enable'
-end
 GO
 ALTER DATABASE [Proyecto] SET ANSI_NULL_DEFAULT OFF 
 GO
@@ -106,6 +92,21 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+CREATE TABLE [dbo].[carrito](
+	[IdCarrito] [int] IDENTITY(1,1) NOT NULL,
+	[ConsecutivoUsuario] [int] NOT NULL,
+	[IdProducto] [int] NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[FechaCarrito] [datetime] NOT NULL,
+ CONSTRAINT [PK_tCarrito] PRIMARY KEY CLUSTERED 
+(
+	[IdCarrito] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
 CREATE TABLE [dbo].[clases](
 	[Id_clase] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
@@ -410,12 +411,14 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[usuario](
-	[identificacion] [int] NOT NULL,
+	[Identificacion] [int] NOT NULL,
 	[nombre] [varchar](100) NOT NULL,
 	[correo] [varchar](100) NOT NULL,
 	[contrasenna] [varchar](100) NOT NULL,
 	[Id_rol] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
+	[EsTemporal] [bit] NULL,
+	[VigenciaTemporal] [datetime] NULL,
  CONSTRAINT [PK_tUsuario] PRIMARY KEY CLUSTERED 
 (
 	[identificacion] ASC
@@ -466,8 +469,24 @@ INSERT [dbo].[rol] ([Id_rol], [descripcion], [estado]) VALUES (2, N'Usuario', 1)
 GO
 SET IDENTITY_INSERT [dbo].[rol] OFF
 GO
-INSERT [dbo].[usuario] ([identificacion], [nombre], [correo], [contrasenna], [Id_rol], [estado]) VALUES (208220158, N'HERNANDEZ TORRES NICOLE', N'haydeehuertas51@gmail.com', N'Ie1qNZiOyC7jM30Bkvaf9cmhFfcGWUK/0JQh0qEYrkk=', 2, 1)
+INSERT [dbo].[usuario] ([Identificacion], [nombre], [correo], [contrasenna], [Id_rol], [estado]) VALUES (208220158, N'HERNANDEZ TORRES NICOLE', N'haydeehuertas51@gmail.com', N'Z1MjQaut4zcqgbO9ww6Xog==', 2, 1)
 GO
+INSERT [dbo].[usuario] ([Identificacion], [nombre], [correo], [contrasenna], [Id_rol], [estado]) VALUES (206380455, N'GUEVARA CORDERO OSVALDO', N'osvaldoguco@gmail.com', N'Z1MjQaut4zcqgbO9ww6Xog==', 1, 1)
+GO
+INSERT INTO [dbo].[productos] (Nombre, Descripcion, PrecioUnitario, Inventario, Imagen, estado)
+VALUES 
+('Proteína Whey', 'Suplemento de proteína para el desarrollo muscular', 40000, 120, 'https://onenutrition.cl/tienda/3687-large_default/nitro-tech-100-whey-gold-55-lb.jpg', 1),
+('Creatina Monohidrato', 'Mejora el rendimiento físico y aumenta la masa muscular', 20000, 80, 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sre/sre09181/y/16.jpg', 1),
+('Aminoácidos BCAA', 'Aminoácidos esenciales para la recuperación muscular', 10000, 150, 'https://m.media-amazon.com/images/I/717zB+1zkpL._AC_SL1500_.jpg', 1),
+('Pre-entreno', 'Suplemento energizante para aumentar la fuerza y resistencia', 10000, 100, 'https://fitnesszoneonline.es/cdn/shop/files/mode-on-stim-free-450-gr-limon-preentreno-precursores-880_grande.jpg?v=1718664174', 1),
+('Multivitamínico Deportivo', 'Complejo multivitamínico para atletas y fisicoculturistas', 5000, 200, 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/fcd/fcd02953/y/8.jpg', 1),
+('Glutamina', 'Ayuda en la recuperación muscular y reduce el desgaste', 3000, 90, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwgO2ho6qtiLLLUfCckehGN7f0r7x6HNILRg&s', 1),
+('Proteína Vegana', 'Suplemento de proteína vegetal ideal para veganos', 60000, 60, 'https://m.media-amazon.com/images/I/81WXCYb27eL.jpg', 1),
+('Óxido Nítrico', 'Suplemento para mejorar la circulación y bombeo muscular', 12000, 110, 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/pmf/pmf02101/y/8.jpg', 1),
+('Quemador de Grasa', 'Ayuda a reducir la grasa corporal y definir el cuerpo', 25000, 70, 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/irw/irw40436/y/8.jpg', 1),
+('Barra de Proteína', 'Snack alto en proteína para antes o después del ejercicio', 2000, 300, 'https://img.freepik.com/vector-premium/icono-barra-proteina-estilo-plano-ilustracion-vector-postre-fitness-sobre-fondo-aislado-concepto-negocio-signo-nutrientes-energia_157943-2534.jpg', 1);
+GO
+
 SET ANSI_PADDING ON
 GO
 /****** Object:  Index [UQ__clientes__60695A19E3329D75]    Script Date: 8/27/2024 3:13:06 PM ******/
@@ -503,7 +522,7 @@ GO
 /****** Object:  Index [UQ__usuario__C196DEC7F37C83FA]    Script Date: 8/27/2024 3:13:06 PM ******/
 ALTER TABLE [dbo].[usuario] ADD UNIQUE NONCLUSTERED 
 (
-	[identificacion] ASC
+	[Identificacion] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[usuario] ADD  DEFAULT ((2)) FOR [Id_rol]
@@ -587,13 +606,13 @@ GO
 
 -- Cambiar estado usuario
 CREATE PROCEDURE [dbo].[CambiarEstadoUsuario]
-	@identificacion INT
+	@Identificacion INT
 AS
 BEGIN
 
 	UPDATE usuario
 	   SET estado = CASE WHEN estado = 1 THEN 0 ELSE 1 END
-	 WHERE identificacion = @identificacion
+	 WHERE Identificacion = @Identificacion
 END
 GO
 /****** Object:  StoredProcedure [dbo].[CreateClase]    Script Date: 8/27/2024 3:13:06 PM ******/
@@ -757,14 +776,14 @@ GO
 
 -- Crear usuario
 CREATE PROCEDURE [dbo].[CreateUsuario]
-    @identificacion VARCHAR(50),
+    @Identificacion VARCHAR(50),
     @nombre VARCHAR(100),
     @correo VARCHAR(100),
     @contrasenna VARCHAR(100)
 AS
 BEGIN
-    INSERT INTO [dbo].[usuario] (identificacion, nombre, correo, contrasenna, estado, Id_rol)
-    VALUES (@identificacion, @nombre, @correo, @contrasenna, 1, 2)
+    INSERT INTO [dbo].[usuario] (Identificacion, nombre, correo, contrasenna, estado, Id_rol)
+    VALUES (@Identificacion, @nombre, @correo, @contrasenna, 1, 2)
 END
 GO
 /****** Object:  StoredProcedure [dbo].[DeleteClase]    Script Date: 8/27/2024 3:13:06 PM ******/
@@ -1426,7 +1445,92 @@ BEGIN
     WHERE identificacion = @Identificacion
 END
 GO
-USE [master]
+
+CREATE PROCEDURE [dbo].[ConsultarUsuarioIdentificacion]
+    @identificacion VARCHAR(100)
+AS
+BEGIN
+    SELECT  U.identificacion,
+            U.correo,
+            U.nombre,
+            U.estado,
+            CASE WHEN U.estado = 1 THEN 'ACTIVO' ELSE 'INACTIVO' END AS EstadoDescripcion,
+            R.Id_rol,
+            R.descripcion
+    FROM    dbo.usuario U
+    INNER JOIN dbo.rol R ON U.Id_rol = R.Id_rol
+    WHERE identificacion = @Identificacion;
+END
 GO
-ALTER DATABASE [Proyecto] SET  READ_WRITE 
+
+
+CREATE PROCEDURE [dbo].[ActualizarContrasenna]
+	@Identificacion INT, 
+	@contrasenna VARCHAR(100),
+	@EsTemporal	 BIT, 
+	@VigenciaTemporal DATETIME
+AS
+BEGIN
+
+	UPDATE usuario
+	   SET contrasenna = @contrasenna,
+		   EsTemporal = @EsTemporal,
+		   VigenciaTemporal = @VigenciaTemporal
+	 WHERE Identificacion = @Identificacion
+
+END
 GO
+
+CREATE PROCEDURE [dbo].[RegistrarCarrito]
+	@ConsecutivoUsuario INT,
+	@IdProducto			INT,
+	@Cantidad			INT
+AS
+BEGIN
+
+	IF NOT	EXISTS(	SELECT	1 
+					FROM	Carrito 
+					WHERE	ConsecutivoUsuario = @ConsecutivoUsuario
+						AND IdProducto = @IdProducto)
+	BEGIN
+	
+		INSERT INTO dbo.Carrito (ConsecutivoUsuario,IdProducto,Cantidad,FechaCarrito)
+		VALUES (@ConsecutivoUsuario, @IdProducto, @Cantidad, GETDATE())
+
+	END
+	ELSE
+	BEGIN
+
+		UPDATE	dbo.Carrito
+		SET		Cantidad = @Cantidad,
+				FechaCarrito = GETDATE()
+		WHERE	ConsecutivoUsuario = @ConsecutivoUsuario
+			AND IdProducto = @IdProducto
+
+	END
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[ConsultarCarrito]
+	@ConsecutivoUsuario INT
+AS
+BEGIN
+
+	SELECT	IdCarrito,
+			ConsecutivoUsuario,
+			C.IdProducto,
+			P.Nombre,
+			P.PrecioUnitario,
+			Cantidad,
+			FechaCarrito,
+			(Cantidad * P.PrecioUnitario) 'SubTotal',
+			(Cantidad * P.PrecioUnitario) * 0.13 'Impuesto',
+			(Cantidad * P.PrecioUnitario) + (Cantidad * P.PrecioUnitario) * 0.13 'Total'
+	FROM	Carrito C
+	INNER JOIN productos P ON C.IdProducto = P.IdProducto
+	WHERE	ConsecutivoUsuario = @ConsecutivoUsuario
+
+END
+GO
+

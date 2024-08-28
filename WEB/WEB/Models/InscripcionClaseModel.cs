@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Net.Http;
 using WEB.Entities;
+using WEB.Interface;
 
 namespace WEB.Models
 {
@@ -81,5 +82,5 @@ namespace WEB.Models
         }
 
     }
-    
+
 }

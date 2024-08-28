@@ -12,6 +12,8 @@
         public int Id_rol { get; set; }
         public bool EsTemporal { get; set; }
         public DateTime VigenciaTemporal { get; set; }
+        public string? ContrasennaConfirmar { get; set; }
+
 
     }
 }

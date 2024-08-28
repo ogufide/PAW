@@ -1,14 +1,12 @@
 ﻿using WEB.Entities;
 
-namespace WEB.Models
+namespace WEB.Interface
 {
     public interface IPlanesModel
     {
         Respuesta CreatePlan(Plan ent);
 
         Respuesta ReadPlan();
-
-        Respuesta GetPlanById(int Id_plan);
 
         Respuesta UpdatePlan(Plan ent);
 

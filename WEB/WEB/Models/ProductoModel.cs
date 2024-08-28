@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using JN_WEB.Models;
+using WEB.Interface;
 
 namespace WEB.Models
 {
-    
+
     public class ProductoModel(HttpClient httpClient, IConfiguration iConfiguration, IHttpContextAccessor iContextAccesor) : IProductoModel
     {
         public Respuesta ReadProductos()

@@ -123,6 +123,33 @@ namespace PracticaAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetUsuarioById")]
+        public async Task<IActionResult> GetCompraById(int Id_Compra)
+        {
+
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QueryFirstOrDefaultAsync<Principal>("GetCompraById", new { Id_Compra }, commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No hay compras registradas en este momento";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,7 +15,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController(IConfiguration iConfiguration, IComunesModel iComunesModel) : ControllerBase
+    public class UsuarioController(IConfiguration iConfiguration, IComunesModel iComunesModel, IHostEnvironment iHost) : ControllerBase
     {
         [AllowAnonymous]
         [HttpPost]
@@ -212,5 +213,49 @@ namespace API.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        [HttpGet]
+        [Route("RecuperarAcceso")]
+        public async Task<IActionResult> RecuperarAcceso(string Identificacion)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
+            {
+                var result = await context.QueryFirstOrDefaultAsync<Usuario>("ConsultarUsuarioIdentificacion", new { Identificacion }, commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+                    var CodigoAleatorio = iComunesModel.GenerarCodigo();
+                    var Contrasenna = iComunesModel.Encrypt(CodigoAleatorio);
+                    var EsTemporal = true;
+                    var VigenciaTemporal = DateTime.Now.AddMinutes(30);
+
+                    await context.ExecuteAsync("ActualizarContrasenna",
+                        new { result.Identificacion, Contrasenna, EsTemporal, VigenciaTemporal },
+                        commandType: CommandType.StoredProcedure);
+
+                    var ruta = Path.Combine(iHost.ContentRootPath, "FormatoCorreo.html");
+                    var html = System.IO.File.ReadAllText(ruta);
+
+                    html = html.Replace("@@Nombre", result.Nombre);
+                    html = html.Replace("@@Contrasenna", CodigoAleatorio);
+                    html = html.Replace("@@Vencimiento", VigenciaTemporal.ToString("dd/MM/yyyy HH:mm"));
+
+                    iComunesModel.EnviarCorreo(result.Correo!, "Recuperar Acceso al Sistema Harmony Gym", html);
+
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result;
+                    return Ok(resp);
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "No hay usuarios registrados con ese correo";
+                    resp.Contenido = false;
+                    return Ok(resp);
+                }
+            }
+        }
     }
 }

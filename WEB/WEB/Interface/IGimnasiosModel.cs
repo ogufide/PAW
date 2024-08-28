@@ -1,6 +1,6 @@
 ﻿using WEB.Entities;
 
-namespace WEB.Models
+namespace WEB.Interface
 {
     public interface IGimnasiosModel
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using WEB.Entities;
+using WEB.Interface;
 
 namespace WEB.Models
 {

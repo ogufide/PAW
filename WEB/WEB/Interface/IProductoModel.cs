@@ -1,6 +1,6 @@
 ﻿using WEB.Entities;
 
-namespace JN_WEB.Models
+namespace WEB.Interface
 {
     public interface IProductoModel
     {

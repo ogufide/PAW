@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using WEB.Interface;
 
 namespace WEB.Models
 {

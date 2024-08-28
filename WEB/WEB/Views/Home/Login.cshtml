@@ -48,16 +48,12 @@
                                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Ingresar</button>
                                     </div>
                                 }
-                                <p class="mb-4 text-sm mx-auto">
-                                    <a href="@Url.Action("Principal", "Home")" class="text-info text-gradient font-weight-bold">"Pase a principal"</a>
-                                </p>
-                                <p class="mb-4 text-sm mx-auto">
-                                    <a href="@Url.Action("Privacy", "Home")" class="text-info text-gradient font-weight-bold">"Pase a privacidad"</a>
-                                </p>
-
-
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <p class="mb-4 text-sm mx-auto">
+                                    ¿Olvidó su contraseña?
+                                    <a href="@Url.Action("RecuperarAcceso", "Usuario")" class="text-info text-gradient font-weight-bold">Recupere su acceso</a>
+                                </p>
                                 <p class="mb-4 text-sm mx-auto">
                                     ¿No tiene cuenta con nosotros?
                                     <a href="@Url.Action("CreateUsuario", "Usuario")" class="text-info text-gradient font-weight-bold">Regístrese</a>

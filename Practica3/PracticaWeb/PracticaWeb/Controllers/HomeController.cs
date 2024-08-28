@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 
 namespace PracticaWeb.Controllers
 {
-    public class HomeController(ICompraModel iCompraModel, IPrincipalModel iPrincipalModel) : Controller
+    public class HomeController(IPrincipalModel iPrincipalModel) : Controller
     {
 
         public IActionResult Index()
@@ -49,16 +49,16 @@ namespace PracticaWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Abonar(int id)
+        public IActionResult Abonar(int q)
         {
-            var resp = iCompraModel.GetCompraById(id);
+            var resp = iPrincipalModel.GetCompraById(q);
 
             if (resp.Codigo == 1)
             {
-                var compra = JsonSerializer.Deserialize<Compra>((JsonElement)resp.Contenido!);
+                var compra = JsonSerializer.Deserialize<Principal>((JsonElement)resp.Contenido!);
                 return View(compra);
             }
-            return View(new Compra());
+            return View(new Principal());
         }
 
 

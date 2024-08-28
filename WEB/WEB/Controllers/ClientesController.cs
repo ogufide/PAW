@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 using WEB.Entities;
-using WEB.Models;
+using WEB.Interface;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WEB.Controllers

@@ -1,6 +1,6 @@
 ﻿using WEB.Entities;
 
-namespace WEB.Models
+namespace WEB.Interface
 {
     public interface IUsuarioModel
     {
@@ -12,6 +12,8 @@ namespace WEB.Models
 
         Respuesta UpdateUsuario(Usuario ent);
         Respuesta CambiarEstadoUsuario(Usuario ent);
+
+        Respuesta RecuperarAcceso(string Identificacion);
 
     }
 }

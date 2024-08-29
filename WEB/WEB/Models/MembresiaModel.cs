@@ -40,7 +40,6 @@ namespace WEB.Models
                     return new Respuesta();
             }
         }
-
         public Respuesta DeleteMembresia(Membresia ent)
         {
             using (httpClient)
@@ -54,7 +53,7 @@ namespace WEB.Models
                 else
                     return new Respuesta();
             }
-        }
+         }
 
         public Respuesta GetMembresiaById(int Id_membresia)
         {

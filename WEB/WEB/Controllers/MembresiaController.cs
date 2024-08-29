@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using WEB.Entities;
 using WEB.Interface;
+using WEB.Models;
 
 namespace WEB.Controllers
 {

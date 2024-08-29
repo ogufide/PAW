@@ -14,13 +14,13 @@ namespace WEB.Controllers
             var respuesta = iEjerciciosModel.CreateEjercicio(ent);
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("CreateEjercicio", "Ejercicios");
+                return RedirectToAction("ReadEjercicio", "Ejercicios");
             }
 
             else
             {
                 ViewBag.msj = respuesta.Mensaje;
-                return View();
+                return View(ent);
             }
 
         }
@@ -46,7 +46,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("UpdateEjercicio", "Ejercicios");
+                return RedirectToAction("ReadEjercicio", "Ejercicios");
             }
 
             else
@@ -63,7 +63,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("DeleteEjercicio", "Ejercicios");
+                return RedirectToAction("ReadEjercicio", "Ejercicios");
             }
 
             else

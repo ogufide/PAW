@@ -11,14 +11,15 @@ namespace WEB.Controllers
         public IActionResult CreatePlan(Plan ent)
         {
             var respuesta = iPlanesModel.CreatePlan(ent);
+
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("CreatePlan", "Planes");
+                return RedirectToAction("ReadPlan", "Planes");
             }
             else
             {
                 ViewBag.msj = respuesta.Mensaje;
-                return View();
+                return View(ent);
             }
         }
 
@@ -42,7 +43,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("UpdatePlan", "Planes");
+                return RedirectToAction("ReadPlan", "Planes");
             }
 
             else
@@ -59,7 +60,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("DeletePlan", "Planes");
+                return RedirectToAction("ReadPlan", "Planes");
             }
 
             else

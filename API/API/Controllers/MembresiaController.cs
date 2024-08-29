@@ -81,7 +81,7 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        [Route("UpdateInscripcion")]
+        [Route("UpdateMembresia")]
         public async Task<IActionResult> UpdateMembresia(Membresia ent)
         {
             Respuesta resp = new Respuesta();
@@ -113,9 +113,11 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete]
+
+        [AllowAnonymous]
+        [HttpPost]
         [Route("DeleteMembresia")]
-        public async Task<IActionResult> DeleteMembresia(int Id_membresia)
+        public async Task<IActionResult> DeleteMembresia(Membresia ent)
         {
             Respuesta resp = new Respuesta();
 
@@ -123,7 +125,7 @@ namespace API.Controllers
             {
                 await context.OpenAsync();
 
-                var result = await context.ExecuteAsync("DeleteMembresia", new { Id_membresia }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("DeleteMembresia", new { ent.Id_membresia }, commandType: CommandType.StoredProcedure);
 
 
                 if (result > 0)

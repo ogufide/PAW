@@ -746,10 +746,11 @@ CREATE PROCEDURE [dbo].[CreateRol]
     @descripcion VARCHAR(50)
 AS
 BEGIN
-    INSERT INTO rol (descripcion)
-    VALUES (@descripcion)
+    INSERT INTO rol (descripcion, estado)
+    VALUES (@descripcion, 1)
 END
 GO
+
 /****** Object:  StoredProcedure [dbo].[CreateRutina]    Script Date: 8/27/2024 3:13:06 PM ******/
 SET ANSI_NULLS ON
 GO
@@ -1534,3 +1535,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [dbo].[InventarioProductos]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        IdProducto,
+        Nombre,
+        Descripcion,
+        PrecioUnitario,
+        Inventario,
+        estado
+    FROM 
+        [dbo].[productos];
+END
+GO

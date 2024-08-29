@@ -7,16 +7,16 @@
 
 <h2>Lista de Roles</h2>
 
+<a href="@Url.Action("CreateRol", "Usuario")" class="btn btn-success mb-3">
+    Agregar Nuevo Rol
+</a>
 
 <table id="tabla-Roles" class="table table-hover">
     <thead>
         <tr>
             <th>Identificador del Rol</th>
-            <th>Descipción</th>
+            <th>Descripción</th>
             <th>Estado</th>
-
-
-
         </tr>
     </thead>
     <tbody>
@@ -25,7 +25,16 @@
             <tr>
                 <td>@item.Id_rol</td>
                 <td>@item.descripcion</td>
-                <td>@item.Estado</td>
+                <td>
+                    @if (item.Estado == "true")
+                    {
+                        <span>Inactivo</span>
+                    }
+                    else
+                    {
+                        <span>Activo</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>

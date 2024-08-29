@@ -31,19 +31,21 @@
                 <td>@item.Descripcion</td>
                 <td>@item.Estado</td>
                 <td>
-
-                    <button type="button" class="btn btn-primary Modales" data-toggle="modal" data-target="#ModalUsuarios"
-                            data-id="@item.Identificacion" data-name="@item.Nombre">
-                        <i class="fa fa-pen"></i>
-                    </button>
+                    <form asp-action="CambiarEstadoUsuario" method="post" style="display:inline;">
+                        <input type="hidden" name="Identificacion" value="@item.Identificacion" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
 
                     <a class="btn btn-primary" href="@Url.Action("UpdateUsuario", "Usuario", new { q = item.Identificacion })">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-pen"></i>
                     </a>
                 </td>
             </tr>
         }
     </tbody>
+
 </table>
 
 <script src="~/plantilla/js/jquery.min.js"></script>

@@ -32,11 +32,11 @@ namespace WEB.Controllers
 
             if (resp.Codigo == 1)
             {
-                var datos = JsonSerializer.Deserialize<List<Clase>>((JsonElement)resp.Contenido!);
+                var datos = JsonSerializer.Deserialize<List<Ejercicio>>((JsonElement)resp.Contenido!);
                 return View(datos);
             }
 
-            return View(new List<Clase>());
+            return View(new List<Ejercicio>());
         }
 
         [HttpGet]

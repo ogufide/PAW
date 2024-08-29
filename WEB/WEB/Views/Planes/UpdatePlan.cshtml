@@ -1,7 +1,7 @@
 ﻿@model WEB.Entities.Plan
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "UpdatePlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,7 +37,7 @@
                                 @Html.TextBoxFor(m => m.Descripcion, new { @type = "text", @class = "form-control", @placeholder = "Descripcion", @required = "true", @id = "Descripcion" })
                             </div>
 
-                            <label for="Gimnasio_codigo">Gimnasio_codigo</label>
+                            <label for="Gimnasio_codigo">Gimnasio</label>
                             <div class="mb-3">
                                 @Html.TextBoxFor(m => m.Gimnasio_codigo, new { @type = "int", @class = "form-control", @placeholder = "Gimnasio_codigo", @required = "true", @id = "Gimnasio_codigo" })
                             </div>
@@ -47,13 +47,8 @@
                                 @Html.TextBoxFor(m => m.Estado, new { @type = "int", @class = "form-control", @placeholder = "Estado", @required = "true", @id = "Estado" })
                             </div>
 
-                            <div class="row">
-                                <div class="col-8">
-                                </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">Editar</button>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="@Url.Action("ReadPlan", "Planes")" class="btn btn-secondary">Cancelar</a>
                         }
                     </div>
                 </div>

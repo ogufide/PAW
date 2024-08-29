@@ -13,7 +13,7 @@ namespace WEB.Controllers
             var respuesta = iPlanesModel.CreatePlan(ent);
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("Create´Plan", "Planes");
+                return RedirectToAction("CreatePlan", "Planes");
             }
             else
             {

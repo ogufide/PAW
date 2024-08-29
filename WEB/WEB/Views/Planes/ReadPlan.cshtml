@@ -1,26 +1,26 @@
 ﻿@model List<WEB.Entities.Plan>
 
 @{
-    ViewData["Title"] = "Principal";
+    ViewData["Title"] = "ReadPlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-2">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Clases Disponibles</h2>
+        <h2>Planes Disponibles</h2>
         <a href="@Url.Action("CreatePlan", "Planes")" class="btn btn-primary">
-            Agregar un plan.e
+            Agregar un Plan.
         </a>
     </div>
 
 <table id="tabla-Plan" class="table table-hover">
     <thead>
         <tr>
-            <th>Id_plan</th>
+            <th>Id Plan</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Descripcion</th>
-            <th>Gimnasio_codigo</th>
+            <th>Gimnasio</th>
             <th>Estado</th>
 
         </tr>

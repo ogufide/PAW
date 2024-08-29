@@ -20,7 +20,7 @@
                                 @ViewBag.msj
                             </div>
                         }
-                        @using (Html.BeginForm("UpdateClase", "Clases"))
+                        @using (Html.BeginForm("UpdateClase", "Clases", FormMethod.Post, new { id = "gymForm" }))
                         {
                             <label for="Nombre">Nombre</label>
                             <div class="mb-3">
@@ -32,7 +32,7 @@
                                 @Html.TextBoxFor(m => m.Descripcion, new { @type = "text", @class = "form-control", @placeholder = "Descripcion", @required = "true", @id = "Descripcion" })
                             </div>
 
-                            <label for="IdInstructor">IdInstructor</label>
+                            <label for="IdInstructor">Id Instructor</label>
                             <div class="mb-3">
                                 @Html.TextBoxFor(m => m.IdInstructor, new { @type = "int", @class = "form-control", @placeholder = "IdInstructor", @required = "true", @id = "IdInstructor" })
                             </div>
@@ -42,12 +42,12 @@
                                 @Html.TextBoxFor(m => m.Horario, new { @type = "date", @class = "form-control", @placeholder = "Horario", @required = "true", @id = "Horario" })
                             </div>
 
-                            <label for="Duracion">Duracion</label>
+                            <label for="Duracion">Duracion en Horas</label>
                             <div class="mb-3">
                                 @Html.TextBoxFor(m => m.Duracion, new { @type = "int", @class = "form-control", @placeholder = "Duracion", @required = "true", @id = "Duracion" })
                             </div>
 
-                            <label for="CapacidadMaxima">CapacidadMaxima</label>
+                            <label for="CapacidadMaxima">Capacidad Maxima</label>
                             <div class="mb-3">
                                 @Html.TextBoxFor(m => m.CapacidadMaxima, new { @type = "int", @class = "form-control", @placeholder = "CapacidadMaxima", @required = "true", @id = "CapacidadMaxima" })
                             </div>
@@ -57,13 +57,8 @@
                                 @Html.TextBoxFor(m => m.Estado, new { @type = "int", @class = "form-control", @placeholder = "Estado", @required = "true", @id = "Estado" })
                             </div>
 
-                            <div class="row">
-                                <div class="col-8">
-                                </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">Editar</button>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="@Url.Action("ReadClases", "Clases")" class="btn btn-secondary">Cancelar</a>
                         }
                     </div>
                 </div>

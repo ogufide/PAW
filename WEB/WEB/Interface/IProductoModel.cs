@@ -7,5 +7,8 @@ namespace WEB.Interface
         Respuesta ReadProductos();
         Respuesta CreateProducto(Producto ent);
 
+        Respuesta InventarioProductos();
+        
+
     }
 }

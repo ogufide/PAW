@@ -18,13 +18,13 @@ namespace API.Controllers
         [Authorize]
         [HttpPost]
         [Route("CreateRol")]
-        public async Task<IActionResult> CreateRol(Usuario ent)
+        public async Task<IActionResult> CreateRol(Rol ent)
         {
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("CreateRol", new { ent.Descripcion }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("CreateRol", new { ent.descripcion }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {

@@ -138,9 +138,6 @@ namespace WEB.Controllers
             return View(new List<Producto>());
         }
 
-
-
-
         [HttpGet]
         public IActionResult Gimnasio(int Id_gimnasio)
         {
@@ -162,6 +159,21 @@ namespace WEB.Controllers
             }
 
             return View("Error");
+        }
+
+        [FiltroSesiones]
+        [HttpGet]
+        public IActionResult InventarioProductos()
+        {
+            var resp = iProductoModel.InventarioProductos();
+
+            if (resp.Codigo == 1)
+            {
+                var datos = JsonSerializer.Deserialize<List<Producto>>((JsonElement)resp.Contenido!);
+                return View(datos);
+            }
+
+            return View(new List<Producto>());
         }
 
 

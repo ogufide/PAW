@@ -1,0 +1,37 @@
+﻿@model List<WEB.Entities.Producto>
+
+@{
+    ViewData["Title"] = "Principal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Inventario de Productos</h2>
+
+
+<table id="tabla-Productos" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Descripci+on</th>
+            <th>Precio Unitario</th>
+            <th>Inventario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdProducto</td>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>@item.PrecioUnitario</td>
+                <td>@item.Inventario</td>               
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/plantilla/js/jquery.min.js"></script>
+<script src="~/plantilla/js/ConsultaUsuarios.js"></script>
+

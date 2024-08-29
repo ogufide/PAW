@@ -76,7 +76,7 @@ namespace WEB.Models
         {
             using (httpClient)
             {
-                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Usuario/UpdateUsuario";
+                string url = iConfiguration.GetSection("Llaves:UrlApi").Value + "Usuario/CambiarEstadoUsuario";
                 string token = iContextAccesor.HttpContext!.Session.GetString("TOKEN")!.ToString();
 
                 JsonContent body = JsonContent.Create(ent);

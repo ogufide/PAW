@@ -4,7 +4,11 @@
     ViewData["Title"] = "CreateClase";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="container mt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2> Agregar Clase</h2>
+    </div>
+</div>
 <div class="container mt-2">
     @using (Html.BeginForm("CreateClase", "Clases", FormMethod.Post, new { id = "gymForm" }))
     {

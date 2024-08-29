@@ -10,9 +10,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MembresiaController(IConfiguration iConfiguration) : ControllerBase
+
     {
-        [AllowAnonymous]
+      
         [HttpPost]
         [Route("CreateMembresia")]
         public async Task<IActionResult> CreateMembresia(Membresia ent)
@@ -76,7 +78,7 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
+
         [HttpPut]
         [Route("UpdateMembresia")]
         public async Task<IActionResult> UpdateMembresia(Membresia ent)
@@ -106,7 +108,6 @@ namespace API.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpDelete]
         [Route("DeleteMembresia")]
         public async Task<IActionResult> DeleteMembresia(int Id_membresia)

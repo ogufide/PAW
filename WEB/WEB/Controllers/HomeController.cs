@@ -72,6 +72,12 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
+        public IActionResult Gym()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Services()
         {
             return View();

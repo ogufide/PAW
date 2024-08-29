@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+ 
     public class MembresiaController(IConfiguration iConfiguration) : ControllerBase
 
     {
@@ -79,29 +79,34 @@ namespace API.Controllers
         }
 
 
+        [AllowAnonymous]
         [HttpPut]
-        [Route("UpdateMembresia")]
+        [Route("UpdateInscripcion")]
         public async Task<IActionResult> UpdateMembresia(Membresia ent)
         {
-
-
             Respuesta resp = new Respuesta();
 
             using (var context = new SqlConnection(iConfiguration.GetSection("ConnectionStrings:DefaultConnection").Value))
             {
-                var result = await context.ExecuteAsync("UpdateMembresia", new { ent.Id_membresia, ent.Nombre, ent.Descripcion, ent.Precio, ent.Plan_codigo, ent.Cliente_codigo }, commandType: CommandType.StoredProcedure);
+                var result = await context.ExecuteAsync("UpdateMembresia", new
+                {
+                    ent.Id_membresia,
+                    ent.Nombre,
+                    ent.Descripcion,
+                    ent.Precio
+                }, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
                     resp.Codigo = 1;
-                    resp.Mensaje = "OK";
+                    resp.Mensaje = "Membresia actualizada correctamente";
                     resp.Contenido = true;
                     return Ok(resp);
                 }
                 else
                 {
                     resp.Codigo = 0;
-                    resp.Mensaje = "La información de la membresia no se pudo actualizar";
+                    resp.Mensaje = "Error al actualizar la membresia";
                     resp.Contenido = false;
                     return Ok(resp);
                 }

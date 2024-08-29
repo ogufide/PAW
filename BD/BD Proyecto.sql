@@ -1331,6 +1331,23 @@ BEGIN
 END
 
 GO
+
+--------------Actualizar Membresia
+CREATE PROCEDURE [dbo].[UpdateMembresia]
+    @Id_membresia INT,
+    @Nombre VARCHAR(100),
+    @Descripcion TEXT,  
+    @Precio INT
+AS
+BEGIN
+    UPDATE dbo.membresias
+    SET 
+        Nombre = @Nombre, 
+        Descripcion = @Descripcion,
+        Precio = @Precio
+    WHERE Id_membresia = @Id_membresia
+END
+
 /****** Object:  StoredProcedure [dbo].[UpdatePlan]    Script Date: 8/27/2024 3:13:06 PM ******/
 SET ANSI_NULLS ON
 GO

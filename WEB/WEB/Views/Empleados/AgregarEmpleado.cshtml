@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym.jpeg")');">
-     <h3>Aca podes registar a un empleado</h3>  
-    </div>
+<h3>Aca podes registar a un empleado</h3>
+<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym.jpeg")');"> 
+ </div>
 
 <div class="card-body">
     @if (ViewBag.msj != null)
@@ -17,7 +16,7 @@
             @ViewBag.msj
         </div>
     }
-    @using (Html.BeginForm("RegistrarEmpleado", "Empleados", FormMethod.Post, new { id = "gymForm" }))
+    @using (Html.BeginForm("AgregarEmpleado", "Empleados", FormMethod.Post, new { id = "gymForm" }))
     {
         <label for="Nombre">Nombre</label>
         <div class="mb-3">
@@ -90,12 +89,10 @@
         </div>
 
         <div class="">
-            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("index", "Home")'">Registrar</button>
+            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" disabled onclick="location.href='@Url.Action("ConsultarEmpleado", "Empleados")'">Registrar</button>
         </div>
     }
 </div>
-
-
 
 
 <script>

@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 var result = await context.ExecuteAsync("AgregarGimnasio", new { ent.Nombre, ent.Telefono, ent.Direccion, ent.Id_provincia, }, commandType: CommandType.StoredProcedure);
 
-                if (result > 0)
+                if (result < 0)
                 {
                     resp.Codigo = 1;
                     resp.Mensaje = "Gimnasio guardado con exito!";

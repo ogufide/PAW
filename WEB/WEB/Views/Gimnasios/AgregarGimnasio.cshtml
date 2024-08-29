@@ -4,6 +4,9 @@
     ViewData["Title"] = "Principal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h3>Aca podes registar a un Gimnasio</h3>
+<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym.jpeg")');"> 
+</div>
 
 <div class="container mt-2">
     @if (ViewBag.msj != null)
@@ -45,7 +48,7 @@
         </div>
 
         <div class="">
-            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton">Registrar</button>
+            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="registerButton" onclick="location.href='@Url.Action("ConsultarGimnasio", "Gimnasios")'">Registrar</button>
         </div>
     }
 </div>

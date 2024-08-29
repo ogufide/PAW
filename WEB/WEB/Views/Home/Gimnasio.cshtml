@@ -7,18 +7,18 @@
 
     <link rel="stylesheet" href="~/css/gimasios.css">
 
-    <div class="container">
-        <a href="@Url.Action("Gimnasio", "Home")" class="navbar-brand d-flex align-items-center">
+ 
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+   <a href="@Url.Action("Gimnasio", "Home")" class="navbar-brand d-flex align-items-center">
             <img src="~/plantilla/img/gym/23.jpg" alt="@Context.Session.GetString("NOMBRE")" height="30" class="d-inline-block align-top">
             <span class="gym-name ms-2">@Context.Session.GetString("NOMBRE")</span>
-        <a class="nav-link" href="#inicio">Inicio</a>
+        </a>
         <a class="nav-link" href="#programas">Planes</a>
         <a class="nav-link" href="#planes">Membresías</a>
         <a class="nav-link" href="#galeria">Galería</a>
         <a class="nav-link" href="#contacto">Contacto</a>
-        </a>
-    </div>
-
+</div>
 
 
 <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
@@ -289,7 +289,7 @@
             </div>
             <div class="map-container mt-4">
                 <h4>Encuéntranos aquí</h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126847.75847955866!2d-99.23078359561873!3d19.512933662092035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842f6f87f19a2adf%3A0xb9f5f6d6e7e8c5f0!2sCiudad%20de%20México%2C%20CDMX!5e0!3m2!1ses!2smx!4v1683823443403!5m2!1ses!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.0002826661307!2d-84.07987752599362!3d9.933933574170153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e5b145906ca1%3A0x75bc659d089d1934!2sSmart%20Fit%20Plaza%20de%20la%20Cultura!5e0!3m2!1ses-419!2scr!4v1724963834240!5m2!1ses-419!2scr" width="550" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>

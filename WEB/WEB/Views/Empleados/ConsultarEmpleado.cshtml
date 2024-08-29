@@ -5,6 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Empleados</h2>
+    <a href="@Url.Action("AgregarEmpleado", "Empleados")" class="btn btn-primary">
+        Agregar Empleados
+    </a>
+</div>
+
+
 <table id="tabla-Empleados" class="table table-hover">
     <thead>
         <tr>
@@ -42,6 +50,14 @@
                 <td>@item.Salario</td>
                 <td>@item.Estado</td>
                 <td>Acciones</td>
+                <td>
+                    <a href="@Url.Action("ActualizarEmpleado", "Empleados", new { id = item.Id_empleado })" class="btn btn-warning btn-sm">
+                        Actualizar
+                    </a>
+                    <a href="@Url.Action("EliminarEmpleado", "Empleados", new { id = item.Id_empleado })" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                        Eliminar
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

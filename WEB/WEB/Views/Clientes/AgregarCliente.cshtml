@@ -5,15 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym/14.jpg")');">
 <h3>Aca podes registrar un cliente</h3>
+<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym/14.jpg")');">
 </div>
          
 <div class="card-body">
     @if (ViewBag.msj != null)
     {
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-success" role="alert">
             @ViewBag.msj
         </div>
     }
@@ -47,7 +46,7 @@
             </label>
         </div>
         <div class="">
-            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" onclick="location.href='@Url.Action("Principal", "home")'">Registrar</button>
+            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" onclick="location.href='@Url.Action("ConsultarCliente", "Clientes")'">Registrar</button>
         </div>
     }
 

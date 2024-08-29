@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using WEB.Entities;
 using WEB.Interface;
 
@@ -8,18 +9,20 @@ namespace WEB.Controllers
 {
     public class ClasesController(IClasesModel iClasesModel) : Controller
     {
+
         [HttpGet]
         public IActionResult CreateClase(Clase ent)
         { 
             var respuesta = iClasesModel.CreateClase(ent);
+
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("CreateClase", "Clases");
+                return RedirectToAction("ReadClases", "Clases");
             }
             else
             {
                 ViewBag.msj = respuesta.Mensaje;
-                return View();
+                return View(ent);
             }
         }
 
@@ -43,7 +46,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("UpdateClase", "Clases");
+                return RedirectToAction("ReadClases", "Clases");
             }
 
             else
@@ -56,18 +59,24 @@ namespace WEB.Controllers
         [HttpPost]
         public IActionResult DeleteClase(int Id_clase)
         {
-            var respuesta = iClasesModel.DeleteClase(Id_clase);
+            var respuesta = iClasesModel.ReadClaseById(Id_clase);
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("DeleteClases", "Clases");
+                var contenido = respuesta.Contenido?.ToString();
+                if (!string.IsNullOrEmpty(contenido))
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                        NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+                    };
+                    var datos = JsonSerializer.Deserialize<Clase>(contenido, options);
+                    return View(datos);
+                }
             }
 
-            else
-            {
-                ViewBag.msj = respuesta.Mensaje;
-                return View();
-            }
+            return View(new Clase());
         }
     }
 }

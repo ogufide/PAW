@@ -59,7 +59,7 @@ namespace WEB.Controllers
                 var respuesta = iInscripcionClaseModel.AgregarClase(ent);
                 if (respuesta.Codigo == 1)
                 {
-                    return RedirectToAction("ReadInscripcion", "InscripcionClase");
+                    return RedirectToAction("Calendar", "InscripcionClase");
                 }
                 else
                 {
@@ -168,7 +168,7 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("ReadInscripcion", "InscripcionClase");
+                return RedirectToAction("Calendar", "InscripcionClase");
             }
 
             else
@@ -195,28 +195,62 @@ namespace WEB.Controllers
                         NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
                     };
                     var datos = JsonSerializer.Deserialize<InscripcionClases>(contenido, options);
-                    return View(datos);
+                    return View(datos);  
                 }
             }
 
-            return View(new InscripcionClases());
+            return View(new InscripcionClases()); 
         }
-
-
 
         [HttpPost]
         public IActionResult DeleteInscripcion(InscripcionClases ent)
         {
-
             var respuesta = iInscripcionClaseModel.DeleteInscripcion(ent);
 
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("ReadInscripcion", "InscripcionClase");
-
+                return RedirectToAction("Calendar", "InscripcionClase");
             }
             return View();
         }
+
+
+        [HttpGet]
+        public ActionResult Calendar()
+        {
+            var inscripciones = iInscripcionClaseModel.ReadInscripcion();
+
+            if (inscripciones.Codigo == 1)
+            {
+                var contenido = inscripciones.Contenido?.ToString();
+                if (!string.IsNullOrEmpty(contenido))
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                        NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+                    };
+                    var datos = JsonSerializer.Deserialize<List<InscripcionClases>>(contenido, options);
+
+                    var events = datos.Select(i => new Calendar
+                    {
+                        Title = $" {i.SelectedNombreClase}", // Use the selected class name
+                        Start = i.FechaInscripcion?.ToString("yyyy-MM-dd"),
+                        End = i.FechaInscripcion?.ToString("yyyy-MM-dd"),
+                        Id = i.Id_inscripcion,
+                        NombreCliente = i.SelectedNombreCliente, // Use the selected client name
+                        Color = "#99ff99",
+                        InscripcionId = i.Id_inscripcion
+                    }).ToList();
+
+                    return View(events);
+                }
+            }
+
+            return View(new List<Calendar>());
+        }
+
+
 
 
 

@@ -63,20 +63,15 @@ namespace WEB.Controllers
 
             if (respuesta.Codigo == 1)
             {
-                var contenido = respuesta.Contenido?.ToString();
-                if (!string.IsNullOrEmpty(contenido))
-                {
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true,
-                        NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
-                    };
-                    var datos = JsonSerializer.Deserialize<Clase>(contenido, options);
-                    return View(datos);
-                }
+                return RedirectToAction("ReadPlan", "Planes");
             }
 
-            return View(new Clase());
+            else
+            {
+                ViewBag.msj = respuesta.Mensaje;
+                return View();
+            }
+
         }
     }
 }

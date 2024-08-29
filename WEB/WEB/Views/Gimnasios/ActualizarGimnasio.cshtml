@@ -2,76 +2,62 @@
 
 @{
     ViewData["Title"] = "Actualizar Gimnasio";
-    Layout = "~/Views/Shared/_LayoutExterno.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/plantilla/img/gym.jpeg")');">
-    <span class="mask bg-gradient-dark opacity-6"></span>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 text-center mx-auto">
-                <h1 class="text-white mb-2 mt-5">Actualizar Información</h1>
-                <p class="text-lead text-white">Actualiza la información de tu gimnasio.</p>
-            </div>
+   <h3 class="update-gym-title">Aca puedes actualizar el gimnasio</h3>
+</div>
+<div class="card-body">
+    @if (ViewBag.msj != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.msj
         </div>
-    </div>
+    }
+    @using (Html.BeginForm("ActualizarGimnasio", "Gimnasios", FormMethod.Post, new { id = "gymForm" }))
+    {
+        @Html.HiddenFor(m => m.Id_gimnasio)
+
+        <label for="Nombre">Nombre</label>
+        <div class="mb-3">
+            @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true", @id = "Nombre" })
+        </div>
+
+        <label for="Telefono">Teléfono</label>
+        <div class="mb-3">
+            @Html.TextBoxFor(m => m.Telefono, new { @type = "text", @class = "form-control", @placeholder = "Teléfono", @required = "true", @id = "Telefono" })
+        </div>
+
+        <label for="Direccion">Dirección</label>
+        <div class="mb-3">
+            @Html.TextBoxFor(m => m.Direccion, new { @type = "text", @class = "form-control", @placeholder = "Dirección", @required = "true", @id = "Direccion" })
+        </div>
+
+        <label for="Id_provincia">Provincia</label>
+        <div class="mb-3">
+            <select id="Id_provincia" name="Id_provincia" class="form-control" required>
+                <option value="">Seleccionar Provincia</option>
+                <!-- Opciones serán llenadas dinámicamente con JavaScript -->
+            </select>
+        </div>
+
+        <div class="form-check form-check-info text-left">
+            <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
+            <label class="form-check-label" for="termsCheckbox">
+                Estoy de acuerdo con los <a href="javascript:;" class="text-dark font-weight-bolder">Términos y Condiciones</a>
+            </label>
+        </div>
+
+        <div class="">
+            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="updateButton">Actualizar</button>
+        </div>
+    }
 </div>
 
-<div class="container">
-    <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-        <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-            <div class="card z-index-0">
-                <div class="card-body">
-                    @if (ViewBag.msj != null)
-                    {
-                        <div class="alert alert-success" role="alert">
-                            @ViewBag.msj
-                        </div>
-                    }
-                    @using (Html.BeginForm("ActualizarGimnasio", "Gimnasios", FormMethod.Post, new { id = "gymForm" }))
-                    {
-                        @Html.HiddenFor(m => m.Id_gimnasio)
 
-                        <label for="Nombre">Nombre</label>
-                        <div class="mb-3">
-                            @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true", @id = "Nombre" })
-                        </div>
-
-                        <label for="Telefono">Teléfono</label>
-                        <div class="mb-3">
-                            @Html.TextBoxFor(m => m.Telefono, new { @type = "text", @class = "form-control", @placeholder = "Teléfono", @required = "true", @id = "Telefono" })
-                        </div>
-
-                        <label for="Direccion">Dirección</label>
-                        <div class="mb-3">
-                            @Html.TextBoxFor(m => m.Direccion, new { @type = "text", @class = "form-control", @placeholder = "Dirección", @required = "true", @id = "Direccion" })
-                        </div>
-
-                        <label for="Id_provincia">Provincia</label>
-                        <div class="mb-3">
-                            <select id="Id_provincia" name="Id_provincia" class="form-control" required>
-                                <option value="">Seleccionar Provincia</option>
-                                <!-- Opciones serán llenadas dinámicamente con JavaScript -->
-                            </select>
-                        </div>
-
-                        <div class="form-check form-check-info text-left">
-                            <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
-                            <label class="form-check-label" for="termsCheckbox">
-                                Estoy de acuerdo con los <a href="javascript:;" class="text-dark font-weight-bolder">Términos y Condiciones</a>
-                            </label>
-                        </div>
-
-                        <div class="">
-                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" id="updateButton">Actualizar</button>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+               
+         
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {

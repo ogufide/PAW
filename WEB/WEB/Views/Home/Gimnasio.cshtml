@@ -1,8 +1,23 @@
 ﻿@model WEB.Entities.Gimnasios
 @{
     ViewData["Title"] = "Registro Producto";
-    Layout = "~/Views/Shared/_LayoutGimnasio.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+    <link rel="stylesheet" href="~/css/gimasios.css">
+
+    <div class="container">
+        <a href="@Url.Action("Gimnasio", "Home")" class="navbar-brand d-flex align-items-center">
+            <img src="~/plantilla/img/gym/23.jpg" alt="@Context.Session.GetString("NOMBRE")" height="30" class="d-inline-block align-top">
+            <span class="gym-name ms-2">@Context.Session.GetString("NOMBRE")</span>
+        <a class="nav-link" href="#inicio">Inicio</a>
+        <a class="nav-link" href="#programas">Planes</a>
+        <a class="nav-link" href="#planes">Membresías</a>
+        <a class="nav-link" href="#galeria">Galería</a>
+        <a class="nav-link" href="#contacto">Contacto</a>
+        </a>
+    </div>
 
 
 
@@ -115,7 +130,7 @@
 </div>
 
 <div class="coaches-section">
-    <h1>COACHES</h1>
+    <h1>Empleados</h1>
     <p class="subtitle">Reunimos a los mejores instructores certificados de health, fitness y disciplinas enfocadas en el bienestar integral para ofrecerte todo en un solo lugar.</p>
 
     <div class="coach-list">
@@ -156,18 +171,18 @@
         <h2 class="section-title" data-aos="fade-up">Galería</h2>
         <div class="row">
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <a href="gallery-1-large.jpg" data-lightbox="gym-gallery">
-                    <img src="gallery-1-thumb.jpg" class="img-fluid" alt="Gym Image 1">
+            <a href="" data-lightbox="gym-gallery">
+                <img src="~/plantilla/img/gym/1.jpg" class="img-fluid" alt="Gym Image 1">
                 </a>
             </div>
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                <a href="gallery-2-large.jpg" data-lightbox="gym-gallery">
-                    <img src="gallery-2-thumb.jpg" class="img-fluid" alt="Gym Image 2">
+            <a href="" data-lightbox="gym-gallery">
+                <img src="~/plantilla/img/gym/5.jpg" class="img-fluid" alt="Gym Image 2">
                 </a>
             </div>
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                <a href="gallery-3-large.jpg" data-lightbox="gym-gallery">
-                    <img src="gallery-3-thumb.jpg" class="img-fluid" alt="Gym Image 3">
+            <a href="" data-lightbox="gym-gallery">
+                <img src="~/plantilla/img/gym/2.jpg" class="img-fluid" alt="Gym Image 3">
                 </a>
             </div>
         </div>

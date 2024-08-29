@@ -6,111 +6,6 @@ body {
     padding: 0;
 }
 
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #000;
-    border-bottom: 1px solid #333;
-    transition: background-color 200ms linear;
-}
-
-.navbar-scrolled {
-    background-color: rgba(0, 0, 0, 0.9) !important;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    flex: 1; 
-}
-
-    .navbar-brand img {
-        height: 40px; 
-        transition: transform 0.3s ease;
-    }
-
-        .navbar-brand img:hover {
-            transform: scale(1.1);
-        }
-
-.gym-name {
-    color: #fff;
-    font-size: 15px; 
-    font-weight: 600;
-    margin-left: 0.5rem;
-    white-space: nowrap;
-    text-transform: uppercase;
-}
-
-/* Opciones del navbar */
-.navbar-nav {
-    margin-left: auto; 
-}
-
-.nav-link {
-    color: #fff;
-    margin: 0 0.5rem; 
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-    text-decoration: none; 
-}
-
-    .nav-link:hover {
-        color: #ffd700; 
-        text-decoration: underline; 
-    }
-
-.input-group {
-    max-width: 250px; 
-    margin-top: 1rem;
-}
-
-.input-group-text {
-    background-color: #444;
-    border: none;
-}
-
-.form-control {
-    border: none;
-    border-radius: 0;
-    background-color: #555;
-    color: #fff;
-}
-
-    .form-control::placeholder {
-        color: #ccc;
-    }
-
-.nav-link i.fas.fa-door-open {
-    color: #fff;
-    margin-right: 0.5rem;
-}
-
-.nav-link:hover i.fas.fa-door-open {
-    color: #f0f0f0;
-}
-
-/* Ajustes responsivos */
-@media (max-width: 991.98px) {
-    .navbar-nav {
-        text-align: center;
-        margin-left: 0; 
-    }
-
-        .navbar-nav .nav-item {
-            margin-bottom: 4px;
-        }
-
-    .input-group {
-        width: 100%;
-        margin-top: 1rem;
-    }
-}
-
 
 
 /* Hero Carousel */
@@ -219,26 +114,7 @@ body {
         background-color: #f1c40f;
     }
 
-/* Pie de página */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 40px 0;
-}
 
-.footer-info {
-    margin-bottom: 20px;
-}
-
-    .footer-info h5 {
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-    }
-
-    .footer-info p {
-        margin-bottom: 5px;
-        font-size: 1rem;
-    }
 
 /* Redes sociales */
 .social-links {

@@ -34,12 +34,12 @@
                 <td>@item.GrupoMuscular</td>
                 <td>@item.EquipoNecesario</td>
                 <td>
-                    <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
-                        Editar
-                    </button>
-                    <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
-                        Eliminar
-                    </button>
+                        <a href="@Url.Action("UpdateEjercicio", "Ejercicios")" class="btn btn-primary">
+                            Editar Ejercicio
+                        </a>
+                        <a href="@Url.Action("DeleteEjercicio", "Ejercicios")" class="btn btn-primary">
+                            Borrar Ejercicio
+                        </a>
                 </td>
             </tr>
         }

@@ -36,12 +36,12 @@
                 <td>@item.Gimnasio_codigo</td>
                 <td>@item.Estado</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" title="Editar" onclick="editItem()">
-                            Editar
-                        </button>
-                        <button class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
-                            Eliminar
-                        </button>
+                        <a href="@Url.Action("UpdatePlan", "Planes")" class="btn btn-primary">
+                            Editar Plan
+                        </a>
+                        <a href="@Url.Action("DeletePlan", "Planes")" class="btn btn-primary">
+                            Borrar Plan
+                        </a>
 
                     </td>>
             </tr>

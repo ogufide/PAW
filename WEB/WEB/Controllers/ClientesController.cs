@@ -26,7 +26,7 @@ namespace WEB.Controllers
             var respuesta = iClientesModel.AgregarCliente(ent);
             if (respuesta.Codigo == 1) 
             {
-                return RedirectToAction("AgregarCliente", "Clientes");
+                return RedirectToAction("AgregarCliente", "ClientesController");
             }
 
             else {
@@ -41,7 +41,7 @@ namespace WEB.Controllers
 
 
         [HttpGet]
-        public IActionResult ActualizarCliente(int Id_cliente)
+        public IActionResult ActualizarUsuario(int Id_cliente)
         {
 
             var resp = iClientesModel.ObtenerCliente(Id_cliente);
@@ -67,7 +67,6 @@ namespace WEB.Controllers
                 ViewBag.msj = respuesta.Mensaje;
                 return View();
         }
-
 
         [HttpGet]
         public IActionResult EliminarCliente()

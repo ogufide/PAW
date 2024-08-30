@@ -64,26 +64,27 @@ namespace WEB.Controllers
                 return View();
             }
         }
-
+                
 
 
         [HttpDelete]
         public IActionResult EliminarGimnasio(int Id_gimnasio)
         {
             var respuesta = iGimnasiosModel.EliminarGimnasio(Id_gimnasio);
+
             if (respuesta.Codigo == 1)
             {
-                return RedirectToAction("EliminarGimnasio", "Gimnasios");
+                return RedirectToAction("ConsultarGimnasio", "Gimnasios");
             }
-
+                
             else
             {
-                ViewBag.msj = respuesta.Mensaje;
-                return View();
+                ViewBag.Mensaje = respuesta.Mensaje;
+                return View("Error");
             }
         }
 
-
+     
         [HttpGet]
         public IActionResult ConsultarGimnasio()
         {

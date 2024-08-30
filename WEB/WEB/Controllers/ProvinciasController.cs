@@ -52,8 +52,3 @@ namespace WEB.Controllers
 
  }
 
-<<<<<<< Updated upstream
-}
-=======
-
->>>>>>> Stashed changes

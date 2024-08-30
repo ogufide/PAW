@@ -35,14 +35,12 @@ namespace WEB.Controllers
             {
                 try
                 {
-                    // Asumiendo que resp.Contenido es una cadena JSON que contiene la lista de provincias
                     var jsonString = resp.Contenido.ToString();
                     var datos = JsonSerializer.Deserialize<List<Provincias>>(jsonString!);
                     return View(datos);
                 }
                 catch (JsonException ex)
                 {
-                    // Manejo de errores de deserialización
                     ModelState.AddModelError("", "Error al deserializar los datos de provincias: " + ex.Message);
 
                 }
@@ -52,6 +50,10 @@ namespace WEB.Controllers
         }
     }
 
-  
+ }
 
+<<<<<<< Updated upstream
 }
+=======
+
+>>>>>>> Stashed changes

@@ -21,12 +21,22 @@
                 <div class="card-footer">
                     <a href="@Url.Action("Gimnasio", "Home", new { Id_gimnasio = item.Id_gimnasio })" class="action-btn" aria-label="Ver detalles del gimnasio @item.Nombre">Ver Gimnasio</a>
                 </div>
+<<<<<<< Updated upstream
                 @if (@Context.Session.GetString("NROL") == "Administrador"){
                 <div class="card-options">
                     <a href="@Url.Action("ActualizarGimnasio", "Gimnasios", new { Id_gimnasio = item.Id_gimnasio })" class="update-btn" aria-label="Actualizar gimnasio @item.Nombre">Actualizar</a>
                     <button class="delete-btn" onclick="confirmarEliminacion(@item.Id_gimnasio)" aria-label="Eliminar gimnasio @item.Nombre">Eliminar</button>
                 </div>}
                 
+=======
+                @if (Context.Session.GetString("NROL") == "Administrador")
+                {
+                    <div class="card-options">
+                        <a href="@Url.Action("ActualizarGimnasio", "Gimnasios", new { Id_gimnasio = item.Id_gimnasio })" class="update-btn" aria-label="Actualizar gimnasio @item.Nombre">Actualizar</a>
+                        <button class="delete-btn" onclick="confirmarEliminacion(@item.Id_gimnasio)" aria-label="Eliminar gimnasio @item.Nombre">Eliminar</button>
+                    </div>
+                }
+>>>>>>> Stashed changes
             </div>
         }
     </div>
